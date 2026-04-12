@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(gemini-image)",
+      "Bash(bash:*)",
+      "Bash(ls -la \"/Users/jaeeunlee/Desktop/open claw 준비/\"*.png)",
+      "WebSearch",
+      "Bash(gh api:*)",
+      "Bash(find ~/.claude/skills -maxdepth 1 -type d ! -name \"gstack\" ! -name \".\" ! -name \"..\" -exec basename {} \\\\;)",
+      "WebFetch(domain:namu.wiki)",
+      "WebFetch(domain:www.kci.go.kr)",
+      "WebFetch(domain:koredu.silla.ac.kr)",
+      "WebFetch(domain:www.scribd.com)",
+      "WebFetch(domain:ncic.re.kr)",
+      "WebFetch(domain:k-basics.org)",
+      "WebFetch(domain:stas.moe.go.kr)",
+      "WebFetch(domain:att.pmg.co.kr)",
+      "WebFetch(domain:use.go.kr)",
+      "WebFetch(domain:m.cafe.daum.net)",
+      "WebFetch(domain:www.cku.ac.kr)",
+      "WebFetch(domain:supportseoltab.oopy.io)",
+      "WebFetch(domain:text.vivasam.com)",
+      "WebFetch(domain:www.gne.go.kr)",
+      "WebFetch(domain:textbook-miraen.cdn.x-cdn.com)",
+      "WebFetch(domain:www.edunet.net)",
+      "Bash(npm list:*)",
+      "Bash(npm install:*)",
+      "Bash(npx defuddle:*)",
+      "WebFetch(domain:kuen.korea.ac.kr)",
+      "WebFetch(domain:www.ejce.org)"
+    ]
+  }
+}
