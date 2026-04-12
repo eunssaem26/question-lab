@@ -1,0 +1,178 @@
+{
+  "$schema_doc": "별쌤 프로젝트 전체 JSON 스키마 정의 — Phase 간 인터페이스 계약",
+  "schemas": {
+    "framework": {
+      "description": "Phase 1 산출물. 7단계 평가 준거틀의 기계 판독 버전.",
+      "output_path": "framework.json",
+      "structure": {
+        "metadata": {
+          "version": "string (semver)",
+          "created": "string (ISO 8601)",
+          "reviewed_by": "string (은쌤 검수일)"
+        },
+        "philosophy": {
+          "description": "string — 평가 철학 요약",
+          "principles": ["string — 설계 원칙 목록"]
+        },
+        "domains": [
+          {
+            "code": "string (VOC|LIT|INF|CRT|STR)",
+            "name": "string",
+            "definition": "string",
+            "cbt_item_types": ["string — 이 영역에 적합한 문항 유형"],
+            "weight": "number (0~1, 종합 판정 시 가중치)"
+          }
+        ],
+        "levels": [
+          {
+            "level": "number (1~7)",
+            "corresponding_grade": "number (3~9, 내부용)",
+            "grade_band": "string (초3~4학년군 등)",
+            "band_position": "string (기초|심화|발전)",
+            "overall_description": "string — 이 단계 학생이 할 수 있는 것 종합 기술",
+            "domain_descriptions": {
+              "VOC": "string — 이 단계의 어휘력 수준 기술",
+              "LIT": "string",
+              "INF": "string",
+              "CRT": "string",
+              "STR": "string"
+            },
+            "achievement_standards": ["string — 매핑된 성취기준 코드"]
+          }
+        ],
+        "scoring": {
+          "items_per_session": "number (진단 1회당 문항 수, v1=15)",
+          "items_per_domain": "number (영역당 문항 수, v1=3)",
+          "total_item_pool": "number (전체 문항 풀 크기, v1=175)",
+          "level_determination": {
+            "method": "string — 판정 방법 설명",
+            "domain_weights": {
+              "VOC": "number",
+              "LIT": "number",
+              "INF": "number",
+              "CRT": "number",
+              "STR": "number"
+            },
+            "boundary_handling": "string — 경계선 학생 처리 방법"
+          }
+        }
+      }
+    },
+    "passage": {
+      "description": "지문 데이터. items에서 passage_id로 참조.",
+      "output_path": "item-bank/passages.json",
+      "item_structure": {
+        "passage_id": "string (P-{level}-{domain_code}-{seq}, 예: P-3-INF-001)",
+        "level": "number (1~7)",
+        "text": "string — 지문 본문",
+        "genre": "string (설명문|논설문|서사문|시|실용문)",
+        "char_count": "number — 글자 수",
+        "source": "string (AI생성|원문발췌|원문개작)",
+        "topic": "string — 지문 주제",
+        "review_status": "string (draft|reviewed|approved)"
+      }
+    },
+    "item": {
+      "description": "문항 데이터. 각 문항은 하나의 지문에 연결됨.",
+      "output_path": "item-bank/items.json",
+      "item_structure": {
+        "item_id": "string (R-{level}-{domain_code}-{seq}, 예: R-3-INF-001)",
+        "level": "number (1~7)",
+        "domain": "string (어휘력|사실적 이해|추론적 이해|비판적 이해|구조 파악)",
+        "domain_code": "string (VOC|LIT|INF|CRT|STR)",
+        "achievement_standard": "string (성취기준 코드, 예: [6국02-02])",
+        "item_type": "string (multiple_choice|true_false|ordering)",
+        "question_text": "string — 발문",
+        "choices": ["string — 선택지 배열 (4개)"],
+        "answer": "number (정답 인덱스, 0-based)",
+        "explanation": "string — 정답 해설",
+        "passage_id": "string (연결된 지문 ID, nullable for 어휘 독립문항)",
+        "passage_genre": "string",
+        "difficulty": "number|null (0~1, 파일럿 전 null, 파일럿 후 실측값)",
+        "discrimination": "number|null (변별도, 파일럿 후 실측값)",
+        "review_status": "string (draft|reviewed|approved)",
+        "is_warmup": "boolean (워밍업 문항 여부)"
+      }
+    },
+    "scoring_rules": {
+      "description": "채점 및 단계 판정 규칙.",
+      "output_path": "item-bank/scoring-rules.json",
+      "structure": {
+        "version": "string",
+        "session_config": {
+          "total_items": "number (워밍업 제외 본 문항 수)",
+          "warmup_items": "number",
+          "items_per_domain": "number",
+          "selection_method": "string (random_from_pool|sequential)",
+          "retest_policy": "string — 재시험 시 문항 선택 정책"
+        },
+        "scoring": {
+          "correct_score": "number (정답 시 점수, 기본 1)",
+          "incorrect_score": "number (오답 시 점수, 기본 0)",
+          "domain_scores": {
+            "method": "string — 영역별 점수 산출 방법",
+            "max_per_domain": "number"
+          }
+        },
+        "level_determination": {
+          "method": "string (weighted_average|highest_match|adaptive)",
+          "domain_weights": {
+            "VOC": "number",
+            "LIT": "number",
+            "INF": "number",
+            "CRT": "number",
+            "STR": "number"
+          },
+          "level_thresholds": [
+            {
+              "level": "number",
+              "min_score": "number",
+              "max_score": "number"
+            }
+          ],
+          "boundary_rule": "string — 경계선 판정 규칙"
+        },
+        "domain_level_determination": {
+          "method": "string — 영역별 독립 수준 판정 방법",
+          "thresholds": "동일 구조"
+        }
+      }
+    },
+    "session_result": {
+      "description": "학생 진단 결과 (Phase 3 웹에서 생성, 클라이언트 사이드).",
+      "structure": {
+        "session_id": "string (UUID)",
+        "timestamp": "string (ISO 8601)",
+        "responses": [
+          {
+            "item_id": "string",
+            "selected": "number",
+            "correct": "boolean",
+            "time_ms": "number"
+          }
+        ],
+        "results": {
+          "overall_level": "number (1~7)",
+          "overall_score": "number",
+          "domain_levels": {
+            "VOC": "number",
+            "LIT": "number",
+            "INF": "number",
+            "CRT": "number",
+            "STR": "number"
+          },
+          "domain_scores": {
+            "VOC": "number",
+            "LIT": "number",
+            "INF": "number",
+            "CRT": "number",
+            "STR": "number"
+          },
+          "strengths": ["string — 강점 영역"],
+          "weaknesses": ["string — 약점 영역"],
+          "ai_feedback": "string|null — 별쌤 AI 피드백"
+        }
+      }
+    }
+  }
+}
