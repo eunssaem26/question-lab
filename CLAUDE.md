@@ -19,3 +19,4 @@ Key routing rules:
 - Architecture review → invoke plan-eng-review
 - Save progress, checkpoint, resume → invoke checkpoint
 - Code quality, health check → invoke health
+- 블로그, 개발일지, 필로 블로그, 캐릭터 소개글 → invoke philo-blog
