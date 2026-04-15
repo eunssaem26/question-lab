@@ -39,29 +39,63 @@ npm run dev
 
 ---
 
-## 3. 현재 프로젝트 구조
+## 3. 프로젝트 구조 (2026-04-15 정리 완료)
 
 ```
 question-lab/
 ├── CLAUDE.md              ← Claude 프로젝트 지침
+├── README.md
 ├── HANDOFF.md             ← 이 문서
 │
-├── site/                  ← Astro 블로그 (Vercel 배포 대상)
-│   └── src/content/blog/  ← 블로그 원본 5편 (설립기 시리즈)
+├── agents/                ← 나노클로 6에이전트 시스템 프롬프트 + 아키텍처
+│   ├── ARCHITECTURE.md    ← 에이전트 구조 설계 문서
+│   ├── AGENTS.md          ← 에이전트 목록
+│   ├── COLLABORATION.md   ← 협업 프로토콜
+│   ├── philo.md           ← 필로 (코디네이터)
+│   ├── byeolsaem.md       ← 별쌤 (진단평가)
+│   ├── chaeksaem.md        ← 책쌤 (독서수업)
+│   ├── geulsaem.md         ← 글쌤 (글쓰기수업)
+│   ├── eunsaem.md          ← 은쌤 (검수)
+│   └── hogi.md             ← 호기 (학생소통)
 │
-├── 배포/                  ← 크로스포스팅용 최적화 본문
-│   ├── 가이드.md          ← 발행 체크리스트
-│   ├── 브런치/            ← 브런치 최적화 5편
-│   └── 네이버블로그/      ← 네이버 블로그 최적화 5편
+├── curriculum/            ← 교육과정 데이터 + 평가 설계
+│   ├── reference/         ← 성취기준 JSON, 스키마, 벤치마크
+│   ├── framework.json     ← 읽기 평가 프레임워크
+│   ├── writing-framework.json ← 글쓰기 평가 프레임워크
+│   ├── 별쌤-평가준거틀.md
+│   ├── 글쓰기-평가준거틀.md
+│   ├── 글쓰기-35셀-*.md   ← 매핑표, 청사진
+│   └── 은쌤-검수-1차.md
 │
-├── 별쌤작업/              ← 별쌤 출제 데이터 (읽기/글쓰기 문항, 준거틀)
+├── item-bank/             ← 문항 데이터 (읽기/글쓰기 JSON + 출제 가이드)
 ├── review/                ← 검수 리포트
-├── blog/                  ← 블로그 초안 (site/로 이전 완료, 아카이브)
+├── scripts/               ← validate.js, migrate.sh
 │
-├── data/                  ← 교육과정 데이터, 검수 규칙
-├── agents/                ← 에이전트 시스템 프롬프트
-└── docs/                  ← 프로젝트 문서
+├── site/                  ← Astro 블로그 (Vercel 배포 대상)
+│   └── src/
+│       ├── content/blog/  ← 블로그 원본 (설립기 5편)
+│       └── assets/characters/ ← 캐릭터 이미지 원본 (전체)
+│
+├── 배포/                  ← 크로스포스팅용 (브런치 5편 + 네이버 블로그 5편)
+│
+└── archive/               ← 비활성 파일 아카이브
+    ├── blog-drafts/       ← 구 블로그 초안 (site/로 이전 완료)
+    ├── 별쌤작업/           ← Obsidian 작업 공간 (item-bank/에 정리 완료)
+    ├── 스타일변환사진/     ← 스타일 테스트 이미지
+    ├── 중요파일들/         ← NanoBanana 프롬프트
+    └── misc/              ← 세션 템플릿, loose 이미지 등
 ```
+
+### 에이전트별 작업 경로
+
+| 에이전트 | 주 작업 경로 |
+|---------|-------------|
+| 필로 🐰 | site/, 배포/ |
+| 별쌤 ⭐ | curriculum/, item-bank/ |
+| 책쌤 🦉 | curriculum/reference/, item-bank/ |
+| 글쌤 🐱 | curriculum/, item-bank/writing/ |
+| 은쌤 👩‍🏫 | review/, item-bank/, curriculum/ |
+| 호기 🐕 | site/ (학생 대면 콘텐츠) |
 
 ---
 
