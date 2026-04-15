@@ -92,8 +92,8 @@
 
 읽기 전용:
   student-hub/content-pool/            → 책쌤/글쌤이 큐레이션한 도서·글감
-  runtime/students/ (제한적)           → `display_name`, `grade_band`, `interests`, `preferred_topics`, `encouragement_style`만
-  runtime/results/ (제한적)            → `reading_level_band`, `writing_level_band`, `strength_keywords`, `growth_message`, `recommended_next_action_summary`만
+  runtime/students/ (제한적)           → `student_id`, `display_name`, `grade_band`, `interests`, `preferred_topics`, `encouragement_style`만
+  runtime/results/ (제한적)            → `session_date`, `reading_level_band`, `writing_level_band`, `strength_keywords`, `growth_message`, `recommended_next_action_summary`, `domain_labels`만
 
 접근 불가:
   knowledge/                           → 교육과정 원문

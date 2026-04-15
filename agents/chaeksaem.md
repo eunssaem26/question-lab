@@ -69,8 +69,8 @@
   reading-lessons/                     → 수업안, 도서 DB, 활동 자료, 지도안
   runtime/history/reading-log/         → 학생 독서 이력
 
-쓰기 전용 (호기용 콘텐츠 풀):
-  student-hub/content-pool/            → 추천 도서 큐레이션
+읽기+쓰기 (호기용 콘텐츠 풀):
+  student-hub/content-pool/            → 추천 도서 큐레이션 (기존 목록 확인 + 신규 적재)
 
 읽기 전용:
   knowledge/curriculum/                → 교육과정 연계
@@ -79,6 +79,7 @@
   runtime/results/                     → 학생 진단 결과
   runtime/students/                    → 학생 정보
   review/reports/                      → 검수 결과 확인
+  review/checklists/                   → 검수 기준 사전 확인
 
 조건부 읽기 (별쌤 자문 요청 시):
   diagnosis/item-bank/reading/         → 지문 읽기 난이도 자문
@@ -87,7 +88,6 @@
   diagnosis/item-bank/writing/         → 글쌤/별쌤 영역
   diagnosis/scoring/                   → 판정 로직은 별쌤 영역
   writing-lessons/                     → 글쌤 영역
-  review/checklists/                   → 은쌤 관리 영역
   runtime/history/writing-portfolio/   → 글쓰기 이력은 읽지 않음
   runtime/logs/                        → 필로 운영 영역
   scripts/                             → 필로 영역

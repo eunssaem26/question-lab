@@ -182,7 +182,7 @@ runtime/
 | `student-hub/templates/` | R | — | — | — | — | RW |
 | `student-hub/content-pool/` | R | — | RW | RW | — | R |
 | `runtime/students/` | RW | R | R | R | — | R* |
-| `runtime/results/` | RW | RW | R | R | R | R* |
+| `runtime/results/` | RW | RW | R | R | — | R* |
 | `runtime/history/reading-log/` | R | — | RW | — | — | — |
 | `runtime/history/writing-portfolio/` | R | — | — | RW | — | — |
 | `runtime/logs/` | RW | — | — | — | — | — |
@@ -325,14 +325,47 @@ runtime/
 | 루트의 `AGENT_ARCHITECTURE.md` | 유지 | 시스템 문서, 데이터 디렉토리 밖 |
 | 루트의 `DATA_DESIGN.md` | 유지 | 시스템 문서, 데이터 디렉토리 밖 |
 | `agents/*.md` | 유지 | 시스템 프롬프트, 데이터 디렉토리 밖 |
+| 루트 `별쌤-평가준거틀.md` | `diagnosis/frameworks/별쌤-평가준거틀.md` | 읽기 준거틀 (사람용) |
+| 루트 `글쓰기-평가준거틀.md` | `diagnosis/frameworks/글쓰기-평가준거틀.md` | 글쓰기 준거틀 (사람용) |
+| 루트 `framework.json` | `diagnosis/frameworks/reading-framework.json` | 읽기 준거틀 (기계용), 이름 정규화 |
+| 루트 `writing-framework.json` | `diagnosis/frameworks/writing-framework.json` | 글쓰기 준거틀 (기계용) |
+| 루트 `글쓰기-35셀-성취기준-매핑표.md` | `diagnosis/guides/글쓰기-35셀-매핑표.md` | 출제 참조 자료 |
+| 루트 `글쓰기-35셀-출제-청사진.md` | `diagnosis/guides/글쓰기-35셀-청사진.md` | 출제 참조 자료 |
+| 루트 `글쓰기-진단평가-분석및수준별문항초안.md` | `diagnosis/guides/` 또는 아카이브 | 초안 성격, 최종본 여부 확인 후 결정 |
+| 루트 `글쓰기-출제-가이드-위계및정합성-검토.md` | `diagnosis/guides/글쓰기-출제-가이드.md`에 통합 또는 아카이브 | 검토 기록, 최종본 여부 확인 후 결정 |
+| `별쌤작업/` 전체 | 아카이브 또는 해당 목표 폴더로 분해 이동 | 아래 9.2 참조 |
 
 ### 9.1 F단계 전송 패키지 실행 순서
 
 1. `reference/` 내용을 `knowledge/` 하위 규격으로 재배치한다.
 2. `item-bank/`의 가이드 문서를 `diagnosis/guides/`로 이동한다.
 3. 읽기/글쓰기 문항 파일을 `diagnosis/item-bank/reading|writing/`으로 분리한다.
-4. 기존 루트 `item-bank/`는 전송 완료 후 아카이브하거나 제거한다.
-5. 매핑 완료 뒤 `AGENT_ARCHITECTURE.md`와 에이전트 프롬프트의 경로 참조를 점검한다.
+4. 루트 한국어 파일(준거틀, 프레임워크, 가이드 문서)을 `diagnosis/` 하위로 이동한다.
+5. `별쌤작업/`을 아래 9.2 기준에 따라 분해 이동하거나 아카이브한다.
+6. 기존 루트 `item-bank/`는 전송 완료 후 아카이브하거나 제거한다.
+7. 매핑 완료 뒤 `AGENT_ARCHITECTURE.md`와 에이전트 프롬프트의 경로 참조를 점검한다.
+
+### 9.2 `별쌤작업/` 분해 매핑
+
+`별쌤작업/`은 별쌤의 작업 스냅샷 폴더로, 아래 기준에 따라 분해한다.
+
+| 별쌤작업/ 파일 | 목표 위치 | 비고 |
+|--------------|----------|------|
+| `별쌤-평가준거틀.md` | `diagnosis/frameworks/별쌤-평가준거틀.md` | 루트 사본과 동일하면 하나만 유지 |
+| `출제-가이드.md` | `diagnosis/guides/출제-가이드.md` | item-bank/ 사본과 대조 후 최신본 유지 |
+| `글쓰기-출제-가이드-최종.md` | `diagnosis/guides/글쓰기-출제-가이드.md` | "최종" 표기 → 이것이 정본 |
+| `통합-검사-조립-규칙-최종.md` | `diagnosis/guides/통합-검사-조립-규칙.md` | "최종" 표기 → 이것이 정본 |
+| `passages (1-7).md`, `items (1-7).md` | `diagnosis/item-bank/reading/level-1/` 등으로 분해 | 마크다운 → JSON 변환 검토 |
+| `passages (2-7).md`, `items (2-7).md` | `diagnosis/item-bank/reading/level-2/` 등으로 분해 | 마크다운 → JSON 변환 검토 |
+| `passages.json` | `diagnosis/item-bank/reading/legacy/` 또는 단계별 분해 | 구조 확인 후 결정 |
+| `AGENT_ARCHITECTURE.md` | 아카이브 (루트 최신본이 정본) | 구버전 스냅샷 |
+| `900.주의사항.md` | 아카이브 또는 `review/checklists/`로 이관 | 내용 확인 후 결정 |
+| `.claude/`, `.obsidian/` | 제거 | 작업 도구 설정, 이관 불필요 |
+
+원칙:
+- "최종" 표기가 있는 파일이 정본이다. 루트·item-bank 사본보다 우선한다.
+- 중복 파일은 diff로 비교한 뒤 최신본만 목표 위치에 둔다.
+- 분해 완료 후 `별쌤작업/`은 아카이브하거나 제거한다.
 
 ---
 
