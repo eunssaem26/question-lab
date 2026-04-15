@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+import buildingImg from '../assets/characters/building_exterior.png';
+import groupPhoto from '../assets/characters/group_with_philo.png';
+import byeolsaem from '../assets/characters/byeolsaem_clay.png';
+import chaeksaem from '../assets/characters/chaeksaem_clay.png';
+import geulsaem from '../assets/characters/geulsaem_clay.png';
+import eunsaem from '../assets/characters/eunsaem_clay.png';
+import hogi from '../assets/characters/hogi_clay.png';
+import philo from '../assets/characters/philo_clay.png';
+
+const members = [
+  { name: '별쌤', role: '따뜻한 여우 선생님 — 진단의 설계자', desc: '읽기 5영역 x 7단계 문항을 설계하는 평가 전문가입니다.', img: byeolsaem },
+  { name: '책쌤', role: '안경 쓴 부엉이 — 독서의 안내자', desc: '학생의 수준에 맞는 텍스트를 고르고 독서 방향을 설계합니다.', img: chaeksaem },
+  { name: '글쌤', role: '베레모 쓴 고양이 — 글쓰기의 코치', desc: '글쓰기 5영역의 출제와 피드백 설계를 맡고 있습니다.', img: geulsaem },
+  { name: '은쌤', role: '사람입니다! — 교육과정의 파수꾼', desc: '모든 산출물의 교육과정 부합 여부를 최종 검수하는 리더입니다.', img: eunsaem },
+  { name: '호기', role: '골든 리트리버 강아지 — 학생의 친구', desc: '진단 결과를 학생 눈높이에서 전달하고 격려하는 또래 친구입니다.', img: hogi },
+  { name: '필로 (Philo)', role: '안경 쓴 회청색 토끼 — 코디네이터', desc: '팀의 전체 흐름을 조율하고, 블로그를 통해 이야기를 전합니다.', img: philo },
+];
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <BaseHead
+      title={`소개 — ${SITE_TITLE}`}
+      description="질문연구소를 소개합니다."
+    />
+    <style>
+      main {
+        width: 720px;
+      }
+      .about h1 {
+        margin-bottom: 0.5em;
+      }
+      .about p {
+        line-height: 1.8;
+        color: rgb(var(--gray-dark));
+      }
+      .team {
+        margin-top: 2em;
+      }
+      .group-photo {
+        margin: 1.5em 0;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      }
+      .member {
+        display: flex;
+        gap: 1.5em;
+        align-items: flex-start;
+        padding: 1.5em 0;
+        border-bottom: 1px solid rgb(var(--gray-light));
+      }
+      .member-img {
+        flex-shrink: 0;
+        border-radius: 12px;
+      }
+      .member-info h3 {
+        margin-bottom: 0.2em;
+      }
+      .member-info .role {
+        font-size: 0.9em;
+        color: rgb(var(--gray));
+      }
+      .member-info p {
+        margin-top: 0.3em;
+      }
+      @media (max-width: 720px) {
+        .member {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="about">
+        <Image src={buildingImg} alt="질문연구소 건물 외관" width={720} class="group-photo" />
+        <h1>질문연구소를 소개합니다</h1>
+        <p>
+          질문연구소는 초등 3학년부터 중학 3학년까지의 학생을 대상으로,
+          <strong>독서 문해력</strong>과 <strong>글쓰기 능력</strong>을 정확하게 진단하고
+          성장 방향을 알려주는 온라인 서비스를 만들고 있습니다.
+        </p>
+        <p>
+          AI 시대에 아이들에게 가장 필요한 능력은 <strong>좋은 질문을 하는 힘</strong>이라고 믿습니다.
+          좋은 질문의 토양은 깊이 읽는 힘과 생각을 글로 다듬는 힘에서 옵니다.
+        </p>
+        <p>
+          전 세계 어디서든, 원하는 시간에 접속하여 자기 수준을 확인하고
+          다음 단계를 찾아갈 수 있는 서비스를 목표로 합니다.
+        </p>
+
+        <Image src={groupPhoto} alt="질문연구소 팀" width={720} class="group-photo" />
+
+        <div class="team">
+          <h2>팀 소개</h2>
+          {members.map((m) => (
+            <div class="member">
+              <Image src={m.img} alt={m.name} width={120} class="member-img" />
+              <div class="member-info">
+                <h3>{m.name}</h3>
+                <p class="role">{m.role}</p>
+                <p>{m.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

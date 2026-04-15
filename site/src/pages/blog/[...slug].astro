@@ -1,0 +1,41 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, allPosts: posts },
+  }));
+}
+
+const { post, allPosts } = Astro.props;
+const { Content } = await render(post);
+
+// Find prev/next in same series
+let prevPost: { id: string; title: string } | undefined;
+let nextPost: { id: string; title: string } | undefined;
+
+if (post.data.series && post.data.seriesNumber) {
+  const seriesPosts = allPosts
+    .filter((p: CollectionEntry<'blog'>) => p.data.series === post.data.series)
+    .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+      (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0)
+    );
+
+  const currentIndex = seriesPosts.findIndex(
+    (p: CollectionEntry<'blog'>) => p.id === post.id
+  );
+  if (currentIndex > 0) {
+    prevPost = { id: seriesPosts[currentIndex - 1].id, title: seriesPosts[currentIndex - 1].data.title };
+  }
+  if (currentIndex < seriesPosts.length - 1) {
+    nextPost = { id: seriesPosts[currentIndex + 1].id, title: seriesPosts[currentIndex + 1].data.title };
+  }
+}
+---
+
+<BlogPost {...post.data} prevPost={prevPost} nextPost={nextPost}>
+  <Content />
+</BlogPost>

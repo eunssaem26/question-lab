@@ -1,0 +1,36 @@
+---
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+
+const labels: Record<string, string> = {
+  origin: '설립기',
+  vibelog: '바이브코딩',
+  devlog: '개발일지',
+  philosophy: '설계 철학',
+  character: '캐릭터',
+  insight: '인사이트',
+};
+
+const label = labels[category] || category;
+---
+
+<span class={`badge badge-${category}`}>{label}</span>
+<style>
+  .badge {
+    display: inline-block;
+    padding: 0.15em 0.6em;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .badge-origin { background: #E8F0FE; color: #2D4A6F; }
+  .badge-vibelog { background: #FEF3E2; color: #8B5E34; }
+  .badge-devlog { background: #E8FEE8; color: #2D6F3A; }
+  .badge-philosophy { background: #F3E8FE; color: #5B2D6F; }
+  .badge-character { background: #FEE8F0; color: #6F2D4A; }
+  .badge-insight { background: #E8FEFE; color: #2D5B6F; }
+</style>

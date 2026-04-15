@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import CategoryBadge from '../../components/CategoryBadge.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import classroomImg from '../../assets/characters/empty_classroom.png';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <BaseHead title={`글 목록 — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <style>
+      main {
+        width: 720px;
+      }
+      .page-header-img {
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        margin-bottom: 1.5em;
+      }
+      .page-title {
+        margin-bottom: 0.3em;
+      }
+      .page-desc {
+        color: rgb(var(--gray));
+        margin-bottom: 2em;
+      }
+      .post-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .post-item {
+        padding: 1.5em 0;
+        border-bottom: 1px solid rgb(var(--gray-light));
+      }
+      .post-item:first-child {
+        padding-top: 0;
+      }
+      .post-item a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+      .post-item a:hover .post-title {
+        color: var(--accent);
+      }
+      .post-title {
+        font-size: 1.3em;
+        font-weight: 700;
+        margin: 0.3em 0;
+        line-height: 1.4;
+        color: rgb(var(--black));
+        transition: color 0.2s;
+        word-break: keep-all;
+      }
+      .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        font-size: 0.85em;
+        color: rgb(var(--gray));
+        flex-wrap: wrap;
+      }
+      .post-meta .dot { opacity: 0.4; }
+      .post-desc {
+        color: rgb(var(--gray));
+        font-size: 0.95em;
+        margin: 0.4em 0 0;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <Image src={classroomImg} alt="질문연구소 교실" width={720} class="page-header-img" />
+      <h1 class="page-title">글 목록</h1>
+      <p class="page-desc">질문연구소가 만들어지는 과정을 기록합니다.</p>
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li class="post-item">
+            <a href={`/blog/${post.id}/`}>
+              <div class="post-meta">
+                <CategoryBadge category={post.data.category} />
+                {post.data.series && post.data.seriesNumber && (
+                  <>
+                    <span class="dot">·</span>
+                    <span>{post.data.series} {post.data.seriesNumber}편</span>
+                  </>
+                )}
+                <span class="dot">·</span>
+                <FormattedDate date={post.data.pubDate} />
+              </div>
+              <h2 class="post-title">{post.data.title}</h2>
+              <p class="post-desc">{post.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,26 @@
+---
+const today = new Date();
+---
+
+<footer>
+  <p>&copy; {today.getFullYear()} 질문연구소. All rights reserved.</p>
+  <p class="sub">
+    AI 시대, 아이들에게 필요한 건 좋은 질문을 하는 힘.
+  </p>
+</footer>
+<style>
+  footer {
+    padding: 2em 1em 4em 1em;
+    background: linear-gradient(var(--gray-gradient)) no-repeat;
+    color: rgb(var(--gray));
+    text-align: center;
+    font-size: 0.9em;
+  }
+  footer p {
+    margin: 0.3em 0;
+  }
+  .sub {
+    font-size: 0.85em;
+    opacity: 0.7;
+  }
+</style>
