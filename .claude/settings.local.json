@@ -27,7 +27,14 @@
       "Bash(npm install:*)",
       "Bash(npx defuddle:*)",
       "WebFetch(domain:kuen.korea.ac.kr)",
-      "WebFetch(domain:www.ejce.org)"
+      "WebFetch(domain:www.ejce.org)",
+      "Skill(autoplan)",
+      "Bash(python3 -c \"import json; f=open\\('framework.json'\\); d=json.load\\(f\\); print\\('levels:', len\\(d.get\\('levels',[]\\)\\)\\); print\\('domains:', len\\(d.get\\('domains',[]\\)\\)\\); print\\('scoring keys:', list\\(d.get\\('scoring',{}\\).keys\\(\\)\\)\\); [print\\(f'  level {l[\\\\\"level\\\\\"]}: {l[\\\\\"overall_description\\\\\"][:40]}...'\\) for l in d.get\\('levels',[]\\)]\")",
+      "Bash(echo \"---EXIT:$?---\")",
+      "Bash(chmod 600 \"/Users/jaeeunlee/Desktop/open claw 준비/.env\")",
+      "Bash(chmod 600 \"/Users/jaeeunlee/Documents/remotiontest/.env\")",
+      "Bash(sips:*)",
+      "Bash(du -sh *)"
     ]
   }
 }

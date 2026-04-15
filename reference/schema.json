@@ -1,5 +1,5 @@
 {
-  "$schema_doc": "별쌤 프로젝트 전체 JSON 스키마 정의 — Phase 간 인터페이스 계약",
+  "$schema_doc": "별쌤 프로젝트 전체 JSON 스키마 정의 — Phase 간 인터페이스 계약 (읽기 + 글쓰기)",
   "schemas": {
     "framework": {
       "description": "Phase 1 산출물. 7단계 평가 준거틀의 기계 판독 버전.",
@@ -58,17 +58,78 @@
         }
       }
     },
+    "writing_framework": {
+      "description": "Phase 1 산출물 (글쓰기). 7단계 글쓰기 평가 준거틀의 기계 판독 버전.",
+      "output_path": "writing-framework.json",
+      "structure": {
+        "metadata": {
+          "version": "string (semver)",
+          "created": "string (ISO 8601)",
+          "reviewed_by": "string (은쌤 검수일)"
+        },
+        "philosophy": {
+          "description": "string — 글쓰기 평가 철학 요약",
+          "principles": ["string — 설계 원칙 목록 (읽기 독립 원칙 포함)"]
+        },
+        "domains": [
+          {
+            "code": "string (IDE|ORG|EXP|CVN|REV)",
+            "name": "string",
+            "definition": "string",
+            "cbt_item_types": ["string — 이 영역에 적합한 문항 유형"],
+            "weight": "number (0~1, 종합 판정 시 가중치)"
+          }
+        ],
+        "levels": [
+          {
+            "level": "number (1~7)",
+            "corresponding_grade": "number (3~9, 내부용)",
+            "grade_band": "string",
+            "band_position": "string (기초|심화|발전)",
+            "overall_description": "string — 이 단계 학생이 쓸 수 있는 것 종합 기술",
+            "domain_descriptions": {
+              "IDE": "string",
+              "ORG": "string",
+              "EXP": "string",
+              "CVN": "string",
+              "REV": "string"
+            },
+            "achievement_standards": ["string — 매핑된 쓰기 성취기준 코드"]
+          }
+        ],
+        "scoring": {
+          "items_per_session": "number (진단 1회당 문항 수, v1=15)",
+          "items_per_domain": "number (영역당 문항 수, v1=3)",
+          "total_item_pool": "number (전체 문항 풀 크기, v1=175)",
+          "level_determination": {
+            "method": "string — 판정 방법 설명",
+            "domain_weights": {
+              "IDE": "number",
+              "ORG": "number",
+              "EXP": "number",
+              "CVN": "number",
+              "REV": "number"
+            },
+            "boundary_handling": "string — 경계선 학생 처리 방법"
+          },
+          "note_v2": "string — v2 서술형+AI채점 확장 계획"
+        }
+      }
+    },
     "passage": {
       "description": "지문 데이터. items에서 passage_id로 참조.",
       "output_path": "item-bank/passages.json",
       "item_structure": {
-        "passage_id": "string (P-{level}-{domain_code}-{seq}, 예: P-3-INF-001)",
+        "passage_id": "string (P-{level}-{seq}, 예: P-3-001) — 영역 중립형",
         "level": "number (1~7)",
         "text": "string — 지문 본문",
         "genre": "string (설명문|논설문|서사문|시|실용문)",
         "char_count": "number — 글자 수",
         "source": "string (AI생성|원문발췌|원문개작)",
         "topic": "string — 지문 주제",
+        "intended_domains": ["string — 이 지문으로 출제 가능한 영역 코드 (VOC|LIT|INF|CRT|STR)"],
+        "is_shared": "boolean (여러 단계에서 공유되는 지문 여부, 기본 false)",
+        "background_knowledge_risk": "string (low|medium|high)",
         "review_status": "string (draft|reviewed|approved)"
       }
     },
@@ -80,7 +141,9 @@
         "level": "number (1~7)",
         "domain": "string (어휘력|사실적 이해|추론적 이해|비판적 이해|구조 파악)",
         "domain_code": "string (VOC|LIT|INF|CRT|STR)",
+        "primary_domain": "string (VOC|LIT|INF|CRT|STR) — 주 평가 영역",
         "achievement_standard": "string (성취기준 코드, 예: [6국02-02])",
+        "level_differentiation": "string — 이 단계와 인접 단계 간 질적 차이 설명",
         "item_type": "string (multiple_choice|true_false|ordering)",
         "question_text": "string — 발문",
         "choices": ["string — 선택지 배열 (4개)"],
@@ -89,6 +152,29 @@
         "passage_id": "string (연결된 지문 ID, nullable for 어휘 독립문항)",
         "passage_genre": "string",
         "difficulty": "number|null (0~1, 파일럿 전 null, 파일럿 후 실측값)",
+        "discrimination": "number|null (변별도, 파일럿 후 실측값)",
+        "review_status": "string (draft|reviewed|approved)",
+        "is_warmup": "boolean (워밍업 문항 여부)"
+      }
+    },
+    "writing_item": {
+      "description": "글쓰기 문항 데이터. 읽기 문항과 별도 관리.",
+      "output_path": "item-bank/writing-items.json",
+      "item_structure": {
+        "item_id": "string (W-{level}-{domain_code}-{seq}, 예: W-3-ORG-001)",
+        "level": "number (1~7)",
+        "domain": "string (내용 생성|글 조직|표현|어법과 규범|고쳐쓰기)",
+        "domain_code": "string (IDE|ORG|EXP|CVN|REV)",
+        "primary_domain": "string (IDE|ORG|EXP|CVN|REV) — 주 평가 영역",
+        "achievement_standard": "string (성취기준 코드, 예: [6국03-04])",
+        "level_differentiation": "string — 이 단계와 인접 단계 간 질적 차이 설명",
+        "item_type": "string (multiple_choice|ordering|error_correction)",
+        "question_text": "string — 발문",
+        "stimulus_text": "string|null — 제시문 (글 수정, 오류 발견 등에 사용되는 지문)",
+        "choices": ["string — 선택지 배열 (4개)"],
+        "answer": "number (정답 인덱스, 0-based)",
+        "explanation": "string — 정답 해설",
+        "difficulty": "number|null (0~1, 파일럿 전 null)",
         "discrimination": "number|null (변별도, 파일럿 후 실측값)",
         "review_status": "string (draft|reviewed|approved)",
         "is_warmup": "boolean (워밍업 문항 여부)"
