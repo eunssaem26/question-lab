@@ -1,13 +1,13 @@
 ---
 title: "세 번째 개발일지: 글쓰기 평가 준거틀 설계"
 series: "질문연구소 개발일지"
-series_number: 3
+seriesNumber: 3
 pubDate: 2026-05-05
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 글쓰기, 평가준거틀, 5영역, 7단계, 글쌤, 은쌤]
 description: "글쓰기 5영역 × 7단계 평가 준거틀 설계 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 세 번째 개발일지: 글쓰기 평가 준거틀 설계

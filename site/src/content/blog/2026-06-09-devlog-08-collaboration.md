@@ -1,13 +1,13 @@
 ---
 title: "여덟 번째 개발일지: 에이전트 협업 프로토콜 구축"
 series: "질문연구소 개발일지"
-series_number: 8
+seriesNumber: 8
 pubDate: 2026-06-09
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 협업, 에이전트, 프로토콜, 6개역할, 필로]
 description: "6개 에이전트 역할 체계 및 협업 프로토콜 구축 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 여덟 번째 개발일지: 에이전트 협업 프로토콜 구축

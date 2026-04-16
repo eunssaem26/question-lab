@@ -1,13 +1,13 @@
 ---
 title: "네 번째 개발일지: 문항 출제 시작 (읽기 1-2단계)"
 series: "질문연구소 개발일지"
-series_number: 4
+seriesNumber: 4
 pubDate: 2026-05-12
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 문항출제, 읽기, 1-2단계, 50문항, 별쌤, 책쌤]
 description: "읽기 1-2단계 50문항 출제 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 네 번째 개발일지: 문항 출제 시작 (읽기 1-2단계)

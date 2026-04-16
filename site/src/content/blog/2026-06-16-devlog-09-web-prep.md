@@ -1,13 +1,13 @@
 ---
 title: "아홉 번째 개발일지: 웹 서비스 개발 준비"
 series: "질문연구소 개발일지"
-series_number: 9
+seriesNumber: 9
 pubDate: 2026-06-16
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 웹개발, Astro, 사이트, 호기]
 description: "웹 서비스 개발 준비 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 아홉 번째 개발일지: 웹 서비스 개발 준비

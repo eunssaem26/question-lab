@@ -2,22 +2,22 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import CategoryBadge from '../components/CategoryBadge.astro';
 import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import signboard from '../assets/characters/signboard_questionlab.png';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => post.data.status === 'published')
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = (await getCollection('blog')).filter(
+  (post) => post.data.status === 'published',
+);
 
 const originSeries = posts
   .filter((p) => p.data.series === '질문연구소는 이렇게 시작되었습니다')
   .sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
 
-const recentPosts = posts.slice(0, 5);
+const devlogSeries = posts
+  .filter((p) => p.data.series === '질문연구소 개발일지')
+  .sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
 ---
 
 <!doctype html>
@@ -149,24 +149,23 @@ const recentPosts = posts.slice(0, 5);
         </section>
       )}
 
-      <section class="section">
-        <h2 class="section-title">최근 글</h2>
-        <ul class="post-list">
-          {recentPosts.map((post) => (
-            <li class="post-item">
-              <a href={`/blog/${post.id}/`}>
-                <div class="post-meta">
-                  <CategoryBadge category={post.data.category} />
-                  <span class="dot">·</span>
-                  <FormattedDate date={post.data.pubDate} />
-                </div>
-                <h3 class="post-title">{post.data.title}</h3>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <a href="/blog" class="view-all">모든 글 보기 &rarr;</a>
-      </section>
+      {devlogSeries.length > 0 && (
+        <section class="section">
+          <h2 class="section-title">질문연구소 개발일지</h2>
+          <ol class="series-list">
+            {devlogSeries.map((post) => (
+              <li class="series-item">
+                <a href={`/blog/${post.id}/`}>
+                  <span class="series-num">{post.data.seriesNumber}편</span>
+                  <span class="series-title">{post.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      <a href="/blog" class="view-all">모든 글 보기 &rarr;</a>
     </main>
     <Footer />
   </body>

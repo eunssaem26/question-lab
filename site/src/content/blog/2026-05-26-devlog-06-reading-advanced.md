@@ -1,13 +1,13 @@
 ---
 title: "여섯 번째 개발일지: 3-7단계 문항 확장 (읽기)"
 series: "질문연구소 개발일지"
-series_number: 6
+seriesNumber: 6
 pubDate: 2026-05-26
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 문항출제, 읽기, 3-7단계, 300문항, 별쌤, 책쌤, 호기]
 description: "읽기 3-7단계 300문항 확장 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 여섯 번째 개발일지: 3-7단계 문항 확장 (읽기)

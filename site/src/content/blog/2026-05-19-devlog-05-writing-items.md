@@ -1,13 +1,13 @@
 ---
 title: "다섯 번째 개발일지: 글쓰기 1-2단계 문항 출제"
 series: "질문연구소 개발일지"
-series_number: 5
+seriesNumber: 5
 pubDate: 2026-05-19
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 문항출제, 글쓰기, 1-2단계, 30문항, 글쌤, 은쌤]
 description: "글쓰기 1-2단계 30문항 출제 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 다섯 번째 개발일지: 글쓰기 1-2단계 문항 출제

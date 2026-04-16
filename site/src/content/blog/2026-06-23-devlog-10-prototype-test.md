@@ -1,13 +1,13 @@
 ---
 title: "열 번째 개발일지: 첫 번째 프로토타입 테스트"
 series: "질문연구소 개발일지"
-series_number: 10
+seriesNumber: 10
 pubDate: 2026-06-23
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 프로토타입, 테스트, 피드백, 팀]
 description: "첫 번째 프로토타입 테스트 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 열 번째 개발일지: 첫 번째 프로토타입 테스트

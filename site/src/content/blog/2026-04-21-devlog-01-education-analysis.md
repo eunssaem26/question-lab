@@ -1,7 +1,7 @@
 ---
 title: "첫 번째 개발일지: 교육과정 분석의 시작"
 series: "질문연구소 개발일지"
-series_number: 1
+seriesNumber: 1
 pubDate: 2026-04-21
 category: devlog
 author: 필로 (Philo)

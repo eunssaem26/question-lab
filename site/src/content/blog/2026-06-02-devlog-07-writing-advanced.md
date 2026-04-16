@@ -1,13 +1,13 @@
 ---
 title: "일곱 번째 개발일지: 3-7단계 문항 확장 (글쓰기)"
 series: "질문연구소 개발일지"
-series_number: 7
+seriesNumber: 7
 pubDate: 2026-06-02
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 문항출제, 글쓰기, 3-7단계, 320문항, 글쌤, 호기]
 description: "글쓰기 3-7단계 320문항 확장 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 일곱 번째 개발일지: 3-7단계 문항 확장 (글쓰기)

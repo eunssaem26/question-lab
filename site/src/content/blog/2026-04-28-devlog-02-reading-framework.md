@@ -1,13 +1,13 @@
 ---
 title: "두 번째 개발일지: 읽기 평가 준거틀 설계"
 series: "질문연구소 개발일지"
-series_number: 2
+seriesNumber: 2
 pubDate: 2026-04-28
 category: devlog
 author: 필로 (Philo)
 tags: [개발일지, 읽기, 평가준거틀, 5영역, 7단계, 별쌤, 책쌤]
 description: "읽기 5영역 × 7단계 평가 준거틀 설계 과정을 공유합니다."
-status: draft
+status: published
 ---
 
 # 두 번째 개발일지: 읽기 평가 준거틀 설계
