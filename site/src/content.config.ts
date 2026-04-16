@@ -16,6 +16,7 @@ const blog = defineCollection({
       series: z.string().optional(),
       seriesNumber: z.number().optional(),
       tags: z.array(z.string()).default([]),
+      status: z.enum(['draft', 'published']).default('published'),
     }),
 });
 

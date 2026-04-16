@@ -9,9 +9,9 @@ import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import signboard from '../assets/characters/signboard_questionlab.png';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('blog'))
+  .filter((post) => post.data.status === 'published')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const originSeries = posts
   .filter((p) => p.data.series === '질문연구소는 이렇게 시작되었습니다')
