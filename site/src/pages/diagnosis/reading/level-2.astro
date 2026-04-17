@@ -1,8 +1,15 @@
 ---
 import items from '../../../data/diagnosis/reading-level-2.json';
+import passages from '../../../data/diagnosis/reading-level-2-passages.json';
 
 // 읽기 2단계 문항
 const level2Items = items;
+
+// 지문 맵 생성
+const passagesMap = passages.reduce((acc: any, passage: any) => {
+  acc[passage.passage_id] = passage;
+  return acc;
+}, {});
 
 // 영역별로 그룹화
 const itemsByDomain = level2Items.reduce((acc: any, item: any) => {
@@ -122,30 +129,39 @@ const itemsByDomain = level2Items.reduce((acc: any, item: any) => {
                domainCode === 'STR' ? '구조·요약' : domainCode}
             </h2>
 
-            {(domainItems as any[]).map((item: any, index: number) => (
-              <div class="question-card">
-                <div class="question-text">
-                  {index + 1}. {item.question_text}
+            {(domainItems as any[]).map((item: any, index: number) => {
+              const passage = item.passage_id ? passagesMap[item.passage_id] : null;
+              return (
+                <div class="question-card">
+                  {passage && (
+                    <div style="margin-bottom: 1rem; padding: 1rem; background: #fff8e7; border-left: 4px solid #ffa94d; border-radius: 8px;">
+                      <div style="font-weight: 700; margin-bottom: 0.5rem; color: #8c6d1f;">지문: {passage.topic || passage.genre}</div>
+                      <div style="white-space: pre-wrap; line-height: 1.8; color: #333;">{passage.text}</div>
+                    </div>
+                  )}
+                  <div class="question-text">
+                    {index + 1}. {item.question_text}
+                  </div>
+                  <ol class="choices">
+                    {item.choices.map((choice: string, choiceIndex: number) => (
+                      <li class="choice-item">
+                        <input
+                          type="radio"
+                          id={`q-${item.item_id}-${choiceIndex}`}
+                          name={`q-${item.item_id}`}
+                          value={choiceIndex}
+                          class="choice-input"
+                          required
+                        />
+                        <label for={`q-${item.item_id}-${choiceIndex}`} class="choice-label">
+                          {choice}
+                        </label>
+                      </li>
+                    ))}
+                  </ol>
                 </div>
-                <ol class="choices">
-                  {item.choices.map((choice: string, choiceIndex: number) => (
-                    <li class="choice-item">
-                      <input
-                        type="radio"
-                        id={`q-${item.item_id}-${choiceIndex}`}
-                        name={`q-${item.item_id}`}
-                        value={choiceIndex}
-                        class="choice-input"
-                        required
-                      />
-                      <label for={`q-${item.item_id}-${choiceIndex}`} class="choice-label">
-                        {choice}
-                      </label>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
+              );
+            })}
           </section>
         ))}
 
