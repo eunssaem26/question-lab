@@ -1,0 +1,28 @@
+[
+  {
+    "item_id": "R-7-VOC-001",
+    "level": 7,
+    "domain": "어휘력",
+    "domain_code": "VOC",
+    "primary_domain": "VOC",
+    "achievement_standard": "[4국02-06]",
+    "level_differentiation": "7단계는 어휘의 역사적 변화를 이해하고 맥락에 맞게 사용한다.",
+    "item_type": "multiple_choice",
+    "question_text": "'민주주의' 개념의 역사적 변화를 고려할 때, 현대적 의미로 가장 알맞은 것은?",
+    "choices": [
+      "다수의 지배",
+      "참정권과 기본권 보장, 다원적 사회 참여",
+      "왕의 권력 제한",
+      "경제적 평등"
+    ],
+    "answer": 1,
+    "explanation": "현대 민주주의는 단순한 다수결이 아니라, 참정권과 기본권 보장, 다양한 사회적 참여를 포함하는 개념으로 발전했습니다.",
+    "passage_id": "P-7-001",
+    "passage_genre": "역사철학 텍스트",
+    "difficulty": null,
+    "difficulty_tier": "easy",
+    "discrimination": null,
+    "review_status": "draft",
+    "is_warmup": false
+  }
+]
