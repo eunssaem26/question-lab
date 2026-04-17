@@ -1,0 +1,80 @@
+[
+  {
+    "item_id": "R-5-VOC-001",
+    "level": 5,
+    "domain": "어휘력",
+    "domain_code": "VOC",
+    "primary_domain": "VOC",
+    "achievement_standard": "[4국02-04]",
+    "level_differentiation": "5단계는 다양한 맥락에서 어휘를 정확하게 이해하고, 6단계는 어휘의 사회문화적 의미를 파악한다.",
+    "item_type": "multiple_choice",
+    "question_text": "이 학술 논문에서 '패러다임 전환'의 의미로 가장 알맞은 것은?",
+    "choices": [
+      "기술의 발전",
+      "기존의 사고 방식이나 틀의 근본적인 변화",
+      "경제 구조의 재편",
+      "사회 제도의 개혁"
+    ],
+    "answer": 1,
+    "explanation": "패러다임 전환은 기존의 세계관이나 사고 틀이 근본적으로 바뀌는 것을 의미합니다. 학술적 맥락에서 사용될 때 특히 그러한 의미가 강합니다.",
+    "passage_id": "P-5-001",
+    "passage_genre": "학술 논문",
+    "difficulty": null,
+    "difficulty_tier": "easy",
+    "discrimination": null,
+    "review_status": "draft",
+    "is_warmup": false
+  },
+  {
+    "item_id": "R-5-LIT-001",
+    "level": 5,
+    "domain": "사실적 이해",
+    "domain_code": "LIT",
+    "primary_domain": "LIT",
+    "achievement_standard": "[4국02-05]",
+    "level_differentiation": "5단계는 복잡한 구조의 글을 이해하고, 6단계는 다층적 구조의 글을 분석한다.",
+    "item_type": "multiple_choice",
+    "question_text": "이 논문의 연구 방법으로 알맞은 것은?",
+    "choices": [
+      "설문조사와 인터뷰",
+      "실험과 관찰",
+      "문헌 분석과 사례 연구",
+      "통계 분석과 모델링"
+    ],
+    "answer": 2,
+    "explanation": "논문은 다양한 학술 자료를 분석하고 실제 사례를 연구하는 방법을 사용하고 있습니다.",
+    "passage_id": "P-5-001",
+    "passage_genre": "학술 논문",
+    "difficulty": null,
+    "difficulty_tier": "medium",
+    "discrimination": null,
+    "review_status": "draft",
+    "is_warmup": false
+  },
+  {
+    "item_id": "R-5-INF-001",
+    "level": 5,
+    "domain": "추론적 이해",
+    "domain_code": "INF",
+    "primary_domain": "INF",
+    "achievement_standard": "[4국02-06]",
+    "level_differentiation": "5단계는 글의 함축적 의미를 이해하고, 6단계는 글의 맥락적 의미를 파악한다.",
+    "item_type": "multiple_choice",
+    "question_text": "논문에서 저자가 암시하는 바는 무엇인가?",
+    "choices": [
+      "기술 발전만으로 충분하다",
+      "교육과 윤리의 중요성",
+      "정부 규제의 필요성",
+      "시장 메커니즘의 효율성"
+    ],
+    "answer": 1,
+    "explanation": "저자는 기술 발전 외에 교육과 윤리적 고려의 중요성을 강조하는 뉘앙스를 풍깁니다.",
+    "passage_id": "P-5-001",
+    "passage_genre": "학술 논문",
+    "difficulty": null,
+    "difficulty_tier": "hard",
+    "discrimination": null,
+    "review_status": "draft",
+    "is_warmup": false
+  }
+]

@@ -1,0 +1,331 @@
+---
+import readingLevel1 from '../../data/diagnosis/reading-level-1.json';
+import readingLevel2 from '../../data/diagnosis/reading-level-2.json';
+import readingLevel3 from '../../data/diagnosis/reading-level-3.json';
+import readingLevel4 from '../../data/diagnosis/reading-level-4.json';
+import readingLevel5 from '../../data/diagnosis/reading-level-5.json';
+import readingLevel6 from '../../data/diagnosis/reading-level-6.json';
+import readingLevel7 from '../../data/diagnosis/reading-level-7.json';
+import readingPassages2 from '../../data/diagnosis/reading-level-2-passages.json';
+import readingPassages3 from '../../data/diagnosis/reading-level-3-passages.json';
+import readingPassages4 from '../../data/diagnosis/reading-level-4-passages.json';
+import readingPassages5 from '../../data/diagnosis/reading-level-5-passages.json';
+import readingPassages6 from '../../data/diagnosis/reading-level-6-passages.json';
+import readingPassages7 from '../../data/diagnosis/reading-level-7-passages.json';
+import writingLevel1 from '../../data/diagnosis/writing-level-1.json';
+import writingLevel2 from '../../data/diagnosis/writing-level-2.json';
+import writingLevel3 from '../../data/diagnosis/writing-level-3.json';
+import writingLevel4 from '../../data/diagnosis/writing-level-4.json';
+import writingLevel5 from '../../data/diagnosis/writing-level-5.json';
+import writingLevel6 from '../../data/diagnosis/writing-level-6.json';
+import writingLevel7 from '../../data/diagnosis/writing-level-7.json';
+import writingPassages1 from '../../data/diagnosis/writing-level-1-passages.json';
+import writingPassages2 from '../../data/diagnosis/writing-level-2-passages.json';
+import writingPassages3 from '../../data/diagnosis/writing-level-3-passages.json';
+import writingPassages4 from '../../data/diagnosis/writing-level-4-passages.json';
+import writingPassages5 from '../../data/diagnosis/writing-level-5-passages.json';
+import writingPassages6 from '../../data/diagnosis/writing-level-6-passages.json';
+import writingPassages7 from '../../data/diagnosis/writing-level-7-passages.json';
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="단계형 진단 평가 엔진을 체험합니다." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>진단 평가 엔진</title>
+    <style>
+      body { margin: 0; font-family: 'Noto Sans KR', sans-serif; background: #f4f5f8; color: #222; }
+      header, footer { background: #fff; border-bottom: 1px solid #e5e5e5; }
+      header { padding: 1rem 0; }
+      nav { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+      nav a { text-decoration: none; color: #666; }
+      main { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; }
+      .badge { display: inline-flex; gap: 0.5rem; align-items: center; color: #fff; background: #007acc; border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.95rem; font-weight: 600; }
+      .card { background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+      .title { margin: 0 0 1rem; font-size: 1.8rem; }
+      .subtitle { margin: 0.5rem 0 1rem; color: #555; }
+      .button-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+      .button { display: inline-block; padding: 1rem 1.6rem; text-decoration: none; border-radius: 10px; font-weight: 600; border: none; cursor: pointer; }
+      .button.primary { background: #007acc; color: white; }
+      .button.secondary { background: #f1f3f5; color: #333; }
+      .button.success { background: #28a745; color: white; }
+      .question-card { border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 1.5rem; background: white; }
+      .question-label { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; display: block; }
+      .choices { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+      .choice-item { border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; padding: 0.9rem 1rem; background: #fafbfc; cursor: pointer; transition: background 0.2s; }
+      .choice-item:hover { background: #f0f4ff; }
+      .choice-input { margin-right: 0.75rem; }
+      .passage-box { padding: 1rem; background: #fff8e7; border-left: 4px solid #ffa94d; border-radius: 10px; margin-bottom: 1rem; white-space: pre-wrap; line-height: 1.8; }
+      .passage-title { font-weight: 700; margin-bottom: 0.5rem; color: #8c6d1f; }
+      .status-pill { display: inline-flex; gap: 0.5rem; padding: 0.5rem 0.8rem; border-radius: 999px; background: #eef5ff; color: #1f497d; font-weight: 600; font-size: 0.95rem; }
+      .result-summary { display: grid; gap: 1rem; }
+      .result-card { padding: 1.5rem; border-radius: 16px; background: #f8fbff; border: 1px solid rgba(0,0,0,0.08); }
+      .result-title { margin: 0 0 0.75rem; font-size: 1.25rem; }
+      .feedback { margin: 1rem 0 0; }
+      .feedback p { margin: 0.6rem 0; }
+      .hidden { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2><a href="/">질문연구소</a></h2>
+        <div>
+          <a href="/diagnosis" style="margin-right: 1rem;">진단 시뮬레이션</a>
+          <a href="/diagnosis/start">진단 시작</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="card">
+        <div class="badge">진단 엔진</div>
+        <h1 class="title">학생 수준을 단계별로 확인하는 진단</h1>
+        <p class="subtitle">전 단계 문제를 풀면서 다음 단계로 넘어갈 수 있는지 판단합니다. 각 단계당 5문제를 풀고, 3문제 이상 정답이어야 다음 단계로 이동할 수 있습니다.</p>
+      </section>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+        <p style="margin:0; color:#555;"><strong>기본 규칙</strong> · 단계별로 5문제를 풀고, 3문제 이상 정답이어야 다음 단계로 이동합니다.</p>
+      </div>
+
+      <div id="engine-root" class="card"></div>
+    </main>
+    <footer style="padding: 2rem 1rem; text-align: center; color: #666;">&copy; 2024 질문연구소. All rights reserved.</footer>
+
+    <script type="module">
+      const readingItems = ${JSON.stringify([...readingLevel1, ...readingLevel2, ...readingLevel3, ...readingLevel4, ...readingLevel5, ...readingLevel6, ...readingLevel7])};
+      const writingItems = ${JSON.stringify([...writingLevel1, ...writingLevel2, ...writingLevel3, ...writingLevel4, ...writingLevel5, ...writingLevel6, ...writingLevel7])};
+      const readingPassages = ${JSON.stringify([...readingPassages2, ...readingPassages3, ...readingPassages4, ...readingPassages5, ...readingPassages6, ...readingPassages7])};
+      const writingPassages = ${JSON.stringify([...writingPassages1, ...writingPassages2, ...writingPassages3, ...writingPassages4, ...writingPassages5, ...writingPassages6, ...writingPassages7])};
+
+      const dataByType = {
+        reading: {
+          items: readingItems,
+          passages: readingPassages.reduce((acc, passage) => { acc[passage.passage_id] = passage; return acc; }, {}),
+        },
+        writing: {
+          items: writingItems,
+          passages: writingPassages.reduce((acc, passage) => { acc[passage.passage_id] = passage; return acc; }, {}),
+        },
+      };
+
+      const questionsPerLevel = 5;
+      const advanceThreshold = 3;
+      const root = document.getElementById('engine-root');
+      let currentType = null;
+      let currentLevel = null;
+      let currentQuestions = [];
+      let currentIndex = 0;
+      let correctCount = 0;
+      let history = [];
+      let stageHistory = [];
+      let usedItemIds = new Set();
+      let step = 'select';
+
+      function getLevels(type) {
+        return Array.from(new Set(dataByType[type].items.map(item => item.level))).sort((a, b) => a - b);
+      }
+
+      function sampleQuestions(pool) {
+        const shuffled = [...pool].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, questionsPerLevel);
+      }
+
+      function getQuestions(type, level) {
+        const pool = dataByType[type].items.filter(item => item.level === level && !usedItemIds.has(item.item_id));
+        if (pool.length === 0) {
+          // No unused questions available for this level
+          return [];
+        }
+        // TODO: Implement difficulty tier selection (easy/medium/hard within level)
+        // For now, random sampling from available questions
+        if (pool.length <= questionsPerLevel) {
+          return pool;
+        }
+        return sampleQuestions(pool);
+      }
+
+      function startDiagnosis(type) {
+        currentType = type;
+        currentLevel = getLevels(type)[0];
+        usedItemIds = new Set();
+        currentQuestions = getQuestions(type, currentLevel);
+        currentQuestions.forEach(item => usedItemIds.add(item.item_id));
+        currentIndex = 0;
+        correctCount = 0;
+        history = [];
+        stageHistory = [];
+        step = 'question';
+        render();
+      }
+
+      function selectResultText(correct, total) {
+        if (correct === total) return '완벽하게 맞았습니다! 다음 단계를 도전합니다.';
+        return `현재 단계에서 ${correct}문제 맞았습니다. 다음 단계 도전에는 ${advanceThreshold}문제가 필요합니다.`;
+      }
+
+      function renderSelect() {
+        root.innerHTML = `
+          <div>
+            <h2 style="margin-top:0;">진단 유형 선택</h2>
+            <p style="color:#555;">읽기 또는 글쓰기 진단 중 하나를 선택하면 단계별로 문제를 제시합니다.</p>
+          </div>
+          <div class="button-group" style="margin-top:1rem;">
+            <button class="button primary" type="button" id="start-reading">읽기 진단 시작</button>
+            <button class="button primary" type="button" id="start-writing">글쓰기 진단 시작</button>
+          </div>
+        `;
+
+        document.getElementById('start-reading').addEventListener('click', () => startDiagnosis('reading'));
+        document.getElementById('start-writing').addEventListener('click', () => startDiagnosis('writing'));
+      }
+
+      function renderQuestion() {
+        const item = currentQuestions[currentIndex];
+        const passage = item.passage_id ? dataByType[currentType].passages[item.passage_id] : null;
+        const questionNumber = currentIndex + 1;
+        const totalQuestions = currentQuestions.length;
+
+        root.innerHTML = `
+          <div class="status-pill">${currentType === 'reading' ? '읽기' : '글쓰기'} 진단 · ${currentLevel}단계</div>
+          <div class="feedback" style="margin-top:1rem;">현재 단계 ${questionNumber} / ${totalQuestions}번 문제</div>
+          ${passage ? `<div class="passage-box"><div class="passage-title">지문: ${passage.topic || passage.genre}</div>${passage.text}</div>` : ''}
+          <form id="question-form" class="question-card">
+            <label class="question-label">${questionNumber}. ${item.question_text}</label>
+            <ol class="choices">
+              ${item.choices.map((choice, index) => `
+                <li class="choice-item">
+                  <label>
+                    <input type="radio" name="answer" value="${index}" class="choice-input" required />
+                    ${choice}
+                  </label>
+                </li>
+              `).join('')}
+            </ol>
+            <button class="button success" type="submit" style="margin-top:1rem;">다음</button>
+          </form>
+        `;
+
+        document.getElementById('question-form').addEventListener('submit', event => {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          const answer = parseInt(formData.get('answer'), 10);
+          const isCorrect = answer === item.answer;
+          if (isCorrect) correctCount += 1;
+          history.push({ item_id: item.item_id, correct: isCorrect });
+          if (currentIndex + 1 < totalQuestions) {
+            currentIndex += 1;
+            render();
+          } else {
+            step = 'level-summary';
+            render();
+          }
+        });
+      }
+
+      function renderLevelSummary() {
+        const levels = getLevels(currentType);
+        const currentLevelIndex = levels.indexOf(currentLevel);
+        const nextLevel = levels[currentLevelIndex + 1] ?? null;
+        const nextLevelQuestions = nextLevel ? getQuestions(currentType, nextLevel) : [];
+        const canAdvance = correctCount >= advanceThreshold && nextLevel !== null && nextLevelQuestions.length > 0;
+        const isComplete = currentLevelIndex === levels.length - 1;
+
+        root.innerHTML = `
+          <div>
+            <h2 style="margin-top:0;">${currentType === 'reading' ? '읽기' : '글쓰기'} ${currentLevel}단계 결과</h2>
+            <div class="result-card">
+              <p class="result-title">이번 단계 결과</p>
+              <p>맞힌 문제: <strong>${correctCount} / ${currentQuestions.length}</strong></p>
+              <p>${selectResultText(correctCount, currentQuestions.length)}</p>
+            </div>
+          </div>
+          <div class="button-group" style="margin-top:1.5rem;">
+            ${canAdvance ? `<button class="button primary" type="button" id="next-level">${nextLevel}단계 도전하기</button>` : ''}
+            <button class="button secondary" type="button" id="finish">결과 보기</button>
+          </div>
+        `;
+
+        if (canAdvance) {
+          document.getElementById('next-level').addEventListener('click', () => {
+            stageHistory.push({ level: currentLevel, correctCount, total: currentQuestions.length });
+            currentLevel = nextLevel;
+            currentQuestions = nextLevelQuestions;
+            currentQuestions.forEach(item => usedItemIds.add(item.item_id));
+            currentIndex = 0;
+            correctCount = 0;
+            history = [];
+            step = 'question';
+            render();
+          });
+        }
+        document.getElementById('finish').addEventListener('click', () => {
+          stageHistory.push({ level: currentLevel, correctCount, total: currentQuestions.length });
+          step = 'finished';
+          render();
+        });
+      }
+
+      function renderFinished() {
+        // Determine final level based on performance
+        let finalLevel = 1; // Default to lowest level
+        let finalReason = '기본 시작 단계';
+
+        for (const stage of stageHistory) {
+          if (stage.correctCount >= advanceThreshold) {
+            finalLevel = stage.level;
+            finalReason = `${stage.level}단계 ${stage.correctCount}/${stage.total}문제 정답으로 통과`;
+          } else {
+            finalReason = `${stage.level}단계에서 ${stage.correctCount}/${stage.total}문제 정답으로 ${stage.level}단계 수준 판정`;
+            break;
+          }
+        }
+
+        // If they completed the highest level successfully, that's their final level
+        const levels = getLevels(currentType);
+        if (stageHistory.length > 0 && stageHistory[stageHistory.length - 1].correctCount >= advanceThreshold) {
+          finalLevel = Math.max(finalLevel, stageHistory[stageHistory.length - 1].level);
+        }
+
+        root.innerHTML = `
+          <div>
+            <h2 style="margin-top:0;">진단 완료</h2>
+            <div class="result-card">
+              <p class="result-title">최종 진단 결과</p>
+              <p><strong>${currentType === 'reading' ? '읽기' : '글쓰기'} ${finalLevel}단계</strong> 수준으로 판정되었습니다.</p>
+              <p style="color:#666; font-size:0.9rem;">${finalReason}</p>
+              <p>단계별 기록:</p>
+              <ul style="margin:0.75rem 0 0 1rem; color:#333;">
+                ${stageHistory.map(entry => `<li>${entry.level}단계: ${entry.correctCount}/${entry.total}문제 정답</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+          <div class="button-group" style="margin-top:1.5rem;">
+            <button class="button primary" type="button" id="restart">다시 시작</button>
+            <a class="button secondary" href="/diagnosis/start">진단 시작 페이지로</a>
+          </div>
+        `;
+
+        document.getElementById('restart').addEventListener('click', () => {
+          step = 'select';
+          render();
+        });
+      }
+
+      function render() {
+        if (step === 'select') {
+          renderSelect();
+        } else if (step === 'question') {
+          renderQuestion();
+        } else if (step === 'level-summary') {
+          renderLevelSummary();
+        } else if (step === 'finished') {
+          renderFinished();
+        }
+      }
+
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+[
+  {
+    "item_id": "R-6-VOC-001",
+    "level": 6,
+    "domain": "어휘력",
+    "domain_code": "VOC",
+    "primary_domain": "VOC",
+    "achievement_standard": "[4국02-05]",
+    "level_differentiation": "6단계는 어휘의 사회문화적 의미를 파악하고, 7단계는 어휘의 역사적 변화를 이해한다.",
+    "item_type": "multiple_choice",
+    "question_text": "이 철학 텍스트에서 '실존'의 의미로 가장 알맞은 것은?",
+    "choices": [
+      "물리적 존재",
+      "개인의 주관적 경험과 선택의 자유",
+      "사회적 지위",
+      "경제적 성공"
+    ],
+    "answer": 1,
+    "explanation": "실존철학에서 '실존'은 단순한 존재가 아니라, 개인의 주관적 경험과 자유로운 선택을 의미합니다.",
+    "passage_id": "P-6-001",
+    "passage_genre": "철학 텍스트",
+    "difficulty": null,
+    "difficulty_tier": "easy",
+    "discrimination": null,
+    "review_status": "draft",
+    "is_warmup": false
+  },
+  {
+    "item_id": "R-6-LIT-001",
+    "level": 6,
+    "domain": "사실적 이해",
+    "domain_code": "LIT",
+    "primary_domain": "LIT",
+    "achievement_standard": "[4국02-06]",
+    "level_differentiation": "6단계는 다층적 구조의 글을 분석하고, 7단계는 복합적 구조의 글을 이해한다.",
+    "item_type": "multiple_choice",
+    "question_text": "이 텍스트의 인용 구조를 분석할 때, 가장 복잡한 것은?",
+    "choices": [
+      "단순한 사실 인용",
+      "저자의 해석을 포함한 인용",
+      "여러 저자의 견해를 종합한 인용",
+      "역사적 맥락을 고려한 인용"
+    ],
+    "answer": 2,
+    "explanation": "텍스트는 다양한 철학자들의 견해를 종합하여 분석하는 복잡한 인용 구조를 사용합니다.",
+    "passage_id": "P-6-001",
+    "passage_genre": "철학 텍스트",
+    "difficulty": null,
+    "difficulty_tier": "medium",
+    "discrimination": null,
+    "review_status": "draft",
+    "is_warmup": false
+  }
+]

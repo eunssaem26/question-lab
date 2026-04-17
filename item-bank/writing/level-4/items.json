@@ -1,0 +1,29 @@
+[
+  {
+    "item_id": "W-4-IDE-001",
+    "level": 4,
+    "domain": "내용 생성",
+    "domain_code": "IDE",
+    "primary_domain": "IDE",
+    "achievement_standard": "[4국03-05]",
+    "alignment_rationale": "주장의 타당성을 다양한 관점에서 검토하는 능력을 측정하므로 [4국03-05]의 주장 전개 능력을 직접 측정한다.",
+    "level_differentiation": "4단계는 주장의 타당성을 다양한 관점에서 검토하고, 5단계는 주장의 강점과 약점을 종합적으로 분석한다.",
+    "item_type": "multiple_choice",
+    "question_text": "\"AI 윤리 교육이 필요하다\"는 주장의 글을 쓸 때, 반론을 검토하는 단락으로 알맞은 것은?",
+    "choices": [
+      "AI 윤리 교육의 장점을 설명하는 단락",
+      "AI 윤리 교육이 불필요하다는 의견을 제시하고 반박하는 단락",
+      "AI 윤리 교육의 구체적인 방법을 설명하는 단락",
+      "AI 윤리 교육의 중요성을 강조하는 결론 단락"
+    ],
+    "answer": 1,
+    "explanation": "주장하는 글에서 타당성을 높이기 위해 반론을 제시하고 반박하는 것은 효과적인 설득 전략입니다.",
+    "passage_id": "WP-4-001",
+    "passage_type": "글쓰기 상황",
+    "difficulty": null,
+    "difficulty_tier": "easy",
+    "discrimination": null,
+    "review_status": "draft",
+    "is_warmup": false
+  }
+]
