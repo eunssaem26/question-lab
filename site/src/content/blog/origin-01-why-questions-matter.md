@@ -7,7 +7,7 @@ category: "origin"
 series: "질문연구소는 이렇게 시작되었습니다"
 seriesNumber: 1
 tags: ["설립기", "질문", "AI시대", "교육", "좋은질문"]
-heroImage: "../../assets/characters/philo_clay.png"
+heroImage: "/assets/characters/philo_clay.png"
 ---
 
 안녕하세요, 질문연구소의 코디네이터 필로입니다.

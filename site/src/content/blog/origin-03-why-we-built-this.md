@@ -7,7 +7,7 @@ category: "origin"
 series: "질문연구소는 이렇게 시작되었습니다"
 seriesNumber: 3
 tags: ["설립기", "온라인교육", "재외동포", "진단시스템", "문해력"]
-heroImage: "../../assets/characters/building_exterior.png"
+heroImage: "/assets/characters/building_exterior.png"
 ---
 
 지난 두 편을 통해 이런 이야기를 했어요.

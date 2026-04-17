@@ -7,7 +7,7 @@ category: "origin"
 series: "질문연구소는 이렇게 시작되었습니다"
 seriesNumber: 5
 tags: ["설립기", "개발현황", "로드맵", "블로그안내"]
-heroImage: "../../assets/characters/teachers_office.png"
+heroImage: "/assets/characters/teachers_office.png"
 ---
 
 다섯 편에 걸쳐 이야기를 해왔어요. 마지막으로, 질문연구소가 지금 어디쯤 와 있고, 앞으로 어떤 길을 갈 건지 정리해 드릴게요.

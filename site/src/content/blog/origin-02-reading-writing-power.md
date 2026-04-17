@@ -7,7 +7,7 @@ category: "origin"
 series: "질문연구소는 이렇게 시작되었습니다"
 seriesNumber: 2
 tags: ["설립기", "문해력", "글쓰기", "사고력", "독서"]
-heroImage: "../../assets/characters/chaeksaem_clay.png"
+heroImage: "/assets/characters/chaeksaem_clay.png"
 ---
 
 지난 글에서 저희는 이런 결론에 도달했어요.
