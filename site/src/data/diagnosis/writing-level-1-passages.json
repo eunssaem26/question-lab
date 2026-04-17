@@ -1,0 +1,99 @@
+[
+  {
+    "passage_id": "WP-1-001",
+    "level": 1,
+    "type": "글쓰기 상황",
+    "text": "선생님이 \"학교 급식에 가장 먹고 싶은 반찬\"에 대해 자기 의견을 한 문단으로 써 보라고 하였습니다.",
+    "task_type": "의견 글",
+    "char_count": 54,
+    "source": "AI생성",
+    "topic": "학교 급식 반찬",
+    "intended_errors": [],
+    "intended_domains": [
+      "IDE"
+    ],
+    "review_status": "reviewed"
+  },
+  {
+    "passage_id": "WP-1-003",
+    "level": 1,
+    "type": "학생 글 초안",
+    "text": "오늘 소풍에서 친구들과 숲에 갔습니다. 나뭇잎 사이로 햇빛이 반짝거렸습니다. 새소리도 들렸습니다. 정말 즐거웠습니다.",
+    "task_type": "감상 글",
+    "char_count": 68,
+    "source": "AI생성",
+    "topic": "소풍 경험",
+    "intended_errors": [],
+    "intended_domains": [
+      "EXP"
+    ],
+    "review_status": "reviewed"
+  },
+  {
+    "passage_id": "WP-1-004",
+    "level": 1,
+    "type": "학생 글 초안",
+    "text": "저는 강아지를 조아합니다. 강아지는 꼬리를 흔들며 반겨 줍니다. 저는 매일강아지와 산책을 합니다. 강아지와 함께 하면 기분이 좋습니다.",
+    "task_type": "감상 글",
+    "char_count": 75,
+    "source": "AI생성",
+    "topic": "강아지",
+    "intended_errors": [
+      "맞춤법 1개(조아→좋아)",
+      "띄어쓰기 1개(매일강아지→매일 강아지)"
+    ],
+    "intended_domains": [
+      "CVN",
+      "REV"
+    ],
+    "review_status": "reviewed"
+  },
+  {
+    "passage_id": "WP-1-006",
+    "level": 1,
+    "type": "학생 글 초안",
+    "text": "비가 오면 좋은 점이 있습니다. ______________________. 또, 무더운 날에는 비가 내리면 시원해집니다. 이처럼 비는 우리 생활에 도움을 줍니다.",
+    "task_type": "설명 글",
+    "char_count": 74,
+    "source": "AI생성",
+    "topic": "비가 오면 좋은 점",
+    "intended_errors": [],
+    "intended_domains": [
+      "ORG"
+    ],
+    "review_status": "reviewed"
+  },
+  {
+    "passage_id": "WP-1-007",
+    "level": 1,
+    "type": "글쓰기 상황",
+    "text": "학급 회의에서 \"쉬는 시간에 교실에서 뛰어다니면 안 된다\"라는 규칙을 정할지 이야기하고 있습니다. 찬성하는 의견과 반대하는 의견을 나누고 있습니다.",
+    "task_type": "의견 글",
+    "char_count": 78,
+    "source": "AI생성",
+    "topic": "교실 규칙",
+    "intended_errors": [],
+    "intended_domains": [
+      "IDE"
+    ],
+    "review_status": "reviewed"
+  },
+  {
+    "passage_id": "WP-1-008",
+    "level": 1,
+    "type": "학생 글 초안",
+    "text": "도서관에서는 조용히 해야 합니다. 책을 읽는 친구들이 방해를 받을수 있기 때문입니다. 책을 다 읽으면 제자리에 꽃아야 합니다. 도서관 규칙을 지키면 모두가 편하게 책을 읽을수 있습니다.",
+    "task_type": "설명 글",
+    "char_count": 99,
+    "source": "AI생성",
+    "topic": "도서관 규칙",
+    "intended_errors": [
+      "맞춤법 2개(받을수→받을 수, 꽃아야→꽂아야, 읽을수→읽을 수)"
+    ],
+    "intended_domains": [
+      "CVN",
+      "REV"
+    ],
+    "review_status": "reviewed"
+  }
+]

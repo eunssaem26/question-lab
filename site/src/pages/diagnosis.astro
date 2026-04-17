@@ -1,0 +1,100 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+import readingLevel1 from '../data/diagnosis/reading-level-1.json';
+import readingLevel2 from '../data/diagnosis/reading-level-2.json';
+import writingLevel1 from '../data/diagnosis/writing-level-1.json';
+import writingLevel1Passages from '../data/diagnosis/writing-level-1-passages.json';
+import writingLevel2 from '../data/diagnosis/writing-level-2.json';
+import framework from '../data/diagnosis/framework.json';
+import writingFramework from '../data/diagnosis/writing-framework.json';
+
+const writingLevel1UnusedPassages = writingLevel1Passages.filter(
+  (passage: any) => !writingLevel1.some((item: any) => item.passage_id === passage.passage_id),
+);
+
+const sampleReading1 = readingLevel1.find((item: any) => item.item_id === 'R-1-CRT-004') ?? null;
+const sampleWriting2 = writingLevel2.find((item: any) => item.item_id === 'W-2-ORG-003') ?? null;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <BaseHead title="진단평가 시뮬레이션" description="현재 작성된 진단평가 콘텐츠로 웹 시뮬레이션을 확인합니다." />
+  </head>
+  <body>
+    <Header />
+    <main style="max-width: 860px; margin: 0 auto; padding: 2rem 1rem; line-height: 1.7;">
+      <h1>진단평가 웹 시뮬레이션</h1>
+      <p>현재 작성된 진단평가 데이터(`item-bank`)를 활용해 웹 서비스 형태로 보여줄 수 있는 기본 구조를 시뮬레이션합니다.</p>
+
+      <section style="margin-top: 2rem;">
+        <h2>현재 준비된 데이터 개요</h2>
+        <ul>
+          <li>읽기 1단계 문항: {readingLevel1.length}개</li>
+          <li>읽기 2단계 문항: {readingLevel2.length}개</li>
+          <li>글쓰기 1단계 문항: {writingLevel1.length}개</li>
+          <li>글쓰기 1단계 제시문: {writingLevel1Passages.length}개</li>
+          <li>글쓰기 1단계 미사용 제시문: {writingLevel1UnusedPassages.length}개</li>
+          <li>글쓰기 2단계 문항: {writingLevel2.length}개</li>
+          <li>읽기 평가 준거틀: {framework.levels?.length ?? 0}단계 × {framework.domains?.length ?? 0}영역</li>
+          <li>글쓰기 평가 준거틀: {writingFramework.levels?.length ?? 0}단계 × {writingFramework.domains?.length ?? 0}영역</li>
+        </ul>
+      </section>
+
+      <section style="margin-top: 2rem;">
+        <h2>웹 시뮬레이션으로 가능한 것</h2>
+        <ol>
+          <li>문항 데이터를 정적 페이지로 렌더링하여 진단 문항 확인</li>
+          <li>단계별 진단 항목/제시문을 웹 UI로 나열</li>
+          <li>현재 데이터를 기반으로 진단 결과 요약 페이지, 단계별 추천 메시지, 검수 상태 표시 가능</li>
+          <li><strong>학생용 인터랙티브 진단 페이지 구현</strong></li>
+        </ol>
+      </section>
+
+      <section style="margin-top: 2rem;">
+        <h2>샘플 문항 미리보기</h2>
+        {sampleReading1 ? (
+          <article style="border: 1px solid rgba(0,0,0,0.08); padding: 1rem; border-radius: 12px; background: #fbfbfb; margin-bottom: 1.5rem;">
+            <h3>읽기 1단계 예시: {sampleReading1.item_id}</h3>
+            <p><strong>문항</strong>: {sampleReading1.question_text}</p>
+            <p><strong>보기</strong></p>
+            <ol>
+              {sampleReading1.choices.map((choice: any) => (<li>{choice}</li>))}
+            </ol>
+            <p><strong>정답</strong>: {sampleReading1.answer + 1}번</p>
+          </article>
+        ) : (
+          <p>읽기 샘플 문항을 찾을 수 없습니다.</p>
+        )}
+
+        {sampleWriting2 ? (
+          <article style="border: 1px solid rgba(0,0,0,0.08); padding: 1rem; border-radius: 12px; background: #fbfbfb;">
+            <h3>글쓰기 2단계 예시: {sampleWriting2.item_id}</h3>
+            <p><strong>문항</strong>: {sampleWriting2.question_text}</p>
+            <p><strong>보기</strong></p>
+            <ol>
+              {sampleWriting2.choices.map((choice: any) => (<li>{choice}</li>))}
+            </ol>
+            <p><strong>정답</strong>: {sampleWriting2.answer + 1}번</p>
+          </article>
+        ) : (
+          <p>글쓰기 샘플 문항을 찾을 수 없습니다.</p>
+        )}
+      </section>
+
+      <section style="margin-top: 2rem;">
+        <h2>실제 진단 체험하기</h2>
+        <p>현재 준비된 데이터를 기반으로 실제 학생처럼 진단을 체험해 볼 수 있습니다.</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <a href="/diagnosis/start" style="display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
+            진단 시작하기
+          </a>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
