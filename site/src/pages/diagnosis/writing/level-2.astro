@@ -1,0 +1,211 @@
+---
+import items from '../../../data/diagnosis/writing-level-2.json';
+import passages from '../../../data/diagnosis/writing-level-2-passages.json';
+
+// 글쓰기 2단계 문항
+const level2Items = items;
+
+// 영역별로 그룹화
+const itemsByDomain = level2Items.reduce((acc: any, item: any) => {
+  if (!acc[item.domain_code]) acc[item.domain_code] = [];
+  acc[item.domain_code].push(item);
+  return acc;
+}, {});
+
+// 제시문 맵 생성
+const passagesMap = passages.reduce((acc: any, passage: any) => {
+  acc[passage.passage_id] = passage;
+  return acc;
+}, {});
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="글쓰기 문해력 2단계 진단을 시작합니다." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글쓰기 2단계 진단</title>
+    <style>
+      .question-card {
+        border: 1px solid rgba(0,0,0,0.08);
+        padding: 1.5rem;
+        border-radius: 12px;
+        background: white;
+        margin-bottom: 1.5rem;
+      }
+      .passage-box {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border-left: 4px solid var(--accent);
+      }
+      .passage-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--accent-dark);
+      }
+      .question-text {
+        font-size: 1.1em;
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+      .choices {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .choice-item {
+        margin-bottom: 0.5rem;
+      }
+      .choice-input {
+        margin-right: 0.5rem;
+      }
+      .choice-label {
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+      }
+      .choice-label:hover {
+        background-color: rgba(var(--accent-rgb), 0.1);
+      }
+      .choice-input:checked + .choice-label {
+        background-color: var(--accent);
+        color: white;
+      }
+      .domain-section {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+      .domain-title {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--accent-dark);
+      }
+      .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 2rem;
+      }
+      .submit-btn:hover {
+        background: var(--accent-dark);
+      }
+      .progress {
+        position: sticky;
+        top: 0;
+        background: white;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+        margin-bottom: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header style="background: #fff; border-bottom: 1px solid #e5e5e5; padding: 1rem;">
+      <nav style="max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+        <h2><a href="/" style="text-decoration: none; color: #333; font-size: 1.5rem;">질문연구소</a></h2>
+        <div class="internal-links" style="display: flex; gap: 1rem;">
+          <a href="/" style="text-decoration: none; color: #666; padding: 0.5rem;">홈</a>
+          <a href="/diagnosis" style="text-decoration: none; color: #666; padding: 0.5rem;">진단</a>
+        </div>
+      </nav>
+    </header>
+    <main style="max-width: 860px; margin: 0 auto; padding: 2rem 1rem; line-height: 1.7;">
+      <div class="progress">
+        <h1>글쓰기 2단계 진단</h1>
+        <p>총 {level2Items.length}문항을 풀어주세요. 제시문을 읽고 문제를 풀어주세요.</p>
+        <p style="color: #666; font-size: 0.95em;">2단계는 더 복잡한 글 조직, 표현, 고쳐쓰기 능력을 진단합니다.</p>
+      </div>
+
+      <form id="diagnosis-form">
+        {Object.entries(itemsByDomain).map(([domainCode, domainItems]) => (
+          <section class="domain-section">
+            <h2 class="domain-title">
+              {domainCode === 'IDE' ? '내용 생성' :
+               domainCode === 'ORG' ? '글 조직' :
+               domainCode === 'EXP' ? '표현' :
+               domainCode === 'CVN' ? '어법·규범' :
+               domainCode === 'REV' ? '고쳐쓰기' : domainCode}
+            </h2>
+
+            {(domainItems as any[]).map((item: any, index: number) => {
+              const passage = item.passage_id ? passagesMap[item.passage_id] : null;
+              return (
+                <div class="question-card">
+                  {passage && (
+                    <div class="passage-box">
+                      <div class="passage-title">{passage.type}: {passage.topic}</div>
+                      <div>{passage.text}</div>
+                    </div>
+                  )}
+                  <div class="question-text">
+                    {index + 1}. {item.question_text}
+                  </div>
+                  <ol class="choices">
+                    {item.choices.map((choice: string, choiceIndex: number) => (
+                      <li class="choice-item">
+                        <input
+                          type="radio"
+                          id={`q-${item.item_id}-${choiceIndex}`}
+                          name={`q-${item.item_id}`}
+                          value={choiceIndex}
+                          class="choice-input"
+                          required
+                        />
+                        <label for={`q-${item.item_id}-${choiceIndex}`} class="choice-label">
+                          {choice}
+                        </label>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              );
+            })}
+          </section>
+        ))}
+
+        <button type="submit" class="submit-btn">진단 완료하기</button>
+      </form>
+    </main>
+    <footer style="background: #f5f5f5; padding: 2rem 1rem; margin-top: 4rem; text-align: center; color: #666;">
+      <p>&copy; 2024 질문연구소. All rights reserved.</p>
+    </footer>
+
+    <script>
+      document.getElementById('diagnosis-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target as HTMLFormElement);
+        const answers: Record<string, number> = {};
+
+        for (const [key, value] of formData.entries()) {
+          if (key.startsWith('q-')) {
+            answers[key] = parseInt(value as string);
+          }
+        }
+
+        // 간단한 결과 계산 (실제로는 서버 사이드에서 처리)
+        const totalQuestions = Object.keys(answers).length;
+        const correctAnswers = Math.floor(totalQuestions * 0.75); // 시뮬레이션용
+
+        alert(`진단이 완료되었습니다!\n총 ${totalQuestions}문항 중 ${correctAnswers}문항 정답\n결과는 다음 단계에서 확인하실 수 있습니다.`);
+
+        // 실제 서비스에서는 결과를 저장하고 결과 페이지로 이동
+        window.location.href = '/diagnosis/results?type=writing&level=2&score=' + correctAnswers;
+      });
+    </script>
+  </body>
+</html>

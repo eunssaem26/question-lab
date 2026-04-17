@@ -1,0 +1,109 @@
+---
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="문해력 진단평가를 시작합니다." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>진단평가 시작</title>
+    <style>
+      body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+      header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 1rem; }
+      nav { max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+      nav h2 a { text-decoration: none; color: #333; font-size: 1.5rem; }
+      .internal-links { display: flex; gap: 1rem; }
+      .internal-links a { text-decoration: none; color: #666; padding: 0.5rem; }
+      .internal-links a:hover { color: #333; }
+      main { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; }
+      footer { background: #f5f5f5; padding: 2rem 1rem; margin-top: 4rem; text-align: center; color: #666; }
+      .domain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+      .domain-card { padding: 1.5rem; border: 1px solid #e5e5e5; border-radius: 8px; background: white; }
+      .domain-card h3 { margin-top: 0; color: #333; }
+      .start-btn { display: inline-block; background: #007acc; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px; margin-top: 2rem; }
+      .start-btn:hover { background: #005999; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h2><a href="/">질문연구소</a></h2>
+        <div class="internal-links">
+          <a href="/">홈</a>
+          <a href="/blog">블로그</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <h1>문해력 진단평가</h1>
+      <p>초3~중3 학생을 대상으로 하는 독서·글쓰기 문해력 진단입니다. 각 영역별로 5~10문항 정도의 문제를 풀게 됩니다.</p>
+
+      <section style="margin-top: 2rem; padding: 2rem; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; background: #f9f9f9;">
+        <h2>진단 영역</h2>
+        <div class="domain-grid">
+          <div style="padding: 1rem; background: white; border-radius: 8px;">
+            <h3>읽기 영역 (5개)</h3>
+            <ul style="margin: 0.5rem 0;">
+              <li>어휘 이해 (VOC)</li>
+              <li>사실 이해 (LIT)</li>
+              <li>추론적 이해 (INF)</li>
+              <li>비판적 이해 (CRT)</li>
+              <li>구조·요약 (STR)</li>
+            </ul>
+          </div>
+          <div style="padding: 1rem; background: white; border-radius: 8px;">
+            <h3>글쓰기 영역 (5개)</h3>
+            <ul style="margin: 0.5rem 0;">
+              <li>내용 생성 (IDE)</li>
+              <li>글 조직 (ORG)</li>
+              <li>표현 (EXP)</li>
+              <li>어법·규범 (CVN)</li>
+              <li>고쳐쓰기 (REV)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 2rem;">
+        <h2>진단 단계</h2>
+        <p>현재 1~2단계 문항이 준비되어 있습니다. (초3~중1 수준)</p>
+        
+        <h3 style="margin-top: 1.5rem; color: #333;">1단계 (초3 수준)</h3>
+        <div style="display: flex; gap: 1rem; margin-top: 0.8rem; flex-wrap: wrap;">
+          <a href="/diagnosis/reading/level-1" style="display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
+            읽기 1단계
+          </a>
+          <a href="/diagnosis/writing/level-1" style="display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
+            글쓰기 1단계
+          </a>
+        </div>
+
+        <h3 style="margin-top: 1.5rem; color: #333;">2단계 (초4 수준)</h3>
+        <div style="display: flex; gap: 1rem; margin-top: 0.8rem; flex-wrap: wrap;">
+          <a href="/diagnosis/reading/level-2" style="display: inline-block; padding: 1rem 2rem; background: #28a745; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
+            읽기 2단계
+          </a>
+          <a href="/diagnosis/writing/level-2" style="display: inline-block; padding: 1rem 2rem; background: #28a745; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">
+            글쓰기 2단계
+          </a>
+        </div>
+      </section>
+
+      <section style="margin-top: 2rem; padding: 1rem; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+        <h3>⚠️ 현재 상태 안내</h3>
+        <p>이 페이지는 현재 작성된 진단평가 데이터를 기반으로 한 시뮬레이션입니다. 실제 서비스에서는:</p>
+        <ul style="margin: 0.5rem 0;">
+          <li>학생 로그인과 프로필 관리</li>
+          <li>진단 결과 저장과 분석</li>
+          <li>맞춤 학습 추천</li>
+          <li>교사용 관리 대시보드</li>
+        </ul>
+        <p>등의 기능이 추가됩니다.</p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 질문연구소. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

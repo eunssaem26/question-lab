@@ -9,21 +9,10 @@
     "source": "AI생성",
     "topic": "학교 급식 반찬",
     "intended_errors": [],
-    "intended_domains": ["IDE"],
-    "review_status": "draft"
-  },
-  {
-    "passage_id": "WP-1-002",
-    "level": 1,
-    "type": "학생 글 초안",
-    "text": "우리 학교에서는 매주 수요일에 재활용 쓰레기를 분리합니다. 종이, 플라스틱, 캔을 각각 다른 통에 넣습니다. ㉠ 저는 주말에 공원에서 자전거를 탔습니다. 재활용을 하면 쓰레기가 줄어들어 지구를 깨끗하게 지킬 수 있습니다.",
-    "task_type": "설명 글",
-    "char_count": 117,
-    "source": "AI생성",
-    "topic": "재활용 분리수거",
-    "intended_errors": ["주제 이탈 문장 1개(㉠)"],
-    "intended_domains": ["ORG", "REV"],
-    "review_status": "draft"
+    "intended_domains": [
+      "IDE"
+    ],
+    "review_status": "reviewed"
   },
   {
     "passage_id": "WP-1-003",
@@ -35,8 +24,10 @@
     "source": "AI생성",
     "topic": "소풍 경험",
     "intended_errors": [],
-    "intended_domains": ["EXP"],
-    "review_status": "draft"
+    "intended_domains": [
+      "EXP"
+    ],
+    "review_status": "reviewed"
   },
   {
     "passage_id": "WP-1-004",
@@ -47,22 +38,15 @@
     "char_count": 75,
     "source": "AI생성",
     "topic": "강아지",
-    "intended_errors": ["맞춤법 1개(조아→좋아)", "띄어쓰기 1개(매일강아지→매일 강아지)"],
-    "intended_domains": ["CVN", "REV"],
-    "review_status": "draft"
-  },
-  {
-    "passage_id": "WP-1-005",
-    "level": 1,
-    "type": "글쓰기 상황",
-    "text": "친구에게 \"우리 반에서 기르는 식물에 물을 줘야 하니까, 내일 아침에 같이 교실에 일찍 오자\"라고 말하고 싶습니다. 이 내용을 쪽지로 써서 전하려고 합니다.",
-    "task_type": "편지/쪽지",
-    "char_count": 82,
-    "source": "AI생성",
-    "topic": "친구에게 쪽지 쓰기",
-    "intended_errors": [],
-    "intended_domains": ["EXP"],
-    "review_status": "draft"
+    "intended_errors": [
+      "맞춤법 1개(조아→좋아)",
+      "띄어쓰기 1개(매일강아지→매일 강아지)"
+    ],
+    "intended_domains": [
+      "CVN",
+      "REV"
+    ],
+    "review_status": "reviewed"
   },
   {
     "passage_id": "WP-1-006",
@@ -74,8 +58,10 @@
     "source": "AI생성",
     "topic": "비가 오면 좋은 점",
     "intended_errors": [],
-    "intended_domains": ["ORG"],
-    "review_status": "draft"
+    "intended_domains": [
+      "ORG"
+    ],
+    "review_status": "reviewed"
   },
   {
     "passage_id": "WP-1-007",
@@ -87,8 +73,10 @@
     "source": "AI생성",
     "topic": "교실 규칙",
     "intended_errors": [],
-    "intended_domains": ["IDE"],
-    "review_status": "draft"
+    "intended_domains": [
+      "IDE"
+    ],
+    "review_status": "reviewed"
   },
   {
     "passage_id": "WP-1-008",
@@ -99,8 +87,13 @@
     "char_count": 99,
     "source": "AI생성",
     "topic": "도서관 규칙",
-    "intended_errors": ["맞춤법 2개(받을수→받을 수, 꽃아야→꽂아야, 읽을수→읽을 수)"],
-    "intended_domains": ["CVN", "REV"],
-    "review_status": "draft"
+    "intended_errors": [
+      "맞춤법 2개(받을수→받을 수, 꽃아야→꽂아야, 읽을수→읽을 수)"
+    ],
+    "intended_domains": [
+      "CVN",
+      "REV"
+    ],
+    "review_status": "reviewed"
   }
 ]

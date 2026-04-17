@@ -1,0 +1,141 @@
+---
+const url = new URL(Astro.request.url);
+const type = url.searchParams.get('type') || 'unknown';
+const level = url.searchParams.get('level') || '1';
+const score = parseInt(url.searchParams.get('score') || '0');
+
+const typeName = type === 'reading' ? '읽기' : type === 'writing' ? '글쓰기' : '알 수 없음';
+const levelName = `${level}단계`;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="진단 결과를 확인합니다." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>진단 결과</title>
+    <style>
+      .result-card {
+        border: 1px solid rgba(0,0,0,0.08);
+        padding: 2rem;
+        border-radius: 12px;
+        background: white;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+      .score-display {
+        font-size: 3em;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 1rem 0;
+      }
+      .level-indicator {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: var(--accent);
+        color: white;
+        border-radius: 20px;
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+      .recommendation {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-top: 2rem;
+      }
+      .recommendation h3 {
+        margin-top: 0;
+        color: var(--accent-dark);
+      }
+      .action-btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        margin: 0.5rem;
+        transition: background-color 0.2s;
+      }
+      .action-btn:hover {
+        background: var(--accent-dark);
+      }
+      .action-btn.secondary {
+        background: #6c757d;
+      }
+      .action-btn.secondary:hover {
+        background: #5a6268;
+      }
+    </style>
+  </head>
+  <body>
+    <header style="background: #fff; border-bottom: 1px solid #e5e5e5; padding: 1rem;">
+      <nav style="max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+        <h2><a href="/" style="text-decoration: none; color: #333; font-size: 1.5rem;">질문연구소</a></h2>
+        <div class="internal-links" style="display: flex; gap: 1rem;">
+          <a href="/" style="text-decoration: none; color: #666; padding: 0.5rem;">홈</a>
+          <a href="/diagnosis" style="text-decoration: none; color: #666; padding: 0.5rem;">진단</a>
+        </div>
+      </nav>
+    </header>
+    <main style="max-width: 860px; margin: 0 auto; padding: 2rem 1rem; line-height: 1.7;">
+      <h1>진단 결과</h1>
+
+      <div class="result-card">
+        <div class="level-indicator">{typeName} {levelName}</div>
+        <div class="score-display">{score}점</div>
+        <p>총 15문항 중 {score}문항을 맞추셨습니다.</p>
+        {score >= 12 ? (
+          <p style="color: #28a745; font-weight: 500;">🎉 {levelName} 수준을 잘 이해하고 계시네요!</p>
+        ) : score >= 9 ? (
+          <p style="color: #ffc107; font-weight: 500;">👍 {levelName} 수준을 어느 정도 이해하고 있습니다.</p>
+        ) : (
+          <p style="color: #dc3545; font-weight: 500;">💪 {levelName} 수준에 대한 추가 학습이 도움이 될 수 있습니다.</p>
+        )}
+      </div>
+
+      <div class="recommendation">
+        <h3>다음 단계 추천</h3>
+        {score >= 12 ? (
+          <div>
+            <p>축하합니다! 다음 단계로 올라가 보세요.</p>
+            <p>현재 {level}단계를 잘 마스터하셨습니다. {parseInt(level) + 1}단계 문제를 도전해 보시겠어요?</p>
+          </div>
+        ) : score >= 9 ? (
+          <div>
+            <p>좋은 성과입니다! 같은 단계의 다른 문제를 더 풀어 보세요.</p>
+            <p>더 많은 연습을 통해 실력을 다지실 수 있습니다.</p>
+          </div>
+        ) : (
+          <div>
+            <p>기초부터 차근차근 쌓아가 보세요.</p>
+            <p>이전 단계의 개념을 다시 복습하는 것이 도움이 될 수 있습니다.</p>
+          </div>
+        )}
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/diagnosis/start" class="action-btn">다른 진단 다시 하기</a>
+        <a href="/diagnosis" class="action-btn secondary">진단 시뮬레이션으로 돌아가기</a>
+      </div>
+
+      <section style="margin-top: 3rem; padding: 1rem; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+        <h3>⚠️ 시뮬레이션 안내</h3>
+        <p>이 결과는 현재 준비된 진단 데이터를 기반으로 한 시뮬레이션입니다. 실제 서비스에서는:</p>
+        <ul style="margin: 0.5rem 0;">
+          <li>더 정확한 단계 판정 알고리즘 적용</li>
+          <li>영역별 세부 분석 제공</li>
+          <li>맞춤 학습 콘텐츠 추천</li>
+          <li>진단 이력 저장 및 성장 추이 분석</li>
+        </ul>
+        <p>등의 기능이 추가됩니다.</p>
+      </section>
+    </main>
+    <footer style="background: #f5f5f5; padding: 2rem 1rem; margin-top: 4rem; text-align: center; color: #666;">
+      <p>&copy; 2024 질문연구소. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

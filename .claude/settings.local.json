@@ -78,7 +78,8 @@
       "Bash(mv blog/drafts/* archive/blog-drafts/)",
       "Bash(mv blog/philo-voice.md archive/blog-drafts/)",
       "Bash(rm -rf blog/)",
-      "Bash(mv \"별쌤작업/\" archive/)"
+      "Bash(mv \"별쌤작업/\" archive/)",
+      "Bash(git -C \"/Users/eunssaem/Desktop/open claw 준비\" status)"
     ]
   }
 }
