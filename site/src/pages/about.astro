@@ -78,6 +78,61 @@ const members = [
           text-align: center;
         }
       }
+      .support {
+        margin-top: 3em;
+        padding-top: 2em;
+        border-top: 1px solid rgb(var(--gray-light));
+      }
+      .support-intro {
+        font-style: italic;
+        color: rgb(var(--gray));
+        margin-bottom: 1.5em;
+      }
+      .support-box {
+        border-radius: 12px;
+        padding: 1.5em;
+        margin-bottom: 1em;
+      }
+      .support-box.blue { border: 2px solid #4A6FA5; background: #F0F5FF; }
+      .support-box.orange { border: 2px solid #F4A261; background: #FFFAF4; }
+      .support-box.gray { border: 1px solid #e0e0e0; background: #FAFAFA; }
+      .box-header {
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        margin-bottom: 0.8em;
+      }
+      .pill {
+        font-size: 0.75em;
+        font-weight: 700;
+        padding: 0.2em 0.7em;
+        border-radius: 20px;
+        color: white;
+      }
+      .pill.blue { background: #4A6FA5; }
+      .pill.orange { background: #F4A261; }
+      .tag {
+        font-size: 0.8em;
+        padding: 0.15em 0.6em;
+        border-radius: 8px;
+      }
+      .tag.blue { background: #E8F0FE; color: #4A6FA5; }
+      .tag.orange { background: #FEF3E2; color: #8B5E34; }
+      .stbl { width: 100%; font-size: 0.9em; margin: 0; }
+      .stbl td { padding: 0.4em 0.8em; }
+      .stbl td:first-child { font-weight: 600; width: 90px; }
+      .blue .stbl td { border-color: #c8d8f0; }
+      .orange .stbl td { border-color: #f4d0a8; }
+      .blue .stbl td:first-child { color: #2D4A6F; }
+      .orange .stbl td:first-child { color: #8B5E34; }
+      .support-hint { margin-top: 0.8em; font-size: 0.85em; color: #5a7aa5; }
+      .support-closing {
+        margin-top: 2em;
+        padding: 1.5em;
+        background: var(--accent-light);
+        border-radius: 12px;
+        border-left: 4px solid var(--accent);
+      }
     </style>
   </head>
   <body>
@@ -115,6 +170,65 @@ const members = [
             </div>
           ))}
         </div>
+
+        <div class="support" id="support">
+          <h2>질문연구소를 함께 만들어주세요</h2>
+          <p class="support-intro">— 필로, 질문연구소 코디네이터</p>
+          <p>
+            질문연구소는 벤처 투자도, 대기업 후원도 받지 않습니다.
+            오직 <strong>"좋은 질문이 아이의 미래를 바꾼다"</strong>고 믿는 사람들의 힘으로 만들어지고 있습니다.
+            특히 AI API 운영 비용이 커지면서 여러분의 도움이 절실합니다.
+          </p>
+          <p>
+            1,000원도 괜찮습니다. 한 달에 커피 한 잔 값도 충분합니다.
+            여러분의 후원 하나가 이 공간이 계속 살아 숨쉬게 합니다.
+          </p>
+
+          <div class="support-box blue">
+            <div class="box-header">
+              <span class="pill blue">방법 1</span>
+              <strong>CMS 자동이체</strong>
+              <span class="tag blue">연말정산 가능</span>
+            </div>
+            <p style="margin: 0 0 0.8em; font-size: 0.95em;">CCC 선교후원회를 통해 신청하시면 연말정산 세액공제가 가능합니다.</p>
+            <table class="stbl">
+              <tr><td>전화</td><td>02-397-6300</td></tr>
+              <tr><td>후원번호</td><td><strong>3811</strong></td></tr>
+              <tr><td>이름</td><td>이재은 (CCC 협동간사)</td></tr>
+            </table>
+            <p class="support-hint">전화로 <em>"후원번호 3811, 이재은 간사 후원 신청"</em>이라고 말씀해 주세요.</p>
+          </div>
+
+          <div class="support-box orange">
+            <div class="box-header">
+              <span class="pill orange">방법 2</span>
+              <strong>계좌이체</strong>
+              <span class="tag orange">연말정산 불가</span>
+            </div>
+            <p style="margin: 0 0 0.8em; font-size: 0.95em;">간편하게 바로 이체하실 수 있습니다.</p>
+            <table class="stbl">
+              <tr><td>은행</td><td>카카오뱅크</td></tr>
+              <tr><td>예금주</td><td>이재은</td></tr>
+              <tr><td>계좌번호</td><td><strong>3333-18-2696209</strong></td></tr>
+            </table>
+          </div>
+
+          <div class="support-box gray">
+            <div class="box-header">
+              <strong>후원 문의</strong>
+            </div>
+            <p style="margin: 0; font-size: 0.95em;">
+              담당: 이재은 &nbsp;·&nbsp;
+              <a href="mailto:bluesk21@hanmail.net">bluesk21@hanmail.net</a>
+            </p>
+          </div>
+
+          <div class="support-closing">
+            <strong>질문은 답보다 오래 삽니다.</strong><br />
+            질문연구소도 그렇게, 오래 살아남고 싶습니다.
+          </div>
+        </div>
+
       </div>
     </main>
     <Footer />
