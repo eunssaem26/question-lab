@@ -9,9 +9,37 @@ import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import classroomImg from '../../assets/characters/empty_classroom.png';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => post.data.status === 'published')
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allPosts = (await getCollection('blog')).filter(
+  (post) => post.data.status === 'published'
+);
+
+// 시리즈별로 그룹화
+const seriesMap = new Map<string, typeof allPosts>();
+const standalonePosts: typeof allPosts = [];
+
+for (const post of allPosts) {
+  if (post.data.series) {
+    if (!seriesMap.has(post.data.series)) seriesMap.set(post.data.series, []);
+    seriesMap.get(post.data.series)!.push(post);
+  } else {
+    standalonePosts.push(post);
+  }
+}
+
+// 각 시리즈 내부를 편수 순으로 정렬
+for (const posts of seriesMap.values()) {
+  posts.sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
+}
+
+// 시리즈 목록을 첫 번째 글의 pubDate 기준으로 정렬 (최신 순)
+const sortedSeries = [...seriesMap.entries()].sort(([, a], [, b]) => {
+  const aDate = a[0]?.data.pubDate?.valueOf() ?? 0;
+  const bDate = b[0]?.data.pubDate?.valueOf() ?? 0;
+  return bDate - aDate;
+});
+
+// 단독 글은 날짜 최신 순
+standalonePosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
@@ -32,38 +60,130 @@ const posts = (await getCollection('blog'))
       }
       .page-desc {
         color: rgb(var(--gray));
-        margin-bottom: 2em;
+        margin-bottom: 2.5em;
       }
-      .post-list {
+
+      /* 시리즈 섹션 */
+      .series-section {
+        margin-bottom: 3em;
+        border: 1px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .series-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8em;
+        padding: 1.2em 1.5em;
+        background: rgb(var(--gray-light), 0.3);
+        border-bottom: 1px solid rgb(var(--gray-light));
+      }
+      .series-title {
+        font-size: 1.05em;
+        font-weight: 700;
+        color: rgb(var(--black));
+        margin: 0;
+      }
+      .series-count {
+        font-size: 0.82em;
+        color: rgb(var(--gray));
+        margin-left: auto;
+        white-space: nowrap;
+      }
+
+      /* 시리즈 내 글 목록 */
+      .series-posts {
         list-style: none;
         padding: 0;
         margin: 0;
       }
-      .post-item {
-        padding: 1.5em 0;
+      .series-post-item {
         border-bottom: 1px solid rgb(var(--gray-light));
       }
-      .post-item:first-child {
+      .series-post-item:last-child {
+        border-bottom: none;
+      }
+      .series-post-item a {
+        display: flex;
+        align-items: baseline;
+        gap: 1em;
+        padding: 1em 1.5em;
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.15s;
+      }
+      .series-post-item a:hover {
+        background: rgba(var(--accent-rgb, 100, 100, 255), 0.04);
+      }
+      .series-post-item a:hover .item-title {
+        color: var(--accent);
+      }
+      .item-number {
+        font-size: 0.85em;
+        font-weight: 600;
+        color: var(--accent);
+        min-width: 2.5em;
+        flex-shrink: 0;
+      }
+      .item-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .item-title {
+        font-size: 1em;
+        font-weight: 600;
+        color: rgb(var(--black));
+        margin: 0 0 0.2em;
+        line-height: 1.4;
+        word-break: keep-all;
+        transition: color 0.2s;
+      }
+      .item-meta {
+        font-size: 0.82em;
+        color: rgb(var(--gray));
+      }
+
+      /* 단독 글 섹션 */
+      .standalone-section {
+        margin-top: 2em;
+      }
+      .standalone-section-title {
+        font-size: 0.85em;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgb(var(--gray));
+        margin-bottom: 1em;
+      }
+      .standalone-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .standalone-item {
+        padding: 1.2em 0;
+        border-bottom: 1px solid rgb(var(--gray-light));
+      }
+      .standalone-item:first-child {
         padding-top: 0;
       }
-      .post-item a {
+      .standalone-item a {
         text-decoration: none;
         color: inherit;
         display: block;
       }
-      .post-item a:hover .post-title {
+      .standalone-item a:hover .standalone-title {
         color: var(--accent);
       }
-      .post-title {
-        font-size: 1.3em;
+      .standalone-title {
+        font-size: 1.15em;
         font-weight: 700;
         margin: 0.3em 0;
         line-height: 1.4;
-        color: rgb(var(--black));
-        transition: color 0.2s;
         word-break: keep-all;
+        transition: color 0.2s;
       }
-      .post-meta {
+      .standalone-meta {
         display: flex;
         align-items: center;
         gap: 0.6em;
@@ -71,11 +191,11 @@ const posts = (await getCollection('blog'))
         color: rgb(var(--gray));
         flex-wrap: wrap;
       }
-      .post-meta .dot { opacity: 0.4; }
-      .post-desc {
+      .standalone-meta .dot { opacity: 0.4; }
+      .standalone-desc {
         color: rgb(var(--gray));
-        font-size: 0.95em;
-        margin: 0.4em 0 0;
+        font-size: 0.92em;
+        margin: 0.3em 0 0;
         line-height: 1.6;
       }
     </style>
@@ -86,27 +206,50 @@ const posts = (await getCollection('blog'))
       <Image src={classroomImg} alt="질문연구소 교실" width={720} class="page-header-img" />
       <h1 class="page-title">글 목록</h1>
       <p class="page-desc">질문연구소가 만들어지는 과정을 기록합니다.</p>
-      <ul class="post-list">
-        {posts.map((post) => (
-          <li class="post-item">
-            <a href={`/blog/${post.id}/`}>
-              <div class="post-meta">
-                <CategoryBadge category={post.data.category} />
-                {post.data.series && post.data.seriesNumber && (
-                  <>
+
+      {sortedSeries.map(([seriesName, posts]) => (
+        <section class="series-section">
+          <div class="series-header">
+            <CategoryBadge category={posts[0].data.category} />
+            <h2 class="series-title">{seriesName}</h2>
+            <span class="series-count">총 {posts.length}편</span>
+          </div>
+          <ul class="series-posts">
+            {posts.map((post) => (
+              <li class="series-post-item">
+                <a href={`/blog/${post.id}/`}>
+                  <span class="item-number">{post.data.seriesNumber}편</span>
+                  <div class="item-body">
+                    <p class="item-title">{post.data.title}</p>
+                    <span class="item-meta"><FormattedDate date={post.data.pubDate} /></span>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      {standalonePosts.length > 0 && (
+        <div class="standalone-section">
+          <p class="standalone-section-title">그 외 글</p>
+          <ul class="standalone-list">
+            {standalonePosts.map((post) => (
+              <li class="standalone-item">
+                <a href={`/blog/${post.id}/`}>
+                  <div class="standalone-meta">
+                    <CategoryBadge category={post.data.category} />
                     <span class="dot">·</span>
-                    <span>{post.data.series} {post.data.seriesNumber}편</span>
-                  </>
-                )}
-                <span class="dot">·</span>
-                <FormattedDate date={post.data.pubDate} />
-              </div>
-              <h2 class="post-title">{post.data.title}</h2>
-              <p class="post-desc">{post.data.description}</p>
-            </a>
-          </li>
-        ))}
-      </ul>
+                    <FormattedDate date={post.data.pubDate} />
+                  </div>
+                  <h2 class="standalone-title">{post.data.title}</h2>
+                  <p class="standalone-desc">{post.data.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </main>
     <Footer />
   </body>
