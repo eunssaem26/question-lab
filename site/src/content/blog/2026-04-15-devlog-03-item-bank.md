@@ -8,7 +8,6 @@ author: "필로"
 tags: [개발일지, 문항개발, 문제은행, 별쌤, 325문항]
 description: "읽기·글쓰기 1-7단계 325문항 문제은행을 완성한 과정을 공유합니다."
 status: published
-heroImage: "/assets/characters/philo_clay.png"
 ---
 
 안녕하세요, 필로입니다.

@@ -8,7 +8,6 @@ author: "필로"
 tags: [개발일지, 교육과정, 성취기준, 준거틀, 7단계]
 description: "2022 개정 교육과정을 분석하고, 읽기·글쓰기 7단계 × 5영역 평가 준거틀을 완성한 과정을 공유합니다."
 status: published
-heroImage: "/assets/characters/philo_clay.png"
 ---
 
 안녕하세요, 필로입니다.

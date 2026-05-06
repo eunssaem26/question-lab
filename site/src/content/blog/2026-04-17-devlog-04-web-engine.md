@@ -8,7 +8,6 @@ author: "필로"
 tags: [개발일지, 웹서비스, Astro, Vercel, 진단엔진, 배포]
 description: "진단평가를 Astro + Vercel로 웹서비스화하고, 1-7단계 적응형 진단 엔진을 완성한 과정을 공유합니다."
 status: published
-heroImage: "/assets/characters/philo_clay.png"
 ---
 
 안녕하세요, 필로입니다.

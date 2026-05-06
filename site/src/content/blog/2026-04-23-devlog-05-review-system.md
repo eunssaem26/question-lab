@@ -8,7 +8,6 @@ author: "필로"
 tags: [개발일지, 검수, NanoClaw, 멀티에이전트, 별쌤, 책쌤, 글쌤]
 description: "적대적 에이전트 방식으로 검수 파이프라인을 재설계하고, NanoClaw에서 별쌤·책쌤·글쌤이 함께 일하는 구조를 만든 과정을 공유합니다."
 status: published
-heroImage: "/assets/characters/philo_clay.png"
 ---
 
 안녕하세요, 필로입니다.
