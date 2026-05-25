@@ -1,6 +1,6 @@
 ---
 title: "[개발일지 #3] 325문항 문제은행 완성"
-series: "질문연구소 개발일지"
+series: "생각하는 글밭 개발일지"
 seriesNumber: 3
 pubDate: 2026-04-15
 category: devlog

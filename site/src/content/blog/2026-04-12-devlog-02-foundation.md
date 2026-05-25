@@ -1,6 +1,6 @@
 ---
 title: "[개발일지 #2] 뼈대 세우기: 교육과정 분석부터 준거틀까지"
-series: "질문연구소 개발일지"
+series: "생각하는 글밭 개발일지"
 seriesNumber: 2
 pubDate: 2026-04-12
 category: devlog

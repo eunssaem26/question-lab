@@ -1,6 +1,6 @@
 ---
 title: "[개발일지 #5] 검수 시스템 구축: 적대적 에이전트와 NanoClaw 팀"
-series: "질문연구소 개발일지"
+series: "생각하는 글밭 개발일지"
 seriesNumber: 5
 pubDate: 2026-04-23
 category: devlog

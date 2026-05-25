@@ -12,11 +12,11 @@ const posts = (await getCollection('blog')).filter(
 );
 
 const originSeries = posts
-  .filter((p) => p.data.series === '질문연구소는 이렇게 시작되었습니다')
+  .filter((p) => p.data.series === '생각하는 글밭은 이렇게 시작되었습니다')
   .sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
 
 const devlogSeries = posts
-  .filter((p) => p.data.series === '질문연구소 개발일지')
+  .filter((p) => p.data.series === '생각하는 글밭 개발일지')
   .sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
 ---
 
@@ -128,14 +128,14 @@ const devlogSeries = posts
     <Header />
     <main>
       <div class="hero">
-        <Image src={signboard} alt="질문연구소 간판" width={360} class="signboard" />
-        <h1>질문연구소 블로그</h1>
+        <Image src={signboard} alt="생각하는 글밭 간판" width={360} class="signboard" />
+        <h1>생각하는 글밭</h1>
         <p>AI 시대, 아이들에게 필요한 건 좋은 질문을 하는 힘.<br />그 여정을 기록합니다.</p>
       </div>
 
       {originSeries.length > 0 && (
         <section class="section">
-          <h2 class="section-title">질문연구소는 이렇게 시작되었습니다</h2>
+          <h2 class="section-title">생각하는 글밭은 이렇게 시작되었습니다</h2>
           <ol class="series-list">
             {originSeries.map((post) => (
               <li class="series-item">
@@ -151,7 +151,7 @@ const devlogSeries = posts
 
       {devlogSeries.length > 0 && (
         <section class="section">
-          <h2 class="section-title">질문연구소 개발일지</h2>
+          <h2 class="section-title">생각하는 글밭 개발일지</h2>
           <ol class="series-list">
             {devlogSeries.map((post) => (
               <li class="series-item">

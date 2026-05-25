@@ -1,6 +1,6 @@
 ---
 title: "[개발일지 #4] 온라인으로: 진단 웹서비스와 적응형 엔진"
-series: "질문연구소 개발일지"
+series: "생각하는 글밭 개발일지"
 seriesNumber: 4
 pubDate: 2026-04-17
 category: devlog
