@@ -5,7 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import signboard from '../assets/characters/signboard_questionlab.png';
+import signboard from '../assets/characters/signboard_thinkingfield.png';
 
 const posts = (await getCollection('blog')).filter(
   (post) => post.data.status === 'published',
