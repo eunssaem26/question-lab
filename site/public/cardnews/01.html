@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 01. AI 시대, 글쓰기 교육의 중요성</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card {
+    transform-origin: top left;
+    display: flex;
+    margin-bottom: 10px;
+  }
+  .card-number {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #A67B5B;
+    opacity: 0.5;
+    letter-spacing: 2px;
+  }
+
+  /* ───── Card 1: Hook ───── */
+  .card-1 {
+    background: #F5E6D0;
+    color: #5C3D2E;
+    text-align: center;
+    padding: 100px;
+  }
+  .card-1 .brand-circle {
+    width: 260px;
+    position: absolute;
+    top: 50px;
+    filter: drop-shadow(0 4px 12px rgba(92,61,46,0.15));
+  }
+  .card-1 h1 {
+    font-size: 88px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-top: 60px;
+    word-break: keep-all;
+  }
+  .card-1 h1 em {
+    font-style: normal;
+    color: #C4956A;
+  }
+  .card-1 .subtitle {
+    font-size: 38px;
+    color: #A67B5B;
+    margin-top: 36px;
+    font-weight: 700;
+  }
+  .card-1 .swipe {
+    position: absolute;
+    bottom: 60px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #A67B5B;
+    opacity: 0.5;
+    letter-spacing: 3px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+  .card-1 .leaf-deco {
+    position: absolute;
+    font-size: 60px;
+    opacity: 0.2;
+  }
+  .card-1 .leaf-deco.tl { top: 40px; left: 40px; transform: rotate(-30deg); }
+  .card-1 .leaf-deco.br { bottom: 40px; right: 40px; transform: rotate(150deg); }
+
+  /* ───── Card 2: 문제 제기 ① ───── */
+  .card-2 {
+    background: #F5E6D0;
+    padding: 100px;
+    justify-content: flex-start;
+    padding-top: 140px;
+  }
+  .card-2 .bubble-q {
+    background: #EDD8C3;
+    border: 3px solid #D4BFA8;
+    border-radius: 30px 30px 30px 6px;
+    padding: 48px 56px;
+    font-size: 60px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 60px;
+    align-self: flex-start;
+    max-width: 90%;
+    line-height: 1.45;
+  }
+  .card-2 .bubble-q::before {
+    content: '🙋';
+    display: block;
+    font-size: 60px;
+    margin-bottom: 16px;
+  }
+  .card-2 .body-text {
+    font-size: 52px;
+    line-height: 1.65;
+    color: #6B5344;
+    word-break: keep-all;
+    font-weight: 500;
+  }
+  .card-2 .body-text .highlight {
+    color: #5C3D2E;
+    font-weight: 900;
+  }
+  .card-2 .question-mark {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+    font-size: 260px;
+    font-weight: 900;
+    color: #EDD8C3;
+  }
+
+  /* ───── Card 3: 문제 제기 ② ───── */
+  .card-3 {
+    background: #FBF3EA;
+    padding: 100px;
+  }
+  .card-3 h2 {
+    font-size: 68px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 60px;
+    text-align: center;
+  }
+  .card-3 .stat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    width: 100%;
+  }
+  .card-3 .stat-item {
+    background: #F5E6D0;
+    border-left: 8px solid #C4956A;
+    border-radius: 0 16px 16px 0;
+    padding: 36px 44px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .card-3 .stat-icon {
+    font-size: 56px;
+    flex-shrink: 0;
+  }
+  .card-3 .stat-content { flex: 1; }
+  .card-3 .stat-number {
+    font-size: 72px;
+    font-weight: 900;
+    color: #C4956A;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .card-3 .stat-desc {
+    font-size: 40px;
+    color: #6B5344;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .card-3 .source {
+    position: absolute;
+    bottom: 50px;
+    font-size: 26px;
+    color: #B8A494;
+    font-weight: 500;
+  }
+
+  /* ───── Card 4: 핵심 ① ───── */
+  .card-4 {
+    background: #5C3D2E;
+    color: #F5E6D0;
+    padding: 100px;
+  }
+  .card-4 .card-number { color: rgba(245,230,208,0.3); }
+  .card-4 h2 {
+    font-size: 68px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.35;
+    word-break: keep-all;
+  }
+  .card-4 h2 em {
+    font-style: normal;
+    color: #D4A574;
+  }
+  .card-4 .compare {
+    display: flex;
+    gap: 36px;
+    width: 100%;
+  }
+  .card-4 .compare-box {
+    flex: 1;
+    border-radius: 24px;
+    padding: 44px 36px;
+    text-align: center;
+  }
+  .card-4 .compare-box.left {
+    background: rgba(245,230,208,0.08);
+    border: 2px solid rgba(245,230,208,0.2);
+  }
+  .card-4 .compare-box.right {
+    background: rgba(107,127,74,0.2);
+    border: 2px solid rgba(107,127,74,0.4);
+  }
+  .card-4 .compare-icon {
+    font-size: 88px;
+    margin-bottom: 20px;
+  }
+  .card-4 .compare-label {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 16px;
+  }
+  .card-4 .compare-desc {
+    font-size: 40px;
+    line-height: 1.5;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+  .card-4 .bottom-msg {
+    position: absolute;
+    bottom: 100px;
+    text-align: center;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.6;
+    opacity: 0.7;
+    word-break: keep-all;
+    padding: 0 100px;
+  }
+
+  /* ───── Card 5: 핵심 ② ───── */
+  .card-5 {
+    background: #F5E6D0;
+    padding: 100px;
+  }
+  .card-5 .big-number {
+    font-size: 220px;
+    font-weight: 900;
+    color: #C4956A;
+    opacity: 0.1;
+    position: absolute;
+    top: 60px;
+    left: 80px;
+  }
+  .card-5 .reason-label {
+    font-size: 36px;
+    font-weight: 900;
+    color: #6B7F4A;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+  }
+  .card-5 h2 {
+    font-size: 76px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 50px;
+    word-break: keep-all;
+  }
+  .card-5 .body-text {
+    font-size: 50px;
+    line-height: 1.7;
+    color: #6B5344;
+    word-break: keep-all;
+    font-weight: 500;
+  }
+  .card-5 .body-text strong {
+    color: #5C3D2E;
+    font-weight: 900;
+  }
+  .card-5 .deco-icon {
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+    font-size: 140px;
+    opacity: 0.1;
+  }
+
+  /* ───── Card 6: 핵심 ③ ───── */
+  .card-6 {
+    background: #EDD8C3;
+    padding: 100px;
+  }
+  .card-6 .big-number {
+    font-size: 220px;
+    font-weight: 900;
+    color: #C4956A;
+    opacity: 0.1;
+    position: absolute;
+    top: 60px;
+    left: 80px;
+  }
+  .card-6 .reason-label {
+    font-size: 36px;
+    font-weight: 900;
+    color: #6B7F4A;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+  }
+  .card-6 h2 {
+    font-size: 76px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 50px;
+    word-break: keep-all;
+  }
+  .card-6 .doc-visual {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 44px;
+    justify-content: center;
+  }
+  .card-6 .doc {
+    width: 110px;
+    height: 140px;
+    border-radius: 12px;
+    background: #D4BFA8;
+    border: 3px solid #C4AD94;
+  }
+  .card-6 .doc.unique {
+    background: #6B7F4A;
+    border-color: #5A6E3D;
+    box-shadow: 0 4px 24px rgba(107,127,74,0.3);
+  }
+  .card-6 .body-text {
+    font-size: 50px;
+    line-height: 1.7;
+    color: #6B5344;
+    word-break: keep-all;
+    font-weight: 500;
+  }
+  .card-6 .quote-line {
+    font-size: 48px;
+    font-weight: 900;
+    color: #5C3D2E;
+    text-align: center;
+    margin-top: 44px;
+    padding: 28px 0;
+    border-top: 3px solid #D4BFA8;
+  }
+
+  /* ───── Card 7: 핵심 ④ ───── */
+  .card-7 {
+    background: #F5E6D0;
+    padding: 100px;
+  }
+  .card-7 .big-number {
+    font-size: 220px;
+    font-weight: 900;
+    color: #C4956A;
+    opacity: 0.1;
+    position: absolute;
+    top: 60px;
+    left: 80px;
+  }
+  .card-7 .reason-label {
+    font-size: 36px;
+    font-weight: 900;
+    color: #6B7F4A;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+  }
+  .card-7 h2 {
+    font-size: 76px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 50px;
+    word-break: keep-all;
+  }
+  .card-7 .prompt-box {
+    width: 100%;
+    border-radius: 20px;
+    padding: 36px 44px;
+    margin-bottom: 28px;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+  .card-7 .prompt-box.bad {
+    background: #F5DDD0;
+    border: 3px solid #D4A58A;
+    color: #8B4D3B;
+  }
+  .card-7 .prompt-box.good {
+    background: #D5E2C8;
+    border: 3px solid #A8C48E;
+    color: #4A6B32;
+  }
+  .card-7 .prompt-label {
+    font-size: 34px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .card-7 .bottom-msg {
+    font-size: 48px;
+    font-weight: 900;
+    color: #5C3D2E;
+    text-align: center;
+    margin-top: 16px;
+    word-break: keep-all;
+    line-height: 1.55;
+  }
+
+  /* ───── Card 8: 정리 ① ───── */
+  .card-8 {
+    background: #D5E2C8;
+    padding: 100px;
+  }
+  .card-8 h2 {
+    font-size: 68px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .card-8 .summary-box {
+    background: #FBF3EA;
+    border-radius: 28px;
+    padding: 56px;
+    width: 100%;
+    box-shadow: 0 4px 30px rgba(92,61,46,0.08);
+  }
+  .card-8 .summary-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 44px;
+    font-size: 50px;
+    line-height: 1.45;
+    color: #5C3D2E;
+    font-weight: 700;
+  }
+  .card-8 .summary-item:last-child { margin-bottom: 0; }
+  .card-8 .check {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #6B7F4A;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .card-8 .summary-text strong {
+    color: #5C3D2E;
+    font-weight: 900;
+  }
+
+  /* ───── Card 9: 정리 ② (인용문) ───── */
+  .card-9 {
+    background: #5C3D2E;
+    color: #F5E6D0;
+    padding: 100px;
+    text-align: center;
+  }
+  .card-9 .card-number { color: rgba(245,230,208,0.3); }
+  .card-9 .quote-mark {
+    font-size: 180px;
+    line-height: 1;
+    opacity: 0.15;
+    font-family: Georgia, serif;
+    margin-bottom: -20px;
+  }
+  .card-9 .quote-text {
+    font-size: 66px;
+    font-weight: 700;
+    line-height: 1.6;
+    word-break: keep-all;
+    max-width: 880px;
+  }
+  .card-9 .quote-text strong {
+    color: #D4A574;
+    font-weight: 900;
+  }
+  .card-9 .quote-source {
+    margin-top: 44px;
+    font-size: 38px;
+    font-weight: 700;
+    opacity: 0.6;
+    letter-spacing: 3px;
+  }
+
+  /* ───── Card 10: CTA ───── */
+  .card-10 {
+    background: linear-gradient(160deg, #F5E6D0 0%, #EDD8C3 100%);
+    padding: 100px;
+    text-align: center;
+  }
+  .card-10 h2 {
+    font-size: 68px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 60px;
+  }
+  .card-10 .cta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    max-width: 780px;
+  }
+  .card-10 .cta-item {
+    background: #FBF3EA;
+    border: 3px solid #E8D5C0;
+    border-radius: 24px;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    box-shadow: 0 4px 20px rgba(92,61,46,0.06);
+    text-align: left;
+  }
+  .card-10 .cta-icon {
+    font-size: 56px;
+    flex-shrink: 0;
+  }
+  .card-10 .cta-text {
+    font-size: 46px;
+    font-weight: 900;
+    color: #5C3D2E;
+  }
+  .card-10 .brand-sign {
+    width: 420px;
+    margin-top: 50px;
+    filter: drop-shadow(0 4px 16px rgba(92,61,46,0.12));
+    border-radius: 16px;
+    object-fit: contain;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ Card 1: Hook ════════ -->
+<section class="card card-1">
+  <span class="card-number">01 / 10</span>
+  <span class="leaf-deco tl">🌿</span>
+  <span class="leaf-deco br">🌿</span>
+  <img src="assets/brand-circle.png" alt="생각하는 글밭" class="brand-circle">
+  <h1>AI가 다 써주는 시대,<br><em>왜 글쓰기를<br>배워야 할까?</em></h1>
+  <div class="subtitle">생각하는 글밭 · 첫 번째 이야기</div>
+  <div class="swipe">SWIPE →</div>
+</section>
+
+<!-- ════════ Card 2: 문제 제기 ① ════════ -->
+<section class="card card-2">
+  <span class="card-number">02 / 10</span>
+  <div class="bubble-q">
+    "ChatGPT한테 시키면<br>되지 않나요?"
+  </div>
+  <div class="body-text">
+    과제도, 보고서도, 이메일도<br>
+    AI가 대신 써주는 세상.<br><br>
+    그런데 정말<br>
+    <span class="highlight">글쓰기 교육이<br>
+    필요 없어진 걸까요?</span>
+  </div>
+  <div class="question-mark">?</div>
+</section>
+
+<!-- ════════ Card 3: 문제 제기 ② ════════ -->
+<section class="card card-3">
+  <span class="card-number">03 / 10</span>
+  <h2>실제로 벌어지고 있는 일</h2>
+  <div class="stat-list">
+    <div class="stat-item">
+      <span class="stat-icon">📱</span>
+      <div class="stat-content">
+        <span class="stat-number">78%</span>
+        <span class="stat-desc">대학생이 AI로 과제를<br>작성한 경험이 있다</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">👔</span>
+      <div class="stat-content">
+        <span class="stat-number">즉시 구별</span>
+        <span class="stat-desc">채용 담당자, AI 자소서를<br>바로 알아본다</span>
+      </div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">📉</span>
+      <div class="stat-content">
+        <span class="stat-number">5년 연속 ↓</span>
+        <span class="stat-desc">초등학생 논술 능력<br>하락 추세</span>
+      </div>
+    </div>
+  </div>
+  <span class="source">* 출처: 교육부 기초학력 실태조사, 잡코리아 채용 동향</span>
+</section>
+
+<!-- ════════ Card 4: 핵심 ① ════════ -->
+<section class="card card-4">
+  <span class="card-number">04 / 10</span>
+  <h2>AI는 <em>'출력'</em>이고<br>글쓰기는 <em>'사고'</em>입니다</h2>
+  <div class="compare">
+    <div class="compare-box left">
+      <div class="compare-icon">🤖</div>
+      <div class="compare-label">AI 출력</div>
+      <div class="compare-desc">결과물을<br>만들어준다</div>
+    </div>
+    <div class="compare-box right">
+      <div class="compare-icon">🧠</div>
+      <div class="compare-label">글쓰기 사고</div>
+      <div class="compare-desc">생각을<br>구조화한다</div>
+    </div>
+  </div>
+  <div class="bottom-msg">
+    AI는 결과물을 만들어주지만,<br>
+    생각하는 힘을 길러주진 않습니다.
+  </div>
+</section>
+
+<!-- ════════ Card 5: 핵심 ② ════════ -->
+<section class="card card-5">
+  <span class="card-number">05 / 10</span>
+  <div class="big-number">01</div>
+  <div class="reason-label">REASON 01</div>
+  <h2>비판적 사고력</h2>
+  <div class="body-text">
+    AI가 만든 글을 그대로 쓰면<br>
+    <strong>"왜?"라고 묻는 힘</strong>이<br>
+    사라집니다.<br><br>
+    직접 쓰는 과정에서<br>
+    논리의 빈틈을 발견하게 됩니다.
+  </div>
+  <div class="deco-icon">🔍</div>
+</section>
+
+<!-- ════════ Card 6: 핵심 ③ ════════ -->
+<section class="card card-6">
+  <span class="card-number">06 / 10</span>
+  <div class="big-number">02</div>
+  <div class="reason-label">REASON 02</div>
+  <h2>나만의 목소리</h2>
+  <div class="doc-visual">
+    <div class="doc"></div>
+    <div class="doc"></div>
+    <div class="doc unique"></div>
+    <div class="doc"></div>
+    <div class="doc"></div>
+  </div>
+  <div class="body-text">
+    AI의 글은 평균적이고 무난합니다.<br>
+    하지만 사람을 움직이는 건<br>
+    '그 사람다운' 문장입니다.
+  </div>
+  <div class="quote-line">"글쓰기는 자기 정체성의 표현"</div>
+</section>
+
+<!-- ════════ Card 7: 핵심 ④ ════════ -->
+<section class="card card-7">
+  <span class="card-number">07 / 10</span>
+  <div class="big-number">03</div>
+  <div class="reason-label">REASON 03</div>
+  <h2>AI를 더 잘 쓰려면</h2>
+  <div class="prompt-box bad">
+    <span class="prompt-label">❌ 나쁜 프롬프트</span>
+    "자소서 써줘"
+  </div>
+  <div class="prompt-box good">
+    <span class="prompt-label">✅ 좋은 프롬프트</span>
+    "IT 스타트업 지원용 자소서를 써줘.<br>
+    협업 경험 중심, 진정성 있는 톤,<br>
+    500자 이내로."
+  </div>
+  <div class="bottom-msg">
+    명확한 지시, 맥락 설정, 톤 조절<br>
+    결국 <strong>글쓰기의 기본기</strong>입니다.
+  </div>
+</section>
+
+<!-- ════════ Card 8: 정리 ① ════════ -->
+<section class="card card-8">
+  <span class="card-number">08 / 10</span>
+  <h2>정리하면 이렇습니다</h2>
+  <div class="summary-box">
+    <div class="summary-item">
+      <div class="check">✓</div>
+      <div class="summary-text"><strong>AI는 도구</strong>,<br>글쓰기는 <strong>능력</strong></div>
+    </div>
+    <div class="summary-item">
+      <div class="check">✓</div>
+      <div class="summary-text"><strong>사고력 · 표현력 · 소통력</strong>의 기반</div>
+    </div>
+    <div class="summary-item">
+      <div class="check">✓</div>
+      <div class="summary-text">AI를 잘 쓰려면<br><strong>글쓰기가 먼저</strong></div>
+    </div>
+    <div class="summary-item">
+      <div class="check">✓</div>
+      <div class="summary-text">대체 불가능한<br><strong>'나'를 만드는 훈련</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ Card 9: 정리 ② (인용문) ════════ -->
+<section class="card card-9">
+  <span class="card-number">09 / 10</span>
+  <div class="quote-mark">"</div>
+  <div class="quote-text">
+    AI 시대에<br>
+    글쓰기를 가르치는 건<br>
+    시대착오가 아니라,<br>
+    <strong>가장 시대에 맞는<br>교육입니다.</strong>
+  </div>
+  <div class="quote-source">— 생각하는 글밭</div>
+</section>
+
+<!-- ════════ Card 10: CTA ════════ -->
+<section class="card card-10">
+  <span class="card-number">10 / 10</span>
+  <h2>이 글이 도움이 되셨다면</h2>
+  <div class="cta-list">
+    <div class="cta-item">
+      <span class="cta-icon">💾</span>
+      <span class="cta-text">저장해두고 다시 읽기</span>
+    </div>
+    <div class="cta-item">
+      <span class="cta-icon">📤</span>
+      <span class="cta-text">관심 있는 분께 공유</span>
+    </div>
+    <div class="cta-item">
+      <span class="cta-icon">💬</span>
+      <span class="cta-text">댓글로 생각 나누기</span>
+    </div>
+  </div>
+  <img src="assets/brand-sign.png" alt="생각하는 글밭" class="brand-sign">
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c) {
+      c.style.transform = '';
+      c.style.marginBottom = '';
+    });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080;
+  var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c) {
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

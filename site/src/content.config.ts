@@ -12,7 +12,7 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       heroImage: z.optional(z.string()),
       author: z.string().default('필로 (Philo)'),
-      category: z.enum(['origin', 'vibelog', 'devlog', 'philosophy', 'character', 'insight', 'support']),
+      category: z.enum(['origin', 'vibelog', 'devlog', 'philosophy', 'character', 'insight', 'support', 'cardnews']),
       series: z.string().optional(),
       seriesNumber: z.number().optional(),
       tags: z.array(z.string()).default([]),
