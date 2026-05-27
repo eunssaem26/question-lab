@@ -18,6 +18,10 @@ const originSeries = posts
 const devlogSeries = posts
   .filter((p) => p.data.series === '생각하는 글밭 개발일지')
   .sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
+
+const cardnewsSeries = posts
+  .filter((p) => p.data.series === '생각하는 글밭 카드뉴스')
+  .sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
 ---
 
 <!doctype html>
@@ -154,6 +158,22 @@ const devlogSeries = posts
           <h2 class="section-title">생각하는 글밭 개발일지</h2>
           <ol class="series-list">
             {devlogSeries.map((post) => (
+              <li class="series-item">
+                <a href={`/blog/${post.id}/`}>
+                  <span class="series-num">{post.data.seriesNumber}편</span>
+                  <span class="series-title">{post.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {cardnewsSeries.length > 0 && (
+        <section class="section">
+          <h2 class="section-title">생각하는 글밭 카드뉴스</h2>
+          <ol class="series-list">
+            {cardnewsSeries.map((post) => (
               <li class="series-item">
                 <a href={`/blog/${post.id}/`}>
                   <span class="series-num">{post.data.seriesNumber}편</span>
