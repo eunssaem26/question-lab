@@ -18,12 +18,13 @@
     ],
     "answer": 1,
     "explanation": "의견 글에는 '좋아하는 계절'(의견)과 '왜 좋아하는지'(까닭)가 함께 있어야 합니다. ②는 '여름을 좋아한다'는 의견과 '물놀이, 방학 여행'이라는 까닭 두 가지를 들고 있으므로 알맞습니다. 나머지는 사실만 말하고 있어 까닭이 없습니다.",
-    "passage_id": "WP-2-001",
+    "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-IDE-002",
@@ -44,12 +45,13 @@
     ],
     "answer": 3,
     "explanation": "④는 '과속 방지턱 설치'라는 의견과 '차가 천천히 달리면 안전하게 건널 수 있다'는 까닭을 함께 밝히고 있습니다. ①은 까닭이 없고, ②는 사실만 말하며, ③은 위험한 행동이므로 의견으로 적절하지 않습니다.",
-    "passage_id": "WP-2-008",
+    "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "medium"
   },
   {
     "item_id": "W-2-IDE-003",
@@ -61,7 +63,7 @@
     "alignment_rationale": "학급 문고 추천 의견의 까닭을 식별하는 능력을 측정하므로 [4국03-03]의 내용 생성 능력을 직접 측정한다.",
     "level_differentiation": "1단계는 주어진 주제에 대해 찬성/반대 의견을 밝힐 수 있고, 2단계는 관심 있는 주제를 정하고 까닭을 들어 의견을 표현할 수 있다.",
     "item_type": "multiple_choice",
-    "question_text": "이 글에서 글쓴이가 과학 만화책을 추천하는 까닭으로 말한 것이 아닌 것은?",
+    "question_text": "이 글에서 글쓴이가 과학 만화책을 추천하는 까닭으로 말한 것이 **아닌** 것은?",
     "choices": [
       "어려운 내용을 쉽고 재미있게 알려 주기 때문이다.",
       "글을 잘 읽지 못하는 친구도 그림을 보며 이해할 수 있기 때문이다.",
@@ -75,7 +77,8 @@
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "hard"
   },
   {
     "item_id": "W-2-ORG-001",
@@ -96,12 +99,13 @@
     ],
     "answer": 1,
     "explanation": "이 글의 중심 문장은 '물을 아껴 써야 한다'이고, 뒷받침 문장들은 물을 아끼면 좋은 점을 말하고 있습니다. ②는 '자연환경 보호'라는 또 다른 좋은 점을 말하여 문단의 흐름에 잘 맞습니다. 나머지는 물 절약의 좋은 점이 아닙니다.",
-    "passage_id": "WP-2-005",
+    "passage_id": null,
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-ORG-002",
@@ -122,12 +126,13 @@
     ],
     "answer": 1,
     "explanation": "'급식을 남기면 쓰레기가 많아진다'(원인)에 이어, '환경이 나빠지고 돈이 많이 든다'(결과)를 연결한 뒤, '남기지 않도록 노력해야 한다'는 결론으로 이어지는 것이 자연스럽습니다. ②가 원인-결과 관계를 이어주는 문장입니다.",
-    "passage_id": "WP-2-007",
+    "passage_id": null,
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-ORG-003",
@@ -143,7 +148,7 @@
     "choices": [
       "그래서 도서관 규칙을 잘 지키는 것이 중요합니다.",
       "그리고 도서관에서는 책을 읽을 수 있습니다.",
-      "하지만 도서관에는 놀 수 있는 공간이 아닙니다.",
+      "하지만 도서관은 놀 수 있는 공간이 아닙니다.",
       "도서관에서는 아무렇게나 행동해도 됩니다."
     ],
     "answer": 0,
@@ -153,7 +158,8 @@
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "medium"
   },
   {
     "item_id": "W-2-EXP-001",
@@ -174,12 +180,13 @@
     ],
     "answer": 1,
     "explanation": "친구에게 말할 때는 반말을 사용하고 편한 표현을 쓰는 것이 자연스럽습니다. ②는 친구에게 말하는 표현입니다. ①은 선생님께, ③은 보고서 문체, ④는 공식 문서 문체이므로 친구에게 어울리지 않습니다.",
-    "passage_id": "WP-2-003",
+    "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-EXP-002",
@@ -200,12 +207,13 @@
     ],
     "answer": 2,
     "explanation": "선생님께 편지를 쓸 때는 높임말을 사용하고 감사의 마음을 정중하게 표현해야 합니다. ③이 선생님께 알맞은 표현입니다. ①④는 반말이고, ②는 부정적인 내용입니다.",
-    "passage_id": "WP-2-003",
+    "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-EXP-003",
@@ -226,12 +234,13 @@
     ],
     "answer": 2,
     "explanation": "글을 쓸 때는 읽는 사람이 누구인지에 따라 말투(높임말, 반말)와 표현 방식을 다르게 해야 합니다. 친구에게는 편한 표현을, 어른에게는 높임 표현을 쓰는 것이 바른 소통입니다.",
-    "passage_id": "WP-2-003",
+    "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "medium"
   },
   {
     "item_id": "W-2-CVN-001",
@@ -252,12 +261,13 @@
     ],
     "answer": 0,
     "explanation": "'갔습니다' 뒤에서 문장이 끝나므로 마침표(.)를 찍어야 합니다. '어제 동생과 함께 공원에 갔습니다.'라고 써야 올바릅니다.",
-    "passage_id": "WP-2-004",
+    "passage_id": null,
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "medium"
   },
   {
     "item_id": "W-2-CVN-002",
@@ -278,12 +288,13 @@
     ],
     "answer": 0,
     "explanation": "감탄사 '와' 뒤에는 쉼표(,)를 찍고, 감탄하는 말이므로 느낌표(!)로 끝내는 것이 알맞습니다. '\"와, 정말 예쁘다!\"'가 올바른 표기입니다.",
-    "passage_id": "WP-2-004",
+    "passage_id": null,
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "hard"
   },
   {
     "item_id": "W-2-CVN-003",
@@ -309,7 +320,8 @@
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-REV-001",
@@ -335,7 +347,8 @@
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-REV-002",
@@ -361,7 +374,8 @@
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "easy"
   },
   {
     "item_id": "W-2-REV-003",
@@ -387,6 +401,7 @@
     "difficulty": null,
     "discrimination": null,
     "review_status": "draft",
-    "is_warmup": false
+    "is_warmup": false,
+    "difficulty_tier": "medium"
   }
 ]
