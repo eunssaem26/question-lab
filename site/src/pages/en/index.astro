@@ -1,0 +1,205 @@
+---
+import { Image } from 'astro:assets';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { APP_URL } from '../../consts';
+import signboard from '../../assets/characters/signboard_thinkingfield.png';
+
+const title = 'Thinking Field — Learn Korean through Reading & Writing';
+const description =
+  'Korean literacy classes for English speakers. Take a placement test, join lessons matched to your level, and track your progress.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      .hero {
+        text-align: center;
+        padding: 2em 0 1em;
+      }
+      .signboard {
+        border-radius: 12px;
+        margin-bottom: 1.2em;
+      }
+      .hero h1 {
+        font-size: 2em;
+        margin-bottom: 0.3em;
+      }
+      .hero .subtitle {
+        color: rgb(var(--gray));
+        font-size: 1.1em;
+        max-width: 540px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+      .cta-row {
+        display: flex;
+        justify-content: center;
+        gap: 0.8em;
+        margin-top: 1.6em;
+        flex-wrap: wrap;
+      }
+      .cta-primary {
+        background: var(--accent);
+        color: white;
+        font-weight: 700;
+        padding: 0.8em 1.6em;
+        border-radius: 10px;
+        text-decoration: none;
+      }
+      .cta-primary:hover {
+        opacity: 0.85;
+      }
+      .cta-secondary {
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+        padding: 0.7em 1.5em;
+        border-radius: 10px;
+        text-decoration: none;
+      }
+      .section {
+        margin-top: 3em;
+      }
+      .section-title {
+        font-size: 1.3em;
+        margin-bottom: 1em;
+        padding-bottom: 0.5em;
+        border-bottom: 2px solid var(--accent);
+        display: inline-block;
+      }
+      .steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        counter-reset: step;
+      }
+      .steps li {
+        counter-increment: step;
+        display: flex;
+        gap: 1em;
+        align-items: baseline;
+        padding: 0.7em 0;
+        border-bottom: 1px solid rgb(var(--gray-light));
+        line-height: 1.6;
+      }
+      .steps li::before {
+        content: counter(step);
+        color: var(--accent);
+        font-weight: 700;
+        min-width: 1.4em;
+      }
+      .levels {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1em;
+      }
+      .level-card {
+        border: 2px solid rgb(var(--gray-light));
+        border-radius: 12px;
+        padding: 1.2em;
+      }
+      .level-card h3 {
+        margin: 0 0 0.4em;
+        font-size: 1.05em;
+        color: var(--accent-dark);
+      }
+      .level-card p {
+        margin: 0;
+        font-size: 0.92em;
+        color: rgb(var(--gray-dark));
+        line-height: 1.6;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 0.75em;
+        font-weight: 700;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        border-radius: 999px;
+        padding: 0.15em 0.7em;
+        margin-bottom: 0.6em;
+      }
+      .note {
+        background: rgba(var(--gray-light), 0.4);
+        border-radius: 12px;
+        padding: 1.2em 1.4em;
+        line-height: 1.7;
+        font-size: 0.95em;
+      }
+    </style>
+  </head>
+  <body>
+    <Header lang="en" />
+    <main>
+      <div class="hero">
+        <Image src={signboard} alt="Thinking Field signboard" width={360} class="signboard" />
+        <h1>Thinking Field</h1>
+        <p class="subtitle">
+          Where Thoughts Grow.<br />
+          Learn Korean the deep way — through <strong>reading and writing</strong>,
+          not just phrases.
+        </p>
+        <div class="cta-row">
+          <a class="cta-primary" href={`${APP_URL}/login`}>Log in &amp; Start Learning</a>
+          <a class="cta-secondary" href="/about">About us (한국어)</a>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">How it works</h2>
+        <ol class="steps">
+          <li>Create an account — one login for everything.</li>
+          <li>Take a placement test that measures your Korean reading and writing separately.</li>
+          <li>Join lessons matched to your level, with AI-assisted writing feedback on every piece you write.</li>
+          <li>Track your progress on your personal dashboard — students and parents can both follow along.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Levels</h2>
+        <div class="levels">
+          <div class="level-card">
+            <span class="badge">Beginner · TOPIK 1–2</span>
+            <h3>Build the foundation</h3>
+            <p>
+              Hangeul, core grammar, and your first real sentences. Short daily
+              writing from week one.
+            </p>
+          </div>
+          <div class="level-card">
+            <span class="badge">Intermediate · TOPIK 3–4</span>
+            <h3>Cross the wall</h3>
+            <p>
+              Read real Korean texts — news, essays, stories — and write
+              structured paragraphs with feedback.
+            </p>
+          </div>
+          <div class="level-card">
+            <span class="badge">Advanced · TOPIK 5–6</span>
+            <h3>Think in Korean</h3>
+            <p>
+              Critical reading and argumentative essays, including TOPIK II
+              writing preparation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Grew up speaking Korean at home?</h2>
+        <p class="note">
+          Many of our students are heritage learners — fluent at the dinner
+          table, but never formally taught to read and write. Our placement
+          test measures reading and writing <strong>separately</strong>, so you
+          start exactly where you need to: skipping what you already know,
+          filling the gaps you actually have.
+        </p>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

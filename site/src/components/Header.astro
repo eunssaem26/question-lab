@@ -1,16 +1,47 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { APP_URL, SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+
+interface Props {
+  lang?: 'ko' | 'en';
+}
+
+const { lang = 'ko' } = Astro.props;
 ---
 
 <header>
   <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
+    <h2><a href={lang === 'en' ? '/en' : '/'}>{SITE_TITLE}</a></h2>
     <div class="internal-links">
-      <HeaderLink href="/">홈</HeaderLink>
-      <HeaderLink href="/blog">글 목록</HeaderLink>
-      <HeaderLink href="/about">소개</HeaderLink>
-      <HeaderLink href="/about#support">후원</HeaderLink>
+      {
+        lang === 'ko' ? (
+          <>
+            <HeaderLink href="/">홈</HeaderLink>
+            <HeaderLink href="/blog">글 목록</HeaderLink>
+            <HeaderLink href="/about">소개</HeaderLink>
+            <HeaderLink href="/about#support">후원</HeaderLink>
+          </>
+        ) : (
+          <>
+            <HeaderLink href="/en">Home</HeaderLink>
+            <HeaderLink href="/">Blog (한국어)</HeaderLink>
+          </>
+        )
+      }
+    </div>
+    <div class="actions">
+      {
+        lang === 'ko' ? (
+          <a class="lang-toggle" href="/en" aria-label="English version">
+            EN
+          </a>
+        ) : (
+          <a class="lang-toggle" href="/" aria-label="한국어 버전">
+            한국어
+          </a>
+        )
+      }
+      <a class="login-btn" href={`${APP_URL}/login`}>Log in</a>
     </div>
   </nav>
 </header>
@@ -53,10 +84,40 @@ import HeaderLink from './HeaderLink.astro';
   nav a:hover {
     color: var(--accent);
   }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .lang-toggle {
+    padding: 0.35em 0.6em;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: rgb(var(--gray-dark));
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 6px;
+  }
+  .lang-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .login-btn {
+    padding: 0.45em 1em;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: white;
+    background: var(--accent);
+    border-radius: 8px;
+  }
+  .login-btn:hover {
+    color: white;
+    opacity: 0.85;
+  }
   @media (max-width: 720px) {
     nav {
       flex-direction: column;
       gap: 0;
+      padding-bottom: 0.8em;
     }
     .internal-links {
       display: flex;
