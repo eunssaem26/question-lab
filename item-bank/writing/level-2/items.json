@@ -22,7 +22,7 @@
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -49,7 +49,7 @@
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "medium"
   },
@@ -66,17 +66,17 @@
     "question_text": "이 글에서 글쓴이가 과학 만화책을 추천하는 까닭으로 말한 것이 **아닌** 것은?",
     "choices": [
       "어려운 내용을 쉽고 재미있게 알려 주기 때문이다.",
-      "글을 잘 읽지 못하는 친구도 그림을 보며 이해할 수 있기 때문이다.",
+      "글을 잘 읽지 못하는 친구도 내용을 이해할 수 있기 때문이다.",
       "과학 만화책이 다른 책보다 가격이 싸기 때문이다.",
-      "과학 만화책은 그림이 많아서 이해하기 쉽기 때문이다."
+      "그림을 보며 내용을 이해할 수 있기 때문이다."
     ],
     "answer": 2,
-    "explanation": "글에서 과학 만화책을 추천한 이유로 '어려운 내용을 쉽고 재미있게 알려 주기 때문'과 '글을 잘 읽지 못하는 친구도 그림을 보며 이해할 수 있기 때문'을 들었습니다. 가격이 싸다는 내용은 글에 나오지 않습니다.",
+    "explanation": "글에서 추천하는 까닭으로 '어려운 내용을 쉽고 재미있게 알려 주기 때문'과 '글을 잘 읽지 못하는 친구도 그림을 보며 내용을 이해할 수 있기 때문'을 들었습니다. ①, ②, ④는 모두 글에 나온 까닭이지만, 가격이 싸다는 내용은 글에 나오지 않습니다.",
     "passage_id": "WP-2-002",
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "hard"
   },
@@ -103,7 +103,7 @@
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -130,7 +130,7 @@
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -157,7 +157,7 @@
     "passage_type": null,
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "medium"
   },
@@ -184,7 +184,7 @@
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -211,7 +211,7 @@
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -238,7 +238,7 @@
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "medium"
   },
@@ -265,7 +265,7 @@
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "medium"
   },
@@ -292,7 +292,7 @@
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "hard"
   },
@@ -308,18 +308,18 @@
     "item_type": "multiple_choice",
     "question_text": "다음 중 문법에 맞는 문장은?",
     "choices": [
-      "나는 어제 학교를 갔습니다.",
+      "나는 어제 학교가 갔습니다.",
       "나는 어제 학교에 갔습니다.",
       "나는 어제 학교를 에 갔습니다.",
       "나는 어제 학교 갔습니다를."
     ],
     "answer": 1,
-    "explanation": "'학교'는 장소이므로 '에'를 붙여 '학교에 갔습니다'가 문법에 맞습니다. '학교를 갔습니다'는 조사가 잘못 사용된 것입니다. '~에 가다'가 올바른 표현입니다.",
+    "explanation": "'학교'는 가는 곳(장소)이므로 조사 '에'를 붙여 '학교에 갔습니다'라고 써야 문법에 맞습니다. ①은 장소에 쓸 수 없는 조사 '가'를 잘못 썼고, ③은 조사를 겹쳐 썼으며, ④는 조사가 잘못된 자리에 붙어 있습니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -337,7 +337,7 @@
     "choices": [
       "과학 만화책은 어려운 내용을 쉽고 재미있게 알려 주기 때문입니다.",
       "글을 잘 읽지 못하는 친구도 그림을 보며 내용을 이해할 수 있습니다.",
-      "㉠ 저는 지난주에 친구와 축구를 했습니다.",
+      "저는 지난주에 친구와 축구를 했습니다.",
       "저는 학급 문고에 과학 만화책을 꼭 넣었으면 합니다."
     ],
     "answer": 2,
@@ -346,7 +346,7 @@
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -364,7 +364,7 @@
     "choices": [
       "날씨가 따뜻해지면서 나무에 새잎이 돋아납니다.",
       "꽃이 피고 나비도 날아다닙니다.",
-      "㉠ 겨울에는 눈이 많이 옵니다.",
+      "겨울에는 눈이 많이 옵니다.",
       "개구리도 겨울잠에서 깨어납니다."
     ],
     "answer": 2,
@@ -373,7 +373,7 @@
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "easy"
   },
@@ -400,7 +400,7 @@
     "passage_type": "학생 글 초안",
     "difficulty": null,
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false,
     "difficulty_tier": "medium"
   }

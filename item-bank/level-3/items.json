@@ -22,7 +22,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -39,7 +39,7 @@
       "번쩍이며 빛을 내다",
       "소리를 내며 움직이다",
       "천천히 사라지다",
-      "갑자기 좋은 생각이 떠오르다"
+      "생각이나 재치가 갑자기 떠오르다"
     ],
     "answer": 3,
     "explanation": "'번뜩이다'는 빛이 번쩍이는 것처럼 생각이나 아이디어가 갑자기 떠오른다는 비유적 의미로도 쓰입니다. 이 문장에서는 고민하다가 좋은 생각이 갑자기 떠오른다는 뜻으로 사용되었습니다.",
@@ -48,7 +48,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -68,13 +68,13 @@
       "시간의 흐름이나 순서"
     ],
     "answer": 1,
-    "explanation": "'기틀'은 원래 기계나 건물의 기초 구조를 뜻하지만, 이 글에서는 민주주의가 발전할 수 있는 바탕이나 토대라는 의미로 쓰였습니다.",
+    "explanation": "이 글에서 '기틀'은 민주주의가 발전할 수 있는 바탕이나 토대라는 의미로 쓰였습니다. '민주주의의 기틀을 마련했다'는 민주주의가 자라날 수 있는 밑바탕을 만들었다는 뜻입니다.",
     "passage_id": "P-3-001",
     "passage_genre": "역사 설명문",
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -100,7 +100,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -114,19 +114,19 @@
     "item_type": "multiple_choice",
     "question_text": "이 글에서 '고정관념에서 벗어나다'라고 할 때, '벗어나다'의 의미로 가장 알맞은 것은?",
     "choices": [
-      "몸에서 옷을 빠르게 제거하다",
-      "속도를 높여 앞으로 나아가다",
-      "방향을 바꿔 돌아서다",
+      "일정한 공간이나 범위 밖으로 나가다",
+      "위험한 상황에서 빠져나와 안전해지다",
+      "정해진 길이나 주제에서 멀어지다",
       "어떤 제한이나 틀에서 자유로워지다"
     ],
     "answer": 3,
-    "explanation": "'벗어나다'는 '옷 등을 벗다'라는 뜻도 있지만, 이 글에서는 '기존의 사고방식이나 틀에서 자유로워지다'라는 의미로 쓰였습니다.",
+    "explanation": "'벗어나다'는 '공간 밖으로 나가다', '위험에서 빠져나오다', '길이나 주제에서 멀어지다' 등 여러 뜻을 가진 다의어입니다. '고정관념에서 벗어나다'에서는 굳어진 생각이라는 제한이나 틀에서 자유로워진다는 의미로 쓰였습니다.",
     "passage_id": "P-3-002",
     "passage_genre": "철학적 에세이",
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -152,7 +152,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -176,9 +176,9 @@
     "passage_id": "P-3-001",
     "passage_genre": "역사 설명문",
     "difficulty": null,
-    "difficulty_tier": "medium",
+    "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -204,7 +204,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -230,7 +230,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -245,9 +245,9 @@
     "question_text": "이 글의 주제를 가장 잘 나타낸 것은?",
     "choices": [
       "인공지능의 이점과 위험을 함께 고려하여 신중하게 활용해야 한다",
-      "인공지능은 우리 생활을 편리하게 만든다",
-      "인공지능 개발을 중단해야 한다",
-      "인공지능은 일자리를 줄이는 심각한 문제가 있다"
+      "인공지능은 빠르고 정확한 처리 능력으로 우리 생활을 편리하게 만든다",
+      "인공지능은 위험하므로 개발과 사용을 당장 중단해야 한다",
+      "인공지능은 일자리를 줄이고 프라이버시를 침해하는 심각한 문제가 있다"
     ],
     "answer": 0,
     "explanation": "글은 AI의 장점과 단점을 모두 제시한 뒤 신중한 활용을 권고합니다. '인공지능의 이점과 위험을 함께 고려하여 신중하게 활용해야 한다'가 이 두 측면을 모두 담아 주제에 가장 부합합니다.",
@@ -256,7 +256,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -282,7 +282,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -294,21 +294,21 @@
     "achievement_standard": "[6국02-04]",
     "level_differentiation": "3단계는 글에 직접 드러나지 않은 내용을 앞뒤 문맥을 통해 짐작하고, 4단계는 비유적·함축적 표현의 의미를 추론한다.",
     "item_type": "multiple_choice",
-    "question_text": "이 글의 내용으로 미루어 저자가 말하고자 하는 바는 무엇인가?",
+    "question_text": "이 글에 직접 나타나 있지는 않지만, 글의 내용으로 미루어 짐작할 수 있는 것은?",
     "choices": [
-      "인간의 마음은 완전히 이해할 수 있다",
-      "인간의 마음은 과학적으로 측정할 수 있다",
-      "인간의 마음은 교육만으로 바꿀 수 있다",
-      "인간의 마음을 헤아리려는 태도가 관계를 이어준다"
+      "말솜씨가 뛰어난 사람일수록 다른 사람의 마음을 잘 이해한다",
+      "오래 알고 지낸 사이라면 노력하지 않아도 마음이 저절로 통한다",
+      "마음은 눈에 보이지 않으므로 다른 사람을 이해하려는 시도는 소용이 없다",
+      "소통이 어려울 때는 먼저 자신이 듣는 태도를 돌아볼 필요가 있다"
     ],
     "answer": 3,
-    "explanation": "저자는 마음을 헤아리고, 경청하고, 공감하는 노력이 진정한 소통을 가능하게 한다고 설명합니다. '서로를 이해하려는 노력이 마음의 문을 여는 열쇠'라는 표현이 이를 뒷받침합니다.",
+    "explanation": "글은 마음의 문을 열기 위해 경청과 공감이 필요하다고 말합니다. 이를 뒤집어 보면, 소통이 잘 되지 않을 때 상대를 탓하기보다 자신이 끝까지 듣고 헤아렸는지를 먼저 돌아볼 필요가 있다는 점을 짐작할 수 있습니다. 글은 말하기보다 듣기를 강조하므로 ①은 알맞지 않고, '노력이 없다면 관계가 멀어진다'고 했으므로 ②와 ③은 글의 내용과 어긋납니다.",
     "passage_id": "P-3-002",
     "passage_genre": "철학적 에세이",
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -334,7 +334,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -349,18 +349,18 @@
     "question_text": "이 글을 읽고 추론할 수 있는 내용으로 가장 알맞은 것은?",
     "choices": [
       "인공지능의 발전은 사회적 논의와 함께 이루어져야 한다",
-      "인공지능이 발전할수록 일자리는 늘어날 것이다",
-      "인공지능은 결국 인간을 완전히 대체할 것이다",
-      "인공지능은 창의적인 일에는 절대 사용하면 안 된다"
+      "인공지능이 발전하면 새로운 일자리가 더 많이 생겨날 것이다",
+      "인공지능은 머지않아 인간이 하는 일의 대부분을 대신하게 될 것이다",
+      "인공지능은 창의적인 일에 활용하기에는 적절하지 않다"
     ],
     "answer": 0,
-    "explanation": "글에서 AI의 장점과 단점을 모두 제시하고 신중한 접근을 권고하므로, AI 발전에 사회적 논의가 함께 필요하다는 것을 추론할 수 있습니다.",
+    "explanation": "글에서 AI의 장점과 단점을 모두 제시하고 신중한 접근을 권고하므로, AI 발전에 사회적 논의가 함께 필요하다는 것을 추론할 수 있습니다. 글은 일자리 감소를 우려하므로 ②는 글의 내용과 어긋나고, ③과 ④는 글에서 가능성으로만 언급한 우려를 확정된 사실처럼 단정하여 알맞지 않습니다.",
     "passage_id": "P-3-004",
     "passage_genre": "설명문",
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -386,7 +386,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -398,7 +398,7 @@
     "achievement_standard": "[6국02-03]",
     "level_differentiation": "3단계는 단일 글에서 주장에 근거가 있는지 있다/없다 수준으로 판단하고, 4단계는 내용 타당성과 표현 적절성을 함께 평가한다.",
     "item_type": "multiple_choice",
-    "question_text": "이 글에서 '민주주의는 인류의 자유와 평등을 실현하는 중요한 제도이다'라는 주장을 뒷받침하는 근거로 적절하지 않은 것은?",
+    "question_text": "다음 중 '민주주의는 인류의 자유와 평등을 실현하는 중요한 제도이다'라는 주장을 뒷받침하는 근거로 적절하지 않은 것은?",
     "choices": [
       "1776년 미국 독립선언에서 모든 사람의 평등한 권리가 선포되었다",
       "1789년 프랑스 대혁명으로 시민의 자유와 권리가 확립되었다",
@@ -412,7 +412,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -438,7 +438,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -464,7 +464,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -478,19 +478,19 @@
     "item_type": "multiple_choice",
     "question_text": "이 글에서 'AI를 개발하고 사용할 때는 신중해야 한다'는 주장을 뒷받침하는 근거로 알맞은 것은?",
     "choices": [
-      "AI는 빠르고 정확하게 처리할 수 있다",
-      "AI는 24시간 작동이 가능하다",
-      "AI는 자동차 자율주행에 사용된다",
+      "AI는 인간이 몇 시간 걸릴 일을 몇 초 만에 정확하게 처리할 수 있다",
+      "AI는 음성 인식부터 자율주행까지 일상에서 활용 분야가 점점 늘어나고 있다",
+      "AI는 24시간 쉬지 않고 작동할 수 있고 인간보다 실수가 적다",
       "AI의 판단이 공정하지 않을 수 있고 창의성을 저해할 수도 있다"
     ],
     "answer": 3,
-    "explanation": "'AI의 판단이 공정하지 않을 수 있고 창의성을 저해할 수도 있다'는 내용은 AI 사용의 위험을 보여 주므로 'AI 개발·사용에 신중해야 한다'는 주장을 직접 뒷받침하는 근거입니다. 빠르고 정확한 처리, 24시간 작동, 자율주행 활용은 AI의 장점이나 사실 정보일 뿐 신중함의 근거가 되지 못합니다.",
+    "explanation": "'AI의 판단이 공정하지 않을 수 있고 창의성을 저해할 수도 있다'는 내용은 AI 사용의 위험을 보여 주므로 'AI 개발·사용에 신중해야 한다'는 주장을 직접 뒷받침하는 근거입니다. 빠르고 정확한 처리와 24시간 작동은 AI의 장점이고, 활용 분야가 늘어난다는 것은 현재 상황을 알려 주는 사실 정보일 뿐이어서, 그 자체로는 '신중해야 한다'는 주장의 근거가 되지 못합니다.",
     "passage_id": "P-3-004",
     "passage_genre": "설명문",
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -502,7 +502,7 @@
     "achievement_standard": "[6국02-03]",
     "level_differentiation": "3단계는 단일 글에서 주장에 근거가 있는지 있다/없다 수준으로 판단하고, 4단계는 내용 타당성과 표현 적절성을 함께 평가한다.",
     "item_type": "multiple_choice",
-    "question_text": "이 글에서 '환경 보호는 선택이 아닌 필수이다'라는 주장을 뒷받침하는 근거 중, 주장과의 관계가 가장 약한 것은?",
+    "question_text": "'환경 보호는 선택이 아닌 필수이다'라는 주장을 뒷받침하려고 합니다. 다음 근거 중 주장과의 관계가 가장 약한 것은?",
     "choices": [
       "지구 온도 상승으로 해수면이 높아져 섬나라들이 침몰 위기에 처해 있다",
       "산호초가 사라지면서 바다 생태계의 균형이 무너지고 있다",
@@ -511,12 +511,12 @@
     ],
     "answer": 2,
     "explanation": "①②④는 환경 파괴의 심각한 결과를 직접 제시하여 환경 보호가 '필수'임을 뒷받침하는 강한 근거입니다. ③'재생에너지의 종류'는 환경 보호 방법을 소개하는 내용으로, 왜 환경 보호가 '필수'인지를 직접 뒷받침하지 않아 주장과의 논리적 연결이 가장 약합니다.",
-    "passage_id": "P-3-003",
-    "passage_genre": "설명문",
+    "passage_id": null,
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -542,7 +542,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -568,7 +568,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -594,7 +594,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -620,7 +620,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -646,7 +646,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   }
 ]

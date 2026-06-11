@@ -7,7 +7,7 @@
     "char_count": 387,
     "source": "AI생성",
     "topic": "환경 보호 실천",
-    "intended_domains": ["IDE", "ORG", "EXP", "GRA", "REV"],
+    "intended_domains": ["IDE", "ORG", "EXP", "CVN", "REV"],
     "background_knowledge_risk": "medium",
     "review_status": "draft"
   },
@@ -19,7 +19,7 @@
     "char_count": 456,
     "source": "AI생성",
     "topic": "AI 교육의 필요성",
-    "intended_domains": ["IDE", "ORG", "EXP", "GRA", "REV"],
+    "intended_domains": ["IDE", "ORG", "EXP", "CVN", "REV"],
     "background_knowledge_risk": "high",
     "review_status": "draft"
   },
@@ -31,7 +31,7 @@
     "char_count": 378,
     "source": "AI생성",
     "topic": "학교 민주주의 교육",
-    "intended_domains": ["IDE", "ORG", "EXP", "GRA", "REV"],
+    "intended_domains": ["IDE", "ORG", "EXP", "CVN", "REV"],
     "background_knowledge_risk": "medium",
     "review_status": "draft"
   },
@@ -43,7 +43,7 @@
     "char_count": 412,
     "source": "AI생성",
     "topic": "글쓰기 구조",
-    "intended_domains": ["ORG", "EXP", "GRA", "REV"],
+    "intended_domains": ["ORG", "EXP", "CVN", "REV"],
     "background_knowledge_risk": "low",
     "review_status": "draft"
   }

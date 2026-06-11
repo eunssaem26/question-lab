@@ -12,9 +12,9 @@
     "question_text": "\"우리 학교에 분리수거함을 더 많이 설치해야 한다\"는 주장의 글을 쓸 때, 가장 타당한 근거는?",
     "choices": [
       "분리수거 비율이 높아지면 자원 재활용이 늘어나 환경 오염을 줄일 수 있다",
-      "분리수거는 귀찮은 일이다",
-      "다른 학교에도 분리수거함이 있다",
-      "분리수거함이 예쁘면 학교가 아름다워진다"
+      "분리수거는 시간이 오래 걸리고 손이 많이 가는 귀찮은 일이다",
+      "이웃에 있는 다른 학교들도 대부분 분리수거함을 가지고 있다",
+      "분리수거함의 디자인이 예쁘면 학교 풍경이 한층 아름다워진다"
     ],
     "answer": 0,
     "explanation": "주장의 근거는 주장을 직접 뒷받침해야 합니다. '분리수거 비율이 높아지면 자원 재활용이 늘어나 환경 오염을 줄일 수 있다'는 분리수거 비율 증가 → 자원 재활용 → 환경 오염 감소라는 인과 관계로 주장을 타당하게 뒷받침합니다.",
@@ -23,7 +23,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -50,7 +50,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -77,7 +77,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -104,7 +104,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -131,7 +131,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -146,19 +146,19 @@
     "item_type": "multiple_choice",
     "question_text": "다음은 '우리 학교에 텃밭을 만들자'는 주장의 글을 쓰기 위한 개요입니다. ㉡에 들어갈 내용으로 가장 알맞은 것은?\n\n서론: 학교에 텃밭이 없다는 문제 제기\n본론 1: 텃밭의 교육적 효과\n본론 2: ㉡\n결론: 텃밭 조성 촉구",
     "choices": [
-      "텃밭 조성의 비용과 관리 방법 및 해결 방안",
-      "텃밭의 역사",
-      "다른 나라의 학교 텃밭 사례",
-      "채소의 종류와 영양"
+      "텃밭 조성에 드는 비용과 관리의 어려움, 그리고 그 해결 방안",
+      "우리나라 농업의 역사와 발전 과정",
+      "내가 좋아하는 꽃과 나무 소개",
+      "채소에 들어 있는 영양소의 종류"
     ],
     "answer": 0,
-    "explanation": "주장하는 글의 본론에서는 주장을 뒷받침하는 근거와 함께 반론(비용·관리 부담)을 예상하고 해결 방안을 제시하는 구성이 설득력을 높입니다.",
+    "explanation": "주장하는 글의 본론에서는 주장을 뒷받침하는 근거와 함께, 예상되는 반론(비용·관리 부담)을 검토하고 해결 방안을 제시하는 구성이 설득력을 높입니다. ②③④는 '학교에 텃밭을 만들자'는 주장과 직접 관련이 없어 본론으로 알맞지 않습니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -185,7 +185,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -212,7 +212,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -237,9 +237,9 @@
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
-    "difficulty_tier": "medium",
+    "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -255,18 +255,18 @@
     "question_text": "다음 주장하는 글의 결론 단락으로 가장 알맞은 것은?\n\n주장: 학교에서 환경 교육을 강화해야 한다.",
     "choices": [
       "지금까지 살펴본 것처럼, 환경 교육은 미래 세대가 지구를 지키는 데 꼭 필요합니다. 우리 모두가 환경 교육의 중요성을 인식하고, 학교에서 더 많은 시간을 환경 교육에 배분할 것을 촉구합니다.",
-      "환경 교육의 역사는 매우 깁니다.",
-      "환경 오염은 심각한 문제입니다.",
-      "환경 교육의 장점은 매우 많습니다."
+      "환경 교육은 세계 여러 나라에서 오래전부터 이루어져 왔습니다. 우리나라에서도 1990년대부터 학교 환경 교육이 시작되어 지금까지 다양한 형태로 이어지고 있습니다.",
+      "환경 오염은 갈수록 심각해지고 있습니다. 플라스틱 쓰레기와 미세 먼지는 우리의 건강을 위협하고 있으며, 앞으로 더 큰 문제로 번질 가능성이 큽니다.",
+      "환경 교육에는 여러 가지 장점이 있습니다. 예를 들어 학생들은 올바른 분리배출 방법을 배우고, 에너지를 아껴 쓰는 생활 습관도 자연스럽게 기를 수 있습니다."
     ],
     "answer": 0,
-    "explanation": "결론 단락은 본론을 요약하고 독자에게 행동을 촉구하는 형식이 효과적입니다. '지금까지 살펴본 것처럼'으로 본론을 요약하고 환경 교육 시간 배분을 촉구하는 선택지가 이 조건을 모두 갖추고 있습니다.",
+    "explanation": "결론 단락은 본론을 요약하고 독자에게 행동을 촉구하는 형식이 효과적입니다. ①은 '지금까지 살펴본 것처럼'으로 본론을 요약하고 환경 교육 시간 배분을 촉구하여 이 조건을 모두 갖추었습니다. ②는 역사 소개, ③은 새로운 문제 제기, ④는 장점 나열로, 모두 본론에 어울리는 내용일 뿐 요약과 촉구가 없어 결론으로 알맞지 않습니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -293,7 +293,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -308,9 +308,9 @@
     "item_type": "multiple_choice",
     "question_text": "다음 학생 글의 밑줄 친 부분을 고칠 때 가장 알맞은 것은?\n\n\"기후 변화는 _뭔가 이상한 날씨를 만드는 것_입니다. 이산화탄소 같은 온실 가스가 늘면서 지구 온도가 올라가는 현상입니다.\"",
     "choices": [
-      "정말 무서운 날씨를 만드는 것",
-      "날씨가 예측 불가능해지는 것",
-      "갑자기 비가 오거나 더워지는 것",
+      "사람들을 정말 무섭고 불안하게 만드는 이상한 날씨를 만드는 것",
+      "날씨가 언제 어떻게 변할지 도무지 예측할 수 없게 되는 것",
+      "갑자기 비가 쏟아지거나 날씨가 며칠씩 무더워지기도 하는 것",
       "지구 전체의 평균 기온과 날씨 패턴을 장기적으로 변화시키는 현상"
     ],
     "answer": 3,
@@ -320,7 +320,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -347,7 +347,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -389,9 +389,9 @@
     "item_type": "multiple_choice",
     "question_text": "'학교 도서관 이용률을 높이자'는 주장의 글에서 독자의 관심을 끄는 서론의 시작으로 가장 알맞은 것은?",
     "choices": [
-      "도서관은 책이 있는 곳입니다.",
-      "우리 학교 도서관은 1학년 때부터 있었습니다.",
-      "도서관 이용률을 높이는 것은 중요합니다.",
+      "도서관은 여러 종류의 책이 모여 있는 곳으로, 누구나 자유롭게 이용할 수 있습니다.",
+      "우리 학교 도서관은 학교가 처음 세워질 때부터 지금까지 운영되어 온 공간입니다.",
+      "도서관 이용률을 높이는 것은 우리 학교 모든 학생에게 중요한 일이라고 생각합니다.",
       "여러분은 지난 한 달 동안 도서관을 몇 번 이용했나요? 조사에 따르면 우리 학교 도서관 하루 이용자는 학생 수의 5%에 불과합니다."
     ],
     "answer": 3,
@@ -401,7 +401,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -449,13 +449,13 @@
       "나는 매일 아침 운동을 한다, 그래서 건강하다."
     ],
     "answer": 0,
-    "explanation": "여러 항목을 나열할 때 항목을 쉼표로 구분하고 마지막 항목 앞에 '그리고'를 쓰는 것은 올바른 사용입니다. '\"빨리 뛰어라\" 고'는 큰따옴표를 닫은 뒤의 '고'를 붙여 써야 하고, '\"내일은 꼭 와야해\" 라고'는 인용 표시와 '라고'의 위치가 어색하며, '운동을 한다, 그래서'처럼 이어지는 두 문장은 쉼표 대신 마침표를 찍고 접속 부사로 연결하는 것이 더 자연스럽습니다.",
+    "explanation": "여러 항목을 나열할 때 항목을 쉼표로 구분하고 마지막 항목 앞에 '그리고'를 쓰는 것은 올바른 사용입니다. ②는 직접 인용 뒤의 조사를 '\"빨리 뛰어라\"라고'처럼 따옴표에 붙여 써야 합니다. ③도 인용 조사 '라고'를 따옴표에 붙여 써야 하며, 인용문 속 '와야해'는 '와야 해'로 띄어 써야 하는 의도된 띄어쓰기 오류입니다. ④는 완결된 두 문장을 쉼표로 이어 붙였는데, 한글 맞춤법 문장 부호 규정에서 쉼표에는 문장과 문장을 연결하는 기능이 없으므로 마침표로 끝맺고 '그래서'로 새 문장을 시작하거나 연결 어미로 한 문장을 만들어야 합니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -482,7 +482,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -509,7 +509,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -536,7 +536,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -549,12 +549,12 @@
     "alignment_rationale": "글의 목적과 독자를 고려하여 내용의 타당성을 검토하는 퇴고 능력을 측정한다.",
     "level_differentiation": "3단계는 잘못된 표현이나 내용의 오류를 찾아 고칠 수 있고, 4단계는 글의 목적·독자·구성을 종합적으로 검토하고 수정할 수 있다.",
     "item_type": "multiple_choice",
-    "question_text": "다음 학생 글을 퇴고할 때, 먼저 확인해야 할 사항으로 가장 알맞은 것은?\n\n\"우리 학교에 운동장을 만들어야 합니다. 왜냐하면 운동은 건강에 좋기 때문입니다. 또한 운동은 재미있습니다.\"\n\n독자: 학교 교장 선생님",
+    "question_text": "다음 학생 글을 퇴고할 때, 먼저 확인해야 할 사항으로 가장 알맞은 것은?\n\n\"우리 학교에 체육 시설을 더 늘려야 합니다. 왜냐하면 운동은 건강에 좋기 때문입니다. 또한 운동은 재미있습니다.\"\n\n독자: 학교 교장 선생님",
     "choices": [
-      "운동장이 왜 필요한지 독자(교장 선생님)를 설득할 수 있는 구체적 근거가 충분한가?",
-      "맞춤법이 틀린 곳은 없는가?",
-      "문장이 너무 짧지 않은가?",
-      "어휘가 어렵지 않은가?"
+      "체육 시설이 왜 더 필요한지 독자(교장 선생님)를 설득할 수 있는 구체적 근거가 충분한가?",
+      "맞춤법이나 띄어쓰기가 틀린 부분은 없는가?",
+      "문장의 길이가 너무 짧아 어색하지는 않은가?",
+      "독자가 이해하기 어려운 어휘를 쓰지는 않았는가?"
     ],
     "answer": 0,
     "explanation": "교장 선생님을 독자로 한 건의문이라면, 근거가 타당하고 구체적인지를 우선 확인해야 합니다. '건강에 좋다', '재미있다'는 근거가 너무 막연하여 설득력이 부족합니다.",
@@ -563,7 +563,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -590,7 +590,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -617,7 +617,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -634,17 +634,17 @@
     "choices": [
       "단락 1이 너무 짧다",
       "단락 1의 문장이 두 개뿐이다",
-      "'따라서'라는 접속어가 틀렸다",
+      "단락 2에 맞춤법이 틀린 단어가 있다",
       "단락 2의 내용이 단락 1과 내용적 연결이 없다"
     ],
     "answer": 3,
-    "explanation": "'따라서'는 앞 내용의 결론을 이끄는 접속어이지만, 도서관을 다룬 단락 1에서 매점을 다루는 단락 2로 이어지는 것은 내용적 연결이 없습니다. 단락 간에는 내용적 연결이 필요합니다.",
+    "explanation": "'따라서'는 앞 내용의 결론을 이끄는 접속어인데, 도서관을 다룬 단락 1에서 매점을 다루는 단락 2로 이어지는 것은 내용적 연결이 없습니다. 단락 간에는 내용적 연결이 필요합니다. 단락의 길이나 문장 수, 맞춤법은 이 글의 연결이 어색한 이유와 관계가 없습니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -671,7 +671,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   }
 ]

@@ -7,7 +7,7 @@
     "char_count": 512,
     "source": "AI생성",
     "topic": "지속 가능한 발전",
-    "intended_domains": ["VOC", "LIT", "INF", "CRI", "CRE"],
+    "intended_domains": ["VOC", "LIT", "INF", "CRT", "STR"],
     "background_knowledge_risk": "high",
     "review_status": "draft"
   },
@@ -19,7 +19,7 @@
     "char_count": 468,
     "source": "AI생성",
     "topic": "혁신과 개혁",
-    "intended_domains": ["VOC", "LIT", "INF", "CRI", "CRE"],
+    "intended_domains": ["VOC", "LIT", "INF", "CRT", "STR"],
     "background_knowledge_risk": "high",
     "review_status": "draft"
   }

@@ -22,7 +22,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -34,21 +34,21 @@
     "achievement_standard": "[6국03-03]",
     "level_differentiation": "3단계는 주장과 구체적 근거를 선정하여 글감을 마련하고, 4단계는 다양한 관점에서 근거의 타당성을 검토한다.",
     "item_type": "multiple_choice",
-    "question_text": "\"지난 주말에 있었던 특별한 경험\"을 일기 형식으로 쓰려고 합니다. 일기에 넣기에 가장 적절한 내용으로 알맞은 것은?",
+    "question_text": "\"지난 주말에 있었던 특별한 경험\"을 일기로 쓰려고 합니다. 일기에 넣기에 가장 알맞은 문장은?",
     "choices": [
-      "일기는 반드시 좋은 일만 써야 합니다.",
-      "일기는 길게 쓸수록 좋은 글입니다.",
-      "일기는 친구에게 보여줄 수 있도록 공식적인 표현을 사용해야 합니다.",
-      "그날 있었던 일과 그 일에 대한 자신의 느낌, 생각, 바람을 구체적으로 씁니다."
+      "토요일 아침에 일어나서 밥을 먹었다. 점심을 먹고 텔레비전을 봤다. 저녁을 먹고 잤다.",
+      "주말은 누구에게나 소중한 시간이므로 우리는 주말을 계획적으로 보내야 한다.",
+      "본 기자는 지난 토요일에 가족과 함께 국립박물관을 방문하여 전시를 관람하였습니다.",
+      "할머니 댁에서 처음으로 감을 따 봤다. 가지가 휘청거릴 때마다 가슴이 두근거렸고, 다음에는 동생과 같이 오고 싶다."
     ],
     "answer": 3,
-    "explanation": "그날 있었던 일과 그 일에 대한 느낌·생각·바람을 구체적으로 쓰는 것이 일기 글쓰기의 핵심 요소입니다. 일기는 좋은 일뿐 아니라 다양한 경험을 쓸 수 있고, 길이보다 내용이 중요하며, 공식적 표현보다 솔직한 자신의 목소리로 씁니다.",
+    "explanation": "일기는 그날 있었던 일과 그 일에 대한 느낌·생각·바람을 구체적으로 쓰는 글입니다. ④는 특별한 경험(감 따기)과 그때의 느낌(두근거림), 바람(동생과 같이 오고 싶다)이 모두 담겨 있습니다. ①은 한 일만 나열하고 느낌이 없으며, ②는 경험이 아닌 주장이고, ③은 일기에 어울리지 않는 기사문 말투입니다.",
     "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -62,19 +62,19 @@
     "item_type": "multiple_choice",
     "question_text": "\"내가 좋아하는 계절\"에 대한 설명문을 쓰려고 합니다. 설명문의 글감을 마련하는 방법으로 가장 적절한 것은?",
     "choices": [
-      "그냥 생각나는 대로 씁니다.",
+      "그 계절에 어울리는 멋진 표현을 먼저 떠올린 뒤, 표현에 맞추어 쓸 내용을 정합니다.",
       "좋아하는 이유를 두세 가지로 나누고, 각각에 어울리는 구체적인 경험이나 예시를 함께 생각합니다.",
-      "좋아하는 이유를 한 가지만 씁니다.",
-      "친구가 좋아하는 계절에 대해 대신 씁니다."
+      "봄·여름·가을·겨울 사계절의 특징을 모두 자세히 조사하여 빠짐없이 소개합니다.",
+      "백과사전에서 그 계절의 날씨와 기온에 대한 과학적 정보를 찾아 그대로 옮겨 적습니다."
     ],
     "answer": 1,
-    "explanation": "좋아하는 이유를 두세 가지로 나누고 각각에 어울리는 구체적인 경험이나 예시를 함께 생각하는 것은 글감을 조직적으로 마련하는 방법으로, 근거를 여러 개 세우고 각각에 예시를 붙이는 방식입니다. 이처럼 근거와 예시를 함께 생각하는 것이 설명문 글감 마련의 핵심입니다.",
+    "explanation": "좋아하는 이유를 두세 가지로 나누고 각각에 어울리는 구체적인 경험이나 예시를 함께 생각하면, 글의 뼈대(이유)와 살(예시)을 갖춘 글감을 조직적으로 마련할 수 있습니다. ①은 내용보다 표현을 앞세워 순서가 거꾸로이고, ③은 '내가 좋아하는 계절'이라는 주제를 벗어나 사계절 전체를 다루며, ④는 자기 생각 없이 자료를 옮겨 적는 방법이어서 알맞지 않습니다.",
     "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -100,7 +100,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -126,7 +126,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -152,7 +152,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -190,21 +190,21 @@
     "achievement_standard": "[6국03-04]",
     "level_differentiation": "3단계는 주장하는 글의 논리적 단락 구성을 이해하고, 4단계는 설명·주장하는 글의 체계적 단락 구성 방법을 적용한다.",
     "item_type": "multiple_choice",
-    "question_text": "다음 개요를 보고, 빈칸에 들어갈 내용으로 가장 알맞은 것은?\n\n[주제: 학교에서 스마트폰 사용을 제한해야 한다]\n- 서론: 스마트폰 사용 증가와 학교 내 문제 소개\n- 본론1: 수업 집중력 저하 문제\n- 본론2: ( ㉠ )\n- 결론: 합리적 사용 규칙 마련 제안",
+    "question_text": "다음 글의 빈칸 ㉠에 들어갈 연결어로 가장 알맞은 것은?\n\n\"스마트폰을 오래 사용하면 수업에 집중하기 어렵습니다. ( ㉠ ) 쉬는 시간에도 스마트폰만 보느라 친구들과 대화가 줄어듭니다. 그러므로 학교에서 스마트폰 사용 규칙을 만들어야 합니다.\"",
     "choices": [
-      "교우 관계 단절과 왕따 문제 심화",
-      "스마트폰의 다양한 기능 소개",
-      "스마트폰 제조 과정의 환경 문제",
-      "해외 학교의 스마트폰 허용 사례"
+      "또한",
+      "그러나",
+      "예를 들어",
+      "왜냐하면"
     ],
     "answer": 0,
-    "explanation": "본론1이 '수업 집중력 저하'라는 문제를 다루므로, 본론2는 또 다른 문제점을 제시해야 합니다. '교우 관계 단절과 왕따 문제'는 스마트폰 제한의 또 다른 근거로 적절합니다.",
+    "explanation": "빈칸 앞 문장(수업 집중 어려움)과 뒤 문장(친구들과 대화 감소)은 모두 스마트폰 사용의 문제점입니다. 같은 방향의 내용을 덧붙일 때는 '또한'이 알맞습니다. '그러나'는 반대되는 내용을, '예를 들어'는 구체적인 예를, '왜냐하면'은 까닭을 이어 줄 때 쓰는 연결어입니다.",
     "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -230,7 +230,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -245,18 +245,18 @@
     "question_text": "다음 주장하는 글에서 결론 단락으로 가장 알맞은 것은?\n\n[주제: 학교 내 독서 시간을 늘려야 한다]\n[본론: 독서가 어휘력과 집중력을 향상시키며, 공감 능력 발달에도 도움이 된다는 근거 제시]",
     "choices": [
       "따라서 학교는 매일 10분씩 독서 시간을 운영하고, 학생들이 다양한 분야의 책을 접할 수 있도록 지원해야 합니다.",
-      "독서는 매우 중요하다고 생각합니다. 저도 책을 많이 읽겠습니다.",
-      "독서를 하면 똑똑해진다는 말이 있습니다.",
-      "책은 사람의 마음을 풍요롭게 만들어 줍니다."
+      "독서는 어휘력과 집중력을 향상시킵니다. 또한 다른 사람의 마음을 헤아리는 공감 능력을 길러 줍니다.",
+      "독서도 중요하지만 운동이나 체험 활동도 그만큼 중요하므로, 여러 활동의 균형을 고려해야 합니다.",
+      "책을 읽으면 좋은 점이 많습니다. 앞으로 어떤 책을 얼마나 읽을지는 학생들이 각자 자유롭게 정하면 됩니다."
     ],
     "answer": 0,
-    "explanation": "결론 단락은 본론의 논거를 바탕으로 구체적인 제안이나 실천 방안을 제시해야 합니다. ①은 '매일 10분 독서'라는 구체적 방안과 '다양한 책 지원'을 담아 본론과 자연스럽게 연결됩니다.",
+    "explanation": "결론 단락은 본론의 논거를 바탕으로 주장을 다시 밝히고 구체적인 제안이나 실천 방안을 제시해야 합니다. ①은 '매일 10분 독서'라는 구체적 방안과 '다양한 책 지원'을 담아 본론과 자연스럽게 연결됩니다. ②는 본론의 근거를 되풀이할 뿐 제안이 없고, ③은 결론에서 새로운 화제를 꺼내 주장을 흐리며, ④는 '독서 시간을 늘려야 한다'는 주제와 반대로 각자 자유에 맡기자고 하여 알맞지 않습니다.",
     "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -282,7 +282,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -296,19 +296,19 @@
     "item_type": "multiple_choice",
     "question_text": "친구에게 자신이 제일 좋아하는 음식을 소개하는 글을 쓸 때, 감정이 가장 잘 드러나는 문장은?",
     "choices": [
-      "나는 떡볶이를 좋아한다.",
+      "나는 떡볶이를 좋아한다. 떡볶이는 우리나라 사람들이 즐겨 먹는 대표적인 분식이다.",
       "나는 떡볶이를 무척 좋아하는데, 매콤하고 쫄깃한 맛이 정말 최고다!",
-      "나는 떡볶이를 먹는다.",
-      "나는 떡볶이가 괜찮은 것 같다."
+      "나는 학교가 끝나면 가끔 집 근처 분식집에 가서 떡볶이를 사 먹는다.",
+      "나는 떡볶이가 다른 여러 음식과 비교해 보면 그런대로 괜찮은 것 같다."
     ],
     "answer": 1,
-    "explanation": "②는 '무척 좋아하는데'로 감정의 강도를 표현하고, 구체적인 이유('매콤하고 쫄깃한 맛')를 함께 적어 독자가 필자의 마음을 생생하게 느낄 수 있습니다. ①은 감정 표현이 평범하고, ③은 행동만 서술하며, ④는 감정이 모호합니다.",
+    "explanation": "②는 '무척 좋아하는데'로 감정의 강도를 표현하고, 구체적인 이유('매콤하고 쫄깃한 맛')를 함께 적어 독자가 필자의 마음을 생생하게 느낄 수 있습니다. ①은 감정보다 정보 설명이 중심이고, ③은 행동만 서술하며, ④는 감정이 모호하고 미지근합니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -334,7 +334,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -349,9 +349,9 @@
     "question_text": "다음 중 주장의 설득력을 높이기 위해 가장 효과적인 표현 방법은?\n\n주장: \"학교에서 음식물 쓰레기를 줄여야 한다.\"",
     "choices": [
       "우리 학교에서 하루 발생하는 음식물 쓰레기는 약 30kg으로, 이를 처리하는 데 드는 비용은 연간 100만 원이 넘습니다.",
-      "음식물 쓰레기를 줄이는 것은 매우 중요합니다.",
-      "음식물 쓰레기가 많으면 환경이 나빠집니다.",
-      "다들 음식을 남기지 말아야 합니다."
+      "음식물 쓰레기를 줄이는 일은 우리 모두에게 매우 중요하고 반드시 필요한 일입니다.",
+      "음식물 쓰레기가 많아지면 환경이 나빠지고 우리 지구에도 나쁜 영향을 미치게 됩니다.",
+      "우리는 다 같이 급식에서 음식을 남기지 말자고 서로에게 꾸준히 이야기해야 합니다."
     ],
     "answer": 0,
     "explanation": "구체적인 수치(30kg, 100만 원)를 제시하면 독자가 문제의 규모를 실감하게 되어 설득력이 높아집니다. 막연한 주장보다 구체적 근거가 있는 표현이 효과적입니다.",
@@ -360,7 +360,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -374,10 +374,10 @@
     "item_type": "multiple_choice",
     "question_text": "다음 글의 표현 중 독자에게 공감을 이끌어내기 위해 가장 효과적인 것은?",
     "choices": [
-      "방과 후 활동을 늘리는 것이 좋습니다.",
-      "방과 후 활동이 부족하다는 통계가 있습니다.",
+      "방과 후 활동을 늘리는 것이 학생들의 학교생활에 여러모로 도움이 되기 때문에 꼭 필요하다고 생각합니다.",
+      "한 조사에 따르면 우리 학교 학생들의 방과 후 활동 참여율은 다른 학교에 비해 낮은 편이라고 합니다.",
       "여러분도 수업이 끝난 후 '이제 뭐 하지?'라는 생각을 해본 적 있지요? 방과 후 활동이 다양해진다면 그런 고민이 줄어들 것입니다.",
-      "방과 후 활동은 오래전부터 중요하게 여겨졌습니다."
+      "방과 후 활동은 오래전부터 학교 교육에서 중요한 부분으로 여겨져 온 의미 있는 활동입니다."
     ],
     "answer": 2,
     "explanation": "독자(같은 학생)의 경험에 공감하는 질문('이제 뭐 하지?')으로 시작하여 자신의 상황과 연결시키는 표현은 독자의 관심을 끌고 공감을 이끌어내는 효과적인 방법입니다.",
@@ -386,7 +386,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -438,7 +438,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -464,7 +464,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -490,7 +490,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -568,7 +568,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -594,7 +594,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -620,7 +620,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -644,9 +644,9 @@
     "passage_id": null,
     "passage_type": "글쓰기 상황",
     "difficulty": null,
-    "difficulty_tier": "hard",
+    "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   }
 ]

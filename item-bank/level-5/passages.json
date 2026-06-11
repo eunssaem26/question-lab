@@ -7,7 +7,7 @@
     "char_count": 587,
     "source": "AI생성",
     "topic": "디지털 윤리",
-    "intended_domains": ["VOC", "LIT", "INF", "CRI", "CRE"],
+    "intended_domains": ["VOC", "LIT", "INF", "CRT", "STR"],
     "background_knowledge_risk": "high",
     "review_status": "draft"
   }

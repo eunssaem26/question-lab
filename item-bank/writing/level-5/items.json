@@ -23,7 +23,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -50,7 +50,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -77,7 +77,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -92,19 +92,19 @@
     "item_type": "multiple_choice",
     "question_text": "'인터넷 실명제를 도입해야 한다'는 주장에서 근거로 가장 타당한 것은?",
     "choices": [
-      "인터넷은 많은 사람이 사용한다",
-      "익명성이 보장될 때 창의적 의견이 더 잘 나온다",
+      "인터넷 이용자 수가 해마다 증가하여 온라인 공간의 사회적 영향력이 커지고 있다",
+      "익명성이 보장될 때 솔직하고 창의적인 의견이 더 활발하게 나온다는 조사가 있다",
       "실명 사용 시 악성 댓글이 감소했다는 국내외 연구 결과가 있다",
-      "인터넷 실명제는 관리하기 쉽다"
+      "주요 포털 사이트들이 이미 게시판에 본인 확인 절차를 운영하고 있다"
     ],
     "answer": 2,
-    "explanation": "실명제 도입을 주장하는 근거로는 실명 사용이 악성 댓글 감소에 실제로 효과가 있다는 연구 결과가 가장 직접적이고 타당합니다.",
+    "explanation": "실명제 도입을 주장하는 근거로는 실명 사용이 악성 댓글 감소에 실제로 효과가 있다는 연구 결과가 가장 직접적이고 타당합니다. 이용자 수 증가는 사실이더라도 실명제의 효과를 직접 뒷받침하지 못하고, 익명성의 장점에 관한 조사는 오히려 실명제 반대 측 근거이며, 포털의 본인 확인 관행은 이미 그렇게 하고 있다는 사실일 뿐 도입의 타당성을 입증하지 못합니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -120,18 +120,18 @@
     "question_text": "\"동물 실험을 금지해야 한다\"는 논제로 논설문을 쓸 때, 양쪽 입장을 검토한 후 취할 수 있는 균형 잡힌 관점은?",
     "choices": [
       "불가피한 경우에는 최소한으로 허용하되 대안 연구 방법 개발을 병행해야 한다",
-      "동물 실험은 절대 허용되면 안 된다",
-      "동물 실험은 아무 문제가 없다",
-      "과학자들이 알아서 결정하면 된다"
+      "동물의 생명권은 어떤 연구 목적으로도 침해될 수 없으므로 전면 금지를 법제화해야 한다",
+      "의학 발전이 가져올 이익이 훨씬 크므로 현행 동물 실험 제도를 그대로 유지해야 한다",
+      "윤리 판단에는 전문성이 필요하므로 연구자 단체의 자율 규제에 전적으로 맡겨야 한다"
     ],
     "answer": 0,
-    "explanation": "논제를 다각도로 검토하면 절대 금지나 전면 허용보다 조건부 최소화와 대안 개발이라는 균형 잡힌 관점을 도출할 수 있습니다. 이는 양쪽 입장을 모두 고려한 논거 생성의 예입니다.",
+    "explanation": "논제를 다각도로 검토하면 절대 금지나 전면 허용보다 조건부 최소화와 대안 개발이라는 균형 잡힌 관점을 도출할 수 있습니다. 전면 금지 법제화와 현행 제도 유지는 그럴듯한 이유를 들고 있지만 각각 한쪽 입장만 반영한 단정이며, 연구자 단체의 자율 규제에 전적으로 맡기는 것은 쟁점 검토를 회피하고 판단을 이해당사자에게 위임하는 것이어서 균형 잡힌 관점이라 보기 어렵습니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -158,7 +158,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -185,7 +185,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -212,7 +212,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -239,7 +239,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -266,7 +266,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -293,7 +293,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -320,7 +320,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -347,7 +347,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -360,21 +360,21 @@
     "alignment_rationale": "문장의 간결성과 명확성을 높이는 표현 선택 능력을 측정한다.",
     "level_differentiation": "4단계는 글의 목적과 독자를 고려하여 어조와 표현을 조절할 수 있고, 5단계는 논증의 설득력을 높이는 다양한 표현 전략을 활용할 수 있다.",
     "item_type": "multiple_choice",
-    "question_text": "다음 두 문장 중 논설문에 더 적합한 것은?",
+    "question_text": "다음 중 논설문의 문장으로 가장 적합한 것은?",
     "choices": [
-      "\"사실 저는 그냥 뭔가 환경이 좀 나빠진 것 같다는 느낌이 좀 있어서 뭔가 해야 할 것 같다는 생각이 드는 것 같습니다.\"",
+      "\"사실 저는 그냥 뭔가 환경이 좀 나빠진 것 같다는 느낌이 들어서 뭔가 해야 할 것 같습니다.\"",
       "\"기후 변화로 인한 이상 기후 현상이 증가하고 있으므로, 지금 즉각적인 대응이 필요하다.\"",
-      "두 문장의 정확성은 동등하다",
-      "첫 번째 문장이 독자와의 라포 형성에 더 유리하다"
+      "\"환경이 파괴되는 모습을 보면 너무너무 슬프고 화가 나서 도저히 견딜 수가 없다.\"",
+      "\"지구 환경 문제에는 여러 가지가 있는데 그것들에는 다양한 원인이 있다고 한다.\""
     ],
     "answer": 1,
-    "explanation": "논설문은 명확하고 간결한 표현이 중요합니다. '기후 변화로 인한 이상 기후 현상이 증가하고 있으므로, 지금 즉각적인 대응이 필요하다'는 문장은 원인(기후 변화)과 결과(이상 기후 증가), 주장(즉각적 대응 필요)을 간결하게 담고 있습니다.",
+    "explanation": "논설문은 명확하고 간결한 표현이 중요합니다. '기후 변화로 인한 이상 기후 현상이 증가하고 있으므로, 지금 즉각적인 대응이 필요하다'는 문장은 원인(기후 변화)과 결과(이상 기후 증가), 주장(즉각적 대응 필요)을 간결하게 담고 있습니다. 나머지 문장은 군더더기와 모호한 표현이 많거나, 감정에 치우쳐 객관성이 떨어지거나, 내용이 막연하여 전달하려는 바가 분명하지 않습니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -389,19 +389,19 @@
     "item_type": "multiple_choice",
     "question_text": "'청소년의 디지털 권리 교육을 강화하자'는 주장의 결론 문장으로 독자에게 가장 효과적으로 호소하는 것은?",
     "choices": [
-      "이 글에서 말한 것처럼 디지털 권리 교육이 필요합니다.",
-      "어른들이 알아서 할 것입니다.",
-      "디지털 권리 교육은 어렵습니다.",
+      "디지털 권리 교육을 받지 못한 청소년은 머지않아 모두 사이버 범죄의 표적이 되어 돌이킬 수 없는 피해를 입게 될 것입니다.",
+      "디지털 권리 교육을 외면하는 학교와 어른들은 시대에 뒤떨어졌다는 비난을 결코 피할 수 없게 될 것입니다.",
+      "전 세계 모든 나라가 이미 디지털 권리 교육을 의무화한 만큼 우리도 더 따지지 말고 무조건 도입해야 합니다.",
       "우리가 디지털 세상에서 주체적으로 살아가기 위해서는 지금 이 순간이 바로 디지털 권리 교육을 시작해야 할 때입니다."
     ],
     "answer": 3,
-    "explanation": "결론은 독자에게 지금 행동할 이유를 주어야 설득력이 높아집니다. '우리'라는 공동체 언어와 '지금 이 순간'이라는 긴박감을 사용한 문장이 독자의 행동을 가장 효과적으로 촉구합니다.",
+    "explanation": "결론은 독자에게 지금 행동할 이유를 주어야 설득력이 높아집니다. '우리'라는 공동체 언어와 '지금 이 순간'이라는 긴박감을 사용한 문장이 독자의 행동을 가장 효과적으로 촉구합니다. '모두 범죄의 표적이 된다'는 근거 없는 공포 과장이고, 학교와 어른들을 비난하는 협박조 표현은 독자의 반감을 살 수 있으며, '전 세계 모든 나라'는 검증되지 않은 과장에 기댄 부화뇌동식 호소여서 설득력이 떨어집니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -428,7 +428,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -455,7 +455,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -470,7 +470,7 @@
     "item_type": "multiple_choice",
     "question_text": "다음 중 피동 표현이 불필요하게 사용된 것은?",
     "choices": [
-      "그 논문은 많은 연구자들에 의해 인용되었다.",
+      "도망치던 범인이 결국 경찰에 잡혔다.",
       "책이 책상 위에 놓여 있다.",
       "창문이 바람에 깨졌다.",
       "나에 의해 그 문제가 풀려졌다."
@@ -482,7 +482,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -509,7 +509,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -536,7 +536,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -563,7 +563,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -590,7 +590,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -617,7 +617,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -630,21 +630,21 @@
     "alignment_rationale": "논설문 전체의 논리적 일관성을 점검하는 퇴고 능력을 측정한다.",
     "level_differentiation": "4단계는 글의 목적·독자·구성을 종합적으로 검토하고 수정할 수 있고, 5단계는 논증의 논리적 타당성, 근거의 신뢰성, 표현의 정확성을 종합적으로 퇴고할 수 있다.",
     "item_type": "multiple_choice",
-    "question_text": "다음 글에서 논리적 일관성이 깨지는 부분은?\n\n\"디지털 기기는 학습에 도움이 되므로 교실에서 적극 활용해야 합니다. 인터넷 검색으로 다양한 정보를 찾을 수 있고, 교육용 앱을 통해 개인 맞춤형 학습이 가능합니다. ___그러나 디지털 기기는 집중력을 해치므로 교실에서 완전히 금지해야 합니다.___\"",
+    "question_text": "다음 글에서 논리적 일관성을 해쳐 삭제하거나 고쳐 써야 할 문장은?\n\n① 디지털 기기는 학습에 도움이 되므로 교실에서 적극 활용해야 한다. ② 인터넷 검색으로 다양한 정보를 찾을 수 있고, 교육용 앱을 통해 개인 맞춤형 학습도 가능하다. ③ 디지털 기기는 집중력을 해치므로 교실에서 완전히 금지하는 것이 마땅하다. ④ 따라서 교사의 지도 아래 디지털 기기를 수업에 단계적으로 도입할 필요가 있다.",
     "choices": [
-      "첫 번째 문장",
-      "두 번째 문장",
-      "밑줄 친 세 번째 문장",
-      "일관성이 깨진 부분이 없다"
+      "①",
+      "②",
+      "③",
+      "④"
     ],
     "answer": 2,
-    "explanation": "세 번째 문장은 앞의 '적극 활용해야 한다'는 주장과 완전히 모순됩니다. 활용을 지지하는 근거를 제시하다가 갑자기 '완전히 금지'로 바뀌는 것은 논리적 일관성이 없습니다.",
+    "explanation": "③은 '적극 활용해야 한다'는 글 전체의 주장과 정반대로 '완전히 금지'를 주장하여 논리적 일관성을 깨뜨립니다. ①은 글의 중심 주장, ②는 이를 뒷받침하는 근거, ④는 주장을 구체화한 결론으로 글의 흐름에 부합합니다.",
     "passage_id": null,
     "passage_type": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -671,7 +671,7 @@
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   }
 ]

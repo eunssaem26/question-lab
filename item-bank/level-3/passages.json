@@ -7,7 +7,7 @@
     "char_count": 387,
     "source": "AI생성",
     "topic": "민주주의의 기틀",
-    "intended_domains": ["VOC", "LIT", "INF", "CRI", "CRE"],
+    "intended_domains": ["VOC", "LIT", "INF", "CRT", "STR"],
     "background_knowledge_risk": "medium",
     "review_status": "draft"
   },
@@ -19,7 +19,7 @@
     "char_count": 356,
     "source": "AI생성",
     "topic": "마음의 이해",
-    "intended_domains": ["VOC", "LIT", "INF", "CRI", "CRE"],
+    "intended_domains": ["VOC", "LIT", "INF", "CRT", "STR"],
     "background_knowledge_risk": "medium",
     "review_status": "draft"
   },
@@ -31,7 +31,7 @@
     "char_count": 342,
     "source": "AI생성",
     "topic": "환경 오염과 기후 변화",
-    "intended_domains": ["LIT", "INF", "CRI", "CRE"],
+    "intended_domains": ["LIT", "INF", "CRT", "STR"],
     "background_knowledge_risk": "medium",
     "review_status": "draft"
   },
@@ -43,7 +43,7 @@
     "char_count": 368,
     "source": "AI생성",
     "topic": "인공지능의 장단점",
-    "intended_domains": ["LIT", "INF", "CRI", "CRE"],
+    "intended_domains": ["LIT", "INF", "CRT", "STR"],
     "background_knowledge_risk": "high",
     "review_status": "draft"
   }

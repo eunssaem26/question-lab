@@ -10,19 +10,19 @@
     "item_type": "multiple_choice",
     "question_text": "'민주주의' 개념의 역사적 변화를 고려할 때, 현대적 의미로 가장 알맞은 것은?",
     "choices": [
-      "다수의 지배",
-      "왕의 권력 제한",
-      "참정권과 기본권 보장, 다원적 사회 참여",
-      "경제적 평등"
+      "다수가 소수를 지배하는 통치 방식",
+      "왕과 귀족의 권력을 제한하는 제도",
+      "보편적 참정권에 기초한 시민의 정치 참여",
+      "모든 구성원의 경제적 평등 실현"
     ],
     "answer": 2,
-    "explanation": "현대 민주주의는 단순한 다수결이 아니라, 참정권과 기본권 보장, 다양한 사회적 참여를 포함하는 개념으로 발전했습니다.",
+    "explanation": "지문은 민주주의가 제한된 시민권에서 보편적 참정권으로 발전해 왔다고 설명합니다. 현대 민주주의는 모든 시민의 참정권과 정치 참여를 핵심으로 합니다.",
     "passage_id": "P-7-001",
     "passage_genre": "역사철학 텍스트",
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -44,11 +44,11 @@
     "answer": 0,
     "explanation": "자유민주주의와 사회민주주의의 분화는 개인 자유 대 국가의 복지·평등 역할이라는 핵심 쟁점을 중심으로 이루어졌습니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -74,7 +74,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -100,7 +100,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -114,19 +114,19 @@
     "item_type": "multiple_choice",
     "question_text": "아래 문장에서 '디지털 민주주의'라는 용어의 의미를 가장 정확하게 설명한 것은?\n\n\"디지털 민주주의는 기존의 대의민주주의 한계를 보완하면서도, 정보 격차와 알고리즘 편향이라는 새로운 위협을 동반한다.\"",
     "choices": [
-      "모든 정치 결정을 인공지능이 자동으로 처리하는 시스템",
-      "온라인에서만 존재하며 오프라인 정치와 완전히 분리된 민주주의",
-      "인터넷을 활용해 투표와 정치 참여를 확대하는 동시에 새로운 위험도 안고 있는 민주주의 형태",
-      "디지털 기기 제조업체가 운영하는 기업 민주주의"
+      "기존 투표를 전자투표로 바꾸는 것만을 뜻하는 선거 절차상의 제도 개혁",
+      "온라인 청원과 토론으로 대의민주주의를 완전히 대체하려는 직접민주주의 운동",
+      "디지털 기술로 정치 참여를 넓히는 동시에 새로운 위험도 안고 있는 민주주의 형태",
+      "알고리즘 편향과 정보 격차 문제를 이미 해결한 가장 진화된 정치 참여 방식"
     ],
     "answer": 2,
-    "explanation": "디지털 민주주의는 디지털 기술을 통해 정치 참여를 확장하는 긍정적 측면과, 정보 격차·알고리즘 편향 등 새로운 위험을 함께 지닌 개념입니다.",
+    "explanation": "디지털 민주주의는 디지털 기술을 통해 정치 참여를 확장하는 긍정적 측면과, 정보 격차·알고리즘 편향 등 새로운 위험을 함께 지닌 개념입니다. ①은 전자투표라는 일부 수단으로 의미를 좁혔고, ②는 '보완'을 '대체'로 왜곡했으며, ④는 글이 명시한 위협을 해결된 것으로 뒤집은 진술입니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -148,11 +148,11 @@
     "answer": 3,
     "explanation": "이 글은 고대→근대→20세기→현재라는 시간적 흐름에 따라 민주주의 개념의 역사적 발전을 순차적으로 서술합니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -178,7 +178,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -204,7 +204,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -230,7 +230,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -244,19 +244,19 @@
     "item_type": "multiple_choice",
     "question_text": "다음 글에서 두 학자의 주장을 비교한 내용으로 올바른 것은?\n\n\"슘페터는 민주주의를 '엘리트 지도자를 선출하는 경쟁적 절차'로 정의했다. 반면 달(Dahl)은 민주주의를 '폴리아키(polyarchy)', 즉 다수의 집단이 경쟁하고 견제하는 체제로 보았다. 슘페터가 지도자의 자질에 초점을 맞춘다면, 달은 권력 분산과 다원성을 강조한다.\"",
     "choices": [
-      "두 학자 모두 경제 성장이 민주주의의 전제 조건이라고 주장한다",
-      "달은 직접민주주의를 이상적 모델로 제시한다",
-      "두 학자 모두 디지털 기술이 민주주의를 강화한다고 본다",
+      "슘페터는 다원적 권력 분산에, 달은 지도자 개인의 자질에 초점을 둔다",
+      "달은 폴리아키를 집단 간 경쟁이 제거된 합의 중심 체제로 규정한다",
+      "두 학자 모두 시민의 직접 참여 확대를 민주주의의 필수 조건으로 본다",
       "슘페터는 엘리트 중심 절차에, 달은 다원적 권력 분산에 초점을 둔다"
     ],
     "answer": 3,
-    "explanation": "슘페터는 민주주의를 엘리트 지도자 선출 경쟁으로, 달은 다수 집단의 경쟁과 견제(폴리아키)로 보며 초점이 다릅니다.",
+    "explanation": "슘페터는 민주주의를 엘리트 지도자 선출 경쟁으로, 달은 다수 집단의 경쟁과 견제(폴리아키)로 보며 초점이 다릅니다. ①은 두 학자의 초점을 뒤바꾼 진술이고, ②는 폴리아키의 핵심인 경쟁과 견제를 부정하며, ③은 두 학자 모두 주장하지 않은 내용입니다.",
     "passage_id": null,
     "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -278,11 +278,11 @@
     "answer": 0,
     "explanation": "필자는 아테네 민주주의의 배제적 현실을 제시하면서도 '발상지'라는 표현을 쓴다. 이 행간에는 이상과 현실, 개념과 실천 사이의 간극이 항상 존재한다는 성찰이 담겨 있습니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -304,11 +304,11 @@
     "answer": 2,
     "explanation": "알고리즘의 선택적 정보 제공은 에코 챔버(같은 의견만 반향되는 공간)와 사회 극단화를 초래해 민주주의의 숙의 기반을 약화시킵니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -334,7 +334,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -358,9 +358,9 @@
     "passage_id": null,
     "passage_genre": null,
     "difficulty": null,
-    "difficulty_tier": "hard",
+    "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -386,7 +386,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -412,7 +412,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -426,19 +426,19 @@
     "item_type": "multiple_choice",
     "question_text": "다음 글을 읽고, 필자의 관점을 메타적으로 평가한 것으로 가장 적절한 것은?\n\n\"민주주의는 인류가 고안한 최선의 정치 체제이다. 역사가 증명하듯, 민주주의 국가들은 전쟁을 적게 일으키고, 경제적으로 더 번성하며, 시민의 자유를 가장 잘 보장한다.\"",
     "choices": [
-      "필자는 자신의 주장을 지지하는 증거만 선택적으로 제시하는 확증 편향을 보인다",
+      "필자는 자기 주장에 유리한 증거만 선택적으로 제시한다",
       "필자는 민주주의의 단점을 충분히 고려하고 있다",
       "필자는 민주주의와 권위주의를 공정하게 비교하고 있다",
       "필자의 주장은 완전히 틀린 사실에 근거한다"
     ],
     "answer": 0,
-    "explanation": "필자는 민주주의의 긍정적 측면만 나열하고, 반례나 민주주의의 한계는 검토하지 않습니다. 이는 확증 편향(confirmation bias)의 전형적인 패턴입니다.",
+    "explanation": "필자는 민주주의의 긍정적 측면만 나열하고, 반례나 민주주의의 한계는 검토하지 않습니다. 자기 주장에 유리한 증거만 골라 제시하는 일면적 논증 방식입니다.",
     "passage_id": null,
     "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -464,7 +464,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -490,7 +490,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -516,7 +516,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -538,11 +538,11 @@
     "answer": 1,
     "explanation": "이 글은 '다수의 지배 원리 제시 → 그 원리의 문제점(소수 억압 사례) → 해결 방향(헌법적 제한) → 결론(입헌 민주주의 정의)'의 구조로 전개됩니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "easy",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -568,7 +568,7 @@
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -580,7 +580,7 @@
     "achievement_standard": "[9국02-05]",
     "level_differentiation": "7단계는 복합 텍스트의 구조를 비교 분석하고, 필자의 논증 전략과 구조적 의도를 파악한다.",
     "item_type": "multiple_choice",
-    "question_text": "다음 글에서 빈칸 ( ㉢ )에 가장 알맞은 내용은?\n\n\"하버마스는 민주주의가 단순한 선거 절차를 넘어 ( ㉢ )을 필요로 한다고 보았다. 이를 위해 그는 시민들이 자유롭게 공적 이성을 나눌 수 있는 공론장의 중요성을 강조했다.\"",
+    "question_text": "다음 글에서 빈칸 ( ㉠ )에 가장 알맞은 내용은?\n\n\"하버마스는 민주주의가 단순한 선거 절차를 넘어 ( ㉠ )을 필요로 한다고 보았다. 이를 위해 그는 시민들이 자유롭게 공적 이성을 나눌 수 있는 공론장의 중요성을 강조했다.\"",
     "choices": [
       "이성적 토론을 통한 합의 과정",
       "경제적 성장과 시장 안정",
@@ -590,11 +590,11 @@
     "answer": 0,
     "explanation": "하버마스의 '심의 민주주의(deliberative democracy)' 이론에서 민주주의의 핵심은 시민들이 이성적 토론을 통해 합의에 이르는 과정입니다. 공론장은 그 과정이 이루어지는 공간입니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "medium",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -620,7 +620,7 @@
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   },
   {
@@ -642,11 +642,11 @@
     "answer": 2,
     "explanation": "필자는 자유의 극단(불평등 심화)과 평등의 극단(자유 제한)을 각각 제시한 뒤, 두 극단을 모두 피하는 '균형'의 필요성을 결론으로 도출합니다. 이는 대칭적 극단 제시를 통해 중도적 입장을 정당화하는 구조적 전략입니다.",
     "passage_id": null,
-    "passage_genre": "역사철학 텍스트",
+    "passage_genre": null,
     "difficulty": null,
     "difficulty_tier": "hard",
     "discrimination": null,
-    "review_status": "draft",
+    "review_status": "reviewed",
     "is_warmup": false
   }
 ]
