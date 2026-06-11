@@ -8,7 +8,7 @@
     "achievement_standard": "[4국02-01]",
     "level_differentiation": "1단계는 학습 수준 어휘의 뜻을 직접 파악하고, 2단계는 문맥 단서를 활용해 낯선 어휘의 뜻을 추론한다.",
     "item_type": "multiple_choice",
-    "question_text": "밑줄 친 낱말의 뜻으로 알맞은 것은?\n\n'강아지가 먹이를 향해 재빠르게 달려갔다.'",
+    "question_text": "밑줄 친 낱말의 뜻으로 알맞은 것은?\n\n'강아지가 먹이를 향해 _재빠르게_ 달려갔다.'",
     "choices": [
       "무겁고 느리게",
       "조심스럽고 살금살금",
@@ -34,7 +34,7 @@
     "achievement_standard": "[4국02-01]",
     "level_differentiation": "1단계는 학습 수준 어휘의 뜻을 직접 파악하고, 2단계는 문맥 단서를 활용해 낯선 어휘의 뜻을 추론한다.",
     "item_type": "multiple_choice",
-    "question_text": "밑줄 친 낱말의 뜻으로 알맞은 것은?\n\n'겨울 산길은 매우 험하고 거칠었다.'",
+    "question_text": "밑줄 친 낱말의 뜻으로 알맞은 것은?\n\n'겨울 산길은 매우 험하고 _거칠었다_.'",
     "choices": [
       "울퉁불퉁하고 부드럽지 않다",
       "조용하고 한적하다",
@@ -60,7 +60,7 @@
     "achievement_standard": "[4국02-01]",
     "level_differentiation": "1단계는 학습 수준 어휘의 뜻을 직접 파악하고, 2단계는 문맥 단서를 활용해 낯선 어휘의 뜻을 추론한다.",
     "item_type": "multiple_choice",
-    "question_text": "밑줄 친 낱말의 뜻으로 알맞은 것은?\n\n'할머니께서 주신 손수건을 오래도록 간직하고 있다.'",
+    "question_text": "밑줄 친 낱말의 뜻으로 알맞은 것은?\n\n'할머니께서 주신 손수건을 오래도록 _간직하고_ 있다.'",
     "choices": [
       "다른 사람에게 나누어주다",
       "소중하게 잘 보관하여 두다",
