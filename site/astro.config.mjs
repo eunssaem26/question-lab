@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://questionlab-blog.vercel.app',
+  site: 'https://question-lab.vercel.app',
   integrations: [mdx(), sitemap()],
   fonts: [
     {
