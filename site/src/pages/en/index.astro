@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import BaseHead from '../../components/BaseHead.astro';
+import CharacterFamily from '../../components/CharacterFamily.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import { APP_URL } from '../../consts';
@@ -70,6 +71,10 @@ const description =
         padding-bottom: 0.5em;
         border-bottom: 2px solid var(--accent);
         display: inline-block;
+      }
+      .family-intro {
+        color: rgb(var(--gray));
+        margin: 0 0 1.2em;
       }
       .steps {
         list-style: none;
@@ -187,6 +192,15 @@ const description =
             </p>
           </div>
         </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Meet the Field Friends</h2>
+        <p class="family-intro">
+          You won't study alone. Six characters guide every step — and they
+          each have their own story on YouTube.
+        </p>
+        <CharacterFamily lang="en" />
       </div>
 
       <div class="section">

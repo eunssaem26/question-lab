@@ -1,8 +1,46 @@
 ---
+import { Image } from 'astro:assets';
+import { CHARACTER_VIDEOS, YOUTUBE_URL } from '../consts';
+import byeolsaem from '../assets/characters/byeolsaem_profile_slack.png';
+import chaeksaem from '../assets/characters/chaeksaem_profile_slack.png';
+import geulsaem from '../assets/characters/geulsaem_profile_slack.png';
+import hogi from '../assets/characters/hogi_profile_slack.png';
+import kkansaem from '../assets/characters/kkansaem_profile_slack.png';
+import philo from '../assets/characters/philo_profile_slack.png';
+
 const today = new Date();
+
+const minis = [
+  { name: '별쌤', img: byeolsaem, link: CHARACTER_VIDEOS['별쌤'] },
+  { name: '책쌤', img: chaeksaem, link: CHARACTER_VIDEOS['책쌤'] },
+  { name: '글쌤', img: geulsaem, link: CHARACTER_VIDEOS['글쌤'] },
+  { name: '호기', img: hogi, link: CHARACTER_VIDEOS['호기'] },
+  { name: '깐쌤', img: kkansaem, link: CHARACTER_VIDEOS['깐쌤'] },
+  { name: '필로', img: philo, link: YOUTUBE_URL },
+];
 ---
 
 <footer>
+  <div class="mini-family">
+    {
+      minis.map((m) => (
+        <a
+          href={m.link}
+          target="_blank"
+          rel="noopener"
+          title={`${m.name} 소개 영상`}
+          aria-label={`${m.name} 소개 영상`}
+        >
+          <Image src={m.img} alt={m.name} width={80} class="mini-img" />
+        </a>
+      ))
+    }
+  </div>
+  <p class="yt-line">
+    <a href={YOUTUBE_URL} target="_blank" rel="noopener" class="yt-link">
+      ▶ YouTube 생각하는 글밭
+    </a>
+  </p>
   <p>&copy; {today.getFullYear()} 생각하는 글밭. All rights reserved.</p>
   <p class="sub">
     읽고 쓰며 생각을 기르는 곳 — Where Thoughts Grow
@@ -22,5 +60,33 @@ const today = new Date();
   .sub {
     font-size: 0.85em;
     opacity: 0.7;
+  }
+  .mini-family {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin-bottom: 0.8em;
+  }
+  .mini-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.15s ease;
+    display: block;
+  }
+  .mini-family a:hover .mini-img {
+    transform: translateY(-3px) scale(1.15);
+  }
+  .yt-line {
+    margin-bottom: 0.8em;
+  }
+  .yt-link {
+    color: #c00;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .yt-link:hover {
+    text-decoration: underline;
   }
 </style>

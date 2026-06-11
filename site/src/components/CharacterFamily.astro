@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import { CHARACTER_VIDEOS, YOUTUBE_URL } from '../consts';
+import byeolsaem from '../assets/characters/byeolsaem_profile_slack.png';
+import chaeksaem from '../assets/characters/chaeksaem_profile_slack.png';
+import geulsaem from '../assets/characters/geulsaem_profile_slack.png';
+import hogi from '../assets/characters/hogi_profile_slack.png';
+import kkansaem from '../assets/characters/kkansaem_profile_slack.png';
+import philo from '../assets/characters/philo_profile_slack.png';
+
+interface Props {
+  lang?: 'ko' | 'en';
+}
+
+const { lang = 'ko' } = Astro.props;
+
+const family = [
+  {
+    name: '별쌤',
+    en: 'Byeolsaem',
+    tag: lang === 'ko' ? '진단을 설계하는 여우' : 'The fox who designs assessments',
+    img: byeolsaem,
+    link: CHARACTER_VIDEOS['별쌤'],
+  },
+  {
+    name: '책쌤',
+    en: 'Chaeksaem',
+    tag: lang === 'ko' ? '글을 고르는 부엉이' : 'The owl who curates readings',
+    img: chaeksaem,
+    link: CHARACTER_VIDEOS['책쌤'],
+  },
+  {
+    name: '글쌤',
+    en: 'Geulsaem',
+    tag: lang === 'ko' ? '글쓰기를 돕는 고양이' : 'The cat who coaches writing',
+    img: geulsaem,
+    link: CHARACTER_VIDEOS['글쌤'],
+  },
+  {
+    name: '호기',
+    en: 'Hogi',
+    tag: lang === 'ko' ? '함께 배우는 강아지 친구' : 'The puppy who learns with you',
+    img: hogi,
+    link: CHARACTER_VIDEOS['호기'],
+  },
+  {
+    name: '깐쌤',
+    en: 'Kkansaem',
+    tag: lang === 'ko' ? '깐깐하게 검수하는 까마귀' : 'The crow who checks everything',
+    img: kkansaem,
+    link: CHARACTER_VIDEOS['깐쌤'],
+  },
+  {
+    name: '필로',
+    en: 'Philo',
+    tag: lang === 'ko' ? '이야기를 전하는 토끼' : 'The rabbit who tells our story',
+    img: philo,
+    link: YOUTUBE_URL,
+  },
+];
+
+const ctaText =
+  lang === 'ko' ? '유튜브에서 글밭 식구들 만나기' : 'Meet us on YouTube';
+const watchText = lang === 'ko' ? '소개 영상 보기' : 'Watch intro';
+---
+
+<div class="family-grid">
+  {
+    family.map((c) => (
+      <a
+        class="family-card"
+        href={c.link}
+        target="_blank"
+        rel="noopener"
+        aria-label={`${lang === 'ko' ? c.name : c.en} — ${watchText}`}
+      >
+        <Image src={c.img} alt={c.name} width={160} class="family-img" />
+        <p class="family-name">{lang === 'ko' ? c.name : c.en}</p>
+        <p class="family-tag">{c.tag}</p>
+        <span class="family-watch">▶ {watchText}</span>
+      </a>
+    ))
+  }
+</div>
+<p class="family-cta-row">
+  <a class="family-cta" href={YOUTUBE_URL} target="_blank" rel="noopener">
+    ▶ {ctaText}
+  </a>
+</p>
+
+<style>
+  .family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1em;
+  }
+  .family-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.2em 0.8em 1em;
+    border: 2px solid rgb(var(--gray-light));
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .family-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 6px 16px rgba(var(--gray), 25%);
+  }
+  .family-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .family-name {
+    margin: 0.6em 0 0.1em;
+    font-weight: 700;
+    color: rgb(var(--black));
+  }
+  .family-tag {
+    margin: 0;
+    font-size: 0.8em;
+    color: rgb(var(--gray));
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .family-watch {
+    margin-top: 0.6em;
+    font-size: 0.75em;
+    font-weight: 600;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .family-card:hover .family-watch {
+    opacity: 1;
+  }
+  .family-cta-row {
+    text-align: center;
+    margin-top: 1.5em;
+  }
+  .family-cta {
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    border-radius: 10px;
+    background: #ff0000;
+    color: white;
+    font-weight: 700;
+    font-size: 0.95em;
+    text-decoration: none;
+  }
+  .family-cta:hover {
+    opacity: 0.85;
+  }
+  @media (max-width: 600px) {
+    .family-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
