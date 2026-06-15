@@ -7,7 +7,10 @@
     "char_count": 215,
     "source": "AI생성",
     "topic": "바람이 부는 까닭",
-    "intended_domains": ["VOC", "INF"],
+    "intended_domains": [
+      "VOC",
+      "INF"
+    ],
     "background_knowledge_risk": "low",
     "review_status": "draft"
   },
@@ -19,7 +22,12 @@
     "char_count": 252,
     "source": "AI생성",
     "topic": "우리 몸의 뼈",
-    "intended_domains": ["VOC", "LIT", "INF", "STR"],
+    "intended_domains": [
+      "VOC",
+      "LIT",
+      "INF",
+      "STR"
+    ],
     "background_knowledge_risk": "low",
     "review_status": "draft"
   },
@@ -31,7 +39,10 @@
     "char_count": 260,
     "source": "AI생성",
     "topic": "할머니께 드리는 편지",
-    "intended_domains": ["LIT", "INF"],
+    "intended_domains": [
+      "LIT",
+      "INF"
+    ],
     "background_knowledge_risk": "low",
     "review_status": "draft"
   },
@@ -43,7 +54,10 @@
     "char_count": 234,
     "source": "AI생성",
     "topic": "식물의 겨울나기",
-    "intended_domains": ["LIT", "INF"],
+    "intended_domains": [
+      "LIT",
+      "INF"
+    ],
     "background_knowledge_risk": "low",
     "review_status": "draft"
   },
@@ -55,7 +69,9 @@
     "char_count": 278,
     "source": "AI생성",
     "topic": "학교 텃밭과 정보의 신뢰성",
-    "intended_domains": ["CRT"],
+    "intended_domains": [
+      "CRT"
+    ],
     "background_knowledge_risk": "low",
     "review_status": "draft"
   },
@@ -67,7 +83,58 @@
     "char_count": 232,
     "source": "AI생성",
     "topic": "낮과 밤이 생기는 까닭",
-    "intended_domains": ["INF", "STR"],
+    "intended_domains": [
+      "INF",
+      "STR"
+    ],
+    "background_knowledge_risk": "low",
+    "review_status": "draft"
+  },
+  {
+    "passage_id": "P-2-007",
+    "level": 2,
+    "text": "개구리는 자라면서 모습이 크게 바뀝니다. 이를 개구리의 한살이라고 합니다.\n\n봄이 되면 개구리는 물속에 알을 낳습니다. 알에서 깨어난 올챙이는 긴 꼬리를 좌우로 흔들며 헤엄칩니다. 시간이 지나면 먼저 뒷다리가 나오고, 이어 앞다리가 생깁니다. 그러는 동안 꼬리는 점점 짧아지다가 사라집니다. 마침내 두 다리를 번갈아 움직이며 헤엄치는 어른 개구리가 됩니다.\n\n이렇게 개구리는 알에서 시작해 모습을 바꾸며 어른 개구리로 자랍니다.",
+    "genre": "설명문",
+    "char_count": 233,
+    "source": "AI생성",
+    "topic": "개구리의 한살이",
+    "intended_domains": [
+      "VOC",
+      "LIT",
+      "INF",
+      "STR"
+    ],
+    "background_knowledge_risk": "low",
+    "review_status": "draft"
+  },
+  {
+    "passage_id": "P-2-008",
+    "level": 2,
+    "text": "운동회 날, 마지막 경기인 이어달리기가 시작되었습니다. 준서는 우리 반 마지막 주자였습니다. 바통을 받아 든 준서는 앞서가는 다른 반 친구를 빠르게 따라잡았습니다.\n\n그때 옆 반 주자가 발을 헛디뎌 넘어졌습니다. 준서는 1등을 눈앞에 두고 있었지만, 잠시 멈춰 넘어진 친구에게 손을 내밀었습니다. 둘은 손을 잡고 함께 결승선을 통과했습니다.\n\n등수는 1등이 아니었지만, 준서는 혼자 빨리 가는 것보다 친구와 함께 가는 것이 더 값지다는 것을 느꼈습니다.",
+    "genre": "서사문",
+    "char_count": 244,
+    "source": "AI생성",
+    "topic": "이어달리기와 우정",
+    "intended_domains": [
+      "LIT",
+      "INF"
+    ],
+    "background_knowledge_risk": "low",
+    "review_status": "draft"
+  },
+  {
+    "passage_id": "P-2-009",
+    "level": 2,
+    "text": "우리는 플라스틱 쓰레기를 줄여야 합니다. 한 환경 단체가 우리 지역 약수터 30곳의 물을 직접 떠서 검사했더니, 그중 여러 곳에서 작은 플라스틱 조각이 나왔다고 합니다. 누가 어떻게 조사했는지 분명한 자료라 믿을 만합니다.\n\n반면 인터넷에는 \"전국 약수터의 물이 모두 깨끗하다\"는 댓글도 있었습니다. 하지만 이 댓글은 누가 어떻게 조사했는지 밝히지 않은 한 사람의 주장일 뿐이었습니다.\n\n그러므로 우리 모두 플라스틱을 줄이는 일에 나서야 합니다. 그리고 정보를 받아들일 때는 그 출처가 믿을 만한지 꼭 따져 보아야 합니다.",
+    "genre": "논설문",
+    "char_count": 286,
+    "source": "AI생성",
+    "topic": "플라스틱 쓰레기와 정보의 신뢰성",
+    "intended_domains": [
+      "INF",
+      "CRT",
+      "STR"
+    ],
     "background_knowledge_risk": "low",
     "review_status": "draft"
   }
