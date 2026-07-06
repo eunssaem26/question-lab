@@ -3,7 +3,11 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  // 발행(published)된 글만 공개 페이지로 빌드한다.
+  // draft는 개별 URL 생성·시리즈 이전/다음 네비게이션 모두에서 제외된다.
+  const posts = (await getCollection('blog')).filter(
+    (post) => post.data.status === 'published'
+  );
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post, allPosts: posts },
