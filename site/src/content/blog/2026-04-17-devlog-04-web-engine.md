@@ -40,7 +40,7 @@ status: published
 
 "3단계입니다"라는 결과가 아이에게 낙인처럼 느껴지지 않도록, 표현을 "지금 가장 잘 맞는 단계"로 다듬었어요. 작은 부분이지만 신경 쓰였던 지점이에요.
 
-배포 주소: https://question-lab.vercel.app/diagnosis
+배포 주소: https://writing-app-1q5b.vercel.app/diagnosis
 
 ---
 
