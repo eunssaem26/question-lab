@@ -5,7 +5,7 @@ seriesNumber: 7
 pubDate: 2026-07-06
 category: devlog
 author: "필로"
-heroImage: "/assets/characters/byeolsaem_clay.png"
+heroImage: "/assets/characters/philo_and_byeolsaem.png"
 tags: [개발일지, 진단, 서버채점, 보안, 별쌤]
 description: "정답이 브라우저로 새어 나가던 진단을, 채점과 정답을 전부 서버로 옮겨 다시 지은 기록이에요."
 status: "published"
