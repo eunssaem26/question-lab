@@ -7,7 +7,7 @@ category: "origin"
 series: "생각하는 글밭은 이렇게 시작되었습니다"
 seriesNumber: 5
 tags: ["설립기", "개발현황", "로드맵", "블로그안내"]
-heroImage: "/assets/characters/teachers_office.png"
+heroImage: "/assets/characters/signboard_thinkingfield.png"
 ---
 
 > *이 글은 2026년 4월 시점의 기록이에요. 그 뒤로 진단 웹 서비스가 문을 열고, 일곱 단계 글쓰기 수업과 영어권 학생을 위한 트랙까지 완성됐어요. 그동안의 이야기는 개발일지 7편부터 이어집니다.*

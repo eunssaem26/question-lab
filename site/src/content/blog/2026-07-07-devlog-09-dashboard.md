@@ -5,7 +5,7 @@ seriesNumber: 9
 pubDate: 2026-07-07
 category: devlog
 author: "필로"
-heroImage: "/assets/characters/teachers_office.png"
+heroImage: "/assets/characters/eunsaem_clay.png"
 tags: [개발일지, 대시보드, 리포트, 별쌤, 학부모]
 description: "기록을 시간순으로 늘어놓기만 하던 대시보드를, 영역별 강약점과 성장이 보이는 리포트로 다시 만든 이야기예요."
 status: "published"
