@@ -5,7 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import CharacterFamily from '../components/CharacterFamily.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { APP_URL, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import signboard from '../assets/characters/signboard_thinkingfield.png';
 
 const posts = (await getCollection('blog')).filter(
@@ -19,6 +19,9 @@ const originSeries = posts
 const devlogSeries = posts
   .filter((p) => p.data.series === '생각하는 글밭 개발일지')
   .sort((a, b) => (a.data.seriesNumber ?? 0) - (b.data.seriesNumber ?? 0));
+
+// 가장 최근 개발일지 = 지금의 모습 (오리엔테이션 CTA에서 사용)
+const latestDevlog = devlogSeries[devlogSeries.length - 1];
 
 const cardnewsSeries = posts
   .filter((p) => p.data.series === '생각하는 글밭 카드뉴스')
@@ -127,6 +130,65 @@ const cardnewsSeries = posts
         color: var(--accent);
         font-weight: 500;
       }
+      /* 오리엔테이션(처음 온 사람용) */
+      .intro {
+        max-width: 620px;
+        margin: 0.5em auto 0;
+      }
+      .intro-lead {
+        text-align: center;
+        font-size: 1.05em;
+        line-height: 1.8;
+        color: rgb(var(--gray-dark));
+        margin: 0;
+      }
+      .status-card {
+        margin-top: 1.6em;
+        border: 1px solid var(--accent);
+        background: var(--accent-light);
+        border-radius: 14px;
+        padding: 1.1em 1.4em;
+      }
+      .status-eyebrow {
+        font-size: 0.8em;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+        margin: 0 0 0.5em;
+      }
+      .status-list {
+        margin: 0;
+        padding-left: 1.2em;
+        line-height: 1.75;
+        color: rgb(var(--gray-dark));
+      }
+      .status-list li { margin-bottom: 0.25em; }
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6em;
+        justify-content: center;
+        margin-top: 1.5em;
+      }
+      .cta {
+        display: inline-block;
+        padding: 0.65em 1.25em;
+        border-radius: 10px;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.95em;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+      .cta.primary { background: var(--accent); color: #fff; }
+      .cta:hover { opacity: 0.82; }
+      .section-desc {
+        color: rgb(var(--gray));
+        font-size: 0.92em;
+        margin: -0.3em 0 1.1em;
+        line-height: 1.6;
+      }
     </style>
   </head>
   <body>
@@ -138,6 +200,29 @@ const cardnewsSeries = posts
         <p>읽고 쓰며 생각을 기르는 곳<br />Where Thoughts Grow</p>
       </div>
 
+      <section class="intro">
+        <p class="intro-lead">
+          생각하는 글밭은 초등 3학년부터 중학 3학년까지, <strong>글쓰기로 생각하는 힘</strong>을
+          기르는 온라인 학습 서비스예요. 자기 수준을 진단받고, 그 자리에서 시작하는
+          7단계 글쓰기 수업을 AI 코치의 첨삭과 함께 따라갑니다.
+        </p>
+
+        <div class="status-card">
+          <p class="status-eyebrow">지금, 생각하는 글밭은</p>
+          <ul class="status-list">
+            <li>읽기·쓰기 진단부터 7단계 글쓰기 수업, AI 첨삭까지 <strong>실제로 작동해요.</strong></li>
+            <li>한국어가 처음인 영어권 학생을 위한 <strong>한글 초급 트랙</strong>도 열렸어요.</li>
+            <li>다음 주, 마닐라 한국 아카데미 여름캠프에서 <strong>첫 교실 수업</strong>을 해요.</li>
+          </ul>
+        </div>
+
+        <div class="cta-row">
+          <a class="cta primary" href={APP_URL} target="_blank" rel="noopener">진단·수업 시작하기</a>
+          <a class="cta" href="/about">생각하는 글밭이란?</a>
+          {latestDevlog && <a class="cta" href={`/blog/${latestDevlog.id}/`}>지금의 모습 보기</a>}
+        </div>
+      </section>
+
       <div class="section">
         <h2 class="section-title">글밭 식구들</h2>
         <CharacterFamily />
@@ -146,6 +231,7 @@ const cardnewsSeries = posts
       {originSeries.length > 0 && (
         <section class="section">
           <h2 class="section-title">생각하는 글밭은 이렇게 시작되었습니다</h2>
+          <p class="section-desc">왜 이 일을 시작했는지, 어떤 마음으로 만드는지 담은 이야기예요.</p>
           <ol class="series-list">
             {originSeries.map((post) => (
               <li class="series-item">
@@ -162,6 +248,7 @@ const cardnewsSeries = posts
       {devlogSeries.length > 0 && (
         <section class="section">
           <h2 class="section-title">생각하는 글밭 개발일지</h2>
+          <p class="section-desc">만들어온 과정을 순서대로 기록했어요. 가장 최근 글이 지금의 모습이에요.</p>
           <ol class="series-list">
             {devlogSeries.map((post) => (
               <li class="series-item">
@@ -178,6 +265,7 @@ const cardnewsSeries = posts
       {cardnewsSeries.length > 0 && (
         <section class="section">
           <h2 class="section-title">생각하는 글밭 카드뉴스</h2>
+          <p class="section-desc">짧게 읽는 카드 모음이에요.</p>
           <ol class="series-list">
             {cardnewsSeries.map((post) => (
               <li class="series-item">
