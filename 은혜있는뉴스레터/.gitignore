@@ -1,0 +1,10 @@
+# 원본 소재 — 용량이 커서 git 제외 (별도 보관)
+26여름사진/
+참고자료폴더/
+
+# 자동생성 · 캐시 · 시스템 파일
+.vercel/
+.cache/
+node_modules/
+.DS_Store
+**/.DS_Store
