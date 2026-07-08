@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 04. 문해력 게임관 오픈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+  .card-number {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #A67B5B;
+    opacity: 0.5;
+    letter-spacing: 2px;
+    z-index: 5;
+  }
+
+  /* ───── Card 1: Hook ───── */
+  .card-1 {
+    background: #F5E6D0;
+    color: #5C3D2E;
+    text-align: center;
+    padding: 100px;
+  }
+  .card-1 .brand-circle {
+    width: 240px;
+    position: absolute;
+    top: 70px;
+    filter: drop-shadow(0 4px 12px rgba(92,61,46,0.15));
+  }
+  .card-1 h1 {
+    font-size: 92px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-top: 80px;
+    word-break: keep-all;
+  }
+  .card-1 h1 em { font-style: normal; color: #C4956A; }
+  .card-1 .subtitle {
+    font-size: 38px;
+    color: #A67B5B;
+    margin-top: 44px;
+    font-weight: 700;
+  }
+  .card-1 .open-badge {
+    display: inline-block;
+    margin-top: 30px;
+    background: #6B7F4A;
+    color: #FBF3EA;
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    padding: 16px 40px;
+    border-radius: 999px;
+  }
+  .card-1 .swipe {
+    position: absolute;
+    bottom: 60px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #A67B5B;
+    opacity: 0.5;
+    letter-spacing: 3px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.7} }
+  .leaf-deco { position: absolute; font-size: 60px; opacity: 0.2; }
+  .leaf-deco.tl { top: 40px; left: 40px; transform: rotate(-30deg); }
+  .leaf-deco.br { bottom: 40px; right: 40px; transform: rotate(150deg); }
+
+  /* ───── Card 2: 문제 제기 ───── */
+  .card-2 { background: #F5E6D0; padding: 100px; justify-content: flex-start; padding-top: 150px; }
+  .card-2 .bubble-q {
+    background: #EDD8C3;
+    border: 3px solid #D4BFA8;
+    border-radius: 30px 30px 30px 6px;
+    padding: 48px 56px;
+    font-size: 58px;
+    font-weight: 900;
+    color: #5C3D2E;
+    margin-bottom: 60px;
+    align-self: flex-start;
+    max-width: 92%;
+    line-height: 1.45;
+  }
+  .card-2 .bubble-q::before { content: '🙋'; display: block; font-size: 60px; margin-bottom: 16px; }
+  .card-2 .body-text {
+    font-size: 52px;
+    line-height: 1.65;
+    color: #6B5344;
+    word-break: keep-all;
+    font-weight: 500;
+  }
+  .card-2 .body-text .highlight { color: #5C3D2E; font-weight: 900; }
+  .card-2 .question-mark {
+    position: absolute; bottom: 90px; right: 100px;
+    font-size: 260px; font-weight: 900; color: #EDD8C3;
+  }
+
+  /* ───── Card 3: 일곱 친구 코너 ───── */
+  .card-3 { background: #FBF3EA; padding: 90px 80px; }
+  .card-3 h2 {
+    font-size: 66px; font-weight: 900; color: #5C3D2E;
+    margin-bottom: 56px; text-align: center; line-height: 1.35; word-break: keep-all;
+  }
+  .char-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; width: 100%; }
+  .char-cell {
+    background: #F5E6D0; border-radius: 28px; padding: 40px 32px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    box-shadow: 0 4px 20px rgba(92,61,46,0.06);
+  }
+  .char-cell img {
+    width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
+    border: 6px solid #fff; box-shadow: 0 4px 16px rgba(92,61,46,0.15); margin-bottom: 22px;
+  }
+  .char-cell .name { font-size: 44px; font-weight: 900; color: #5C3D2E; margin-bottom: 8px; }
+  .char-cell .role { font-size: 34px; font-weight: 700; color: #A67B5B; line-height: 1.35; word-break: keep-all; }
+
+  /* ───── Card 4: 진단 + 인증 ───── */
+  .card-4 { background: #5C3D2E; color: #F5E6D0; padding: 100px 90px; }
+  .card-4 .card-number { color: rgba(245,230,208,0.35); }
+  .card-4 h2 {
+    font-size: 66px; font-weight: 900; text-align: center;
+    margin-bottom: 56px; line-height: 1.35; word-break: keep-all;
+  }
+  .card-4 h2 em { font-style: normal; color: #D4A574; }
+  .boss-row { display: flex; flex-direction: column; gap: 32px; width: 100%; }
+  .boss-item {
+    background: rgba(245,230,208,0.08); border: 2px solid rgba(245,230,208,0.2);
+    border-radius: 24px; padding: 36px 40px; display: flex; align-items: center; gap: 30px;
+  }
+  .boss-item img {
+    width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+    border: 5px solid rgba(245,230,208,0.5); flex-shrink: 0;
+  }
+  .boss-item .txt { flex: 1; }
+  .boss-item .who { font-size: 44px; font-weight: 900; color: #D4A574; margin-bottom: 10px; }
+  .boss-item .desc { font-size: 40px; line-height: 1.45; opacity: 0.9; font-weight: 500; word-break: keep-all; }
+  .card-4 .seal-line {
+    text-align: center; font-size: 46px; font-weight: 900; margin-top: 44px;
+    word-break: keep-all; line-height: 1.5;
+  }
+  .card-4 .seal-line .medal { font-size: 60px; }
+
+  /* ───── Card 5: 특징 ───── */
+  .card-5 { background: #F5E6D0; padding: 100px; }
+  .card-5 h2 { font-size: 68px; font-weight: 900; color: #5C3D2E; margin-bottom: 56px; text-align: center; }
+  .feat-list { display: flex; flex-direction: column; gap: 34px; width: 100%; }
+  .feat-item {
+    background: #FBF3EA; border-left: 8px solid #6B7F4A; border-radius: 0 16px 16px 0;
+    padding: 36px 44px; display: flex; align-items: center; gap: 28px;
+  }
+  .feat-icon { font-size: 60px; flex-shrink: 0; }
+  .feat-num { font-size: 66px; font-weight: 900; color: #6B7F4A; display: block; margin-bottom: 4px; }
+  .feat-desc { font-size: 42px; color: #6B5344; line-height: 1.4; font-weight: 500; word-break: keep-all; }
+
+  /* ───── Card 6: 이런 분께 ───── */
+  .card-6 { background: #D5E2C8; padding: 100px; }
+  .card-6 h2 { font-size: 68px; font-weight: 900; color: #4A6B32; margin-bottom: 56px; text-align: center; word-break: keep-all; }
+  .who-list { display: flex; flex-direction: column; gap: 30px; width: 100%; max-width: 820px; }
+  .who-item {
+    background: #FBF3EA; border: 3px solid #C6D8B4; border-radius: 24px;
+    padding: 40px 48px; display: flex; align-items: center; gap: 28px; text-align: left;
+  }
+  .who-icon { font-size: 60px; flex-shrink: 0; }
+  .who-text { font-size: 46px; font-weight: 900; color: #4A6B32; line-height: 1.4; word-break: keep-all; }
+  .who-text span { display: block; font-size: 36px; font-weight: 500; color: #6B7F4A; margin-top: 6px; }
+
+  /* ───── Card 7: CTA ───── */
+  .card-7 { background: linear-gradient(160deg, #F5E6D0 0%, #EDD8C3 100%); padding: 100px; text-align: center; }
+  .card-7 h2 { font-size: 74px; font-weight: 900; color: #5C3D2E; margin-bottom: 20px; }
+  .card-7 .sub { font-size: 40px; font-weight: 700; color: #A67B5B; margin-bottom: 50px; word-break: keep-all; }
+  .card-7 .url-box {
+    background: #5C3D2E; color: #F5E6D0; border-radius: 24px;
+    padding: 44px 48px; font-size: 46px; font-weight: 900; letter-spacing: 0;
+    white-space: nowrap;
+    box-shadow: 0 8px 28px rgba(92,61,46,0.25); width: 100%; max-width: 900px;
+  }
+  .card-7 .url-box .play { color: #D4A574; }
+  .card-7 .hint { font-size: 36px; font-weight: 700; color: #6B5344; margin-top: 34px; word-break: keep-all; }
+  .card-7 .brand-sign {
+    width: 400px; margin-top: 46px;
+    filter: drop-shadow(0 4px 16px rgba(92,61,46,0.12)); border-radius: 16px; object-fit: contain;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ Card 1: Hook ════════ -->
+<section class="card card-1">
+  <span class="card-number">01 / 07</span>
+  <span class="leaf-deco tl">🌿</span>
+  <span class="leaf-deco br">🌿</span>
+  <img src="assets/brand-circle.png" alt="생각하는 글밭" class="brand-circle">
+  <h1>'깨끗이'가 맞을까<br><em>'깨끗히'가 맞을까?</em></h1>
+  <div class="subtitle">어른도 헷갈리는 우리말,<br>놀면서 정복해요</div>
+  <div class="open-badge">문해력 게임관 OPEN</div>
+  <div class="swipe">SWIPE →</div>
+</section>
+
+<!-- ════════ Card 2: 문제 제기 ════════ -->
+<section class="card card-2">
+  <span class="card-number">02 / 07</span>
+  <div class="bubble-q">
+    맞춤법 공부,<br>왜 이렇게 재미없죠?
+  </div>
+  <div class="body-text">
+    문제집을 펴면<br>
+    표정부터 굳어요.<br>
+    맞으면 동그라미, 틀리면 빗금.<br><br>
+    그래서 우리는<br>
+    <span class="highlight">공부 대신 게임으로<br>
+    만들어 봤어요.</span>
+  </div>
+  <div class="question-mark">?</div>
+</section>
+
+<!-- ════════ Card 3: 일곱 친구 코너 ════════ -->
+<section class="card card-3">
+  <span class="card-number">03 / 07</span>
+  <h2>친구들이 각자<br>게임을 하나씩 맡았어요</h2>
+  <div class="char-grid">
+    <div class="char-cell">
+      <img src="../assets/characters/geulsaem_clay.png" alt="글쌤">
+      <div class="name">글쌤</div>
+      <div class="role">맞춤법 대결<br>되/돼, 왠지/웬지</div>
+    </div>
+    <div class="char-cell">
+      <img src="../assets/characters/hogi_clay.png" alt="호기">
+      <div class="name">호기</div>
+      <div class="role">헷갈리는 단어<br>결제/결재 스피드전</div>
+    </div>
+    <div class="char-cell">
+      <img src="../assets/characters/chaeksaem_clay.png" alt="책쌤">
+      <div class="name">책쌤</div>
+      <div class="role">속담·사자성어<br>예쁜 순우리말</div>
+    </div>
+    <div class="char-cell">
+      <img src="../assets/characters/kkansaem_clay.png" alt="깐쌤">
+      <div class="name">깐쌤</div>
+      <div class="role">빨간펜<br>숨은 틀린 낱말 찾기</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ Card 4: 진단 + 인증 ════════ -->
+<section class="card card-4">
+  <span class="card-number">04 / 07</span>
+  <h2>끝까지 가면<br><em>인증서</em>가 기다려요</h2>
+  <div class="boss-row">
+    <div class="boss-item">
+      <img src="../assets/characters/byeolsaem_clay.png" alt="별쌤">
+      <div class="txt">
+        <div class="who">별쌤의 문해력 진단 ⭐</div>
+        <div class="desc">네 게임 결과를 모아<br>지금 실력을 별점으로 재 줘요</div>
+      </div>
+    </div>
+    <div class="boss-item">
+      <img src="../assets/characters/eunsaem_clay.png" alt="은쌤">
+      <div class="txt">
+        <div class="who">은쌤의 최종 보스전 🏆</div>
+        <div class="desc">심화 문제를 통과하면<br>'우리말 지킴이 인증'을 받아요</div>
+      </div>
+    </div>
+  </div>
+  <div class="seal-line"><span class="medal">🏅</span> 다 깨고 인증서까지 받아 보세요</div>
+</section>
+
+<!-- ════════ Card 5: 특징 ════════ -->
+<section class="card card-5">
+  <span class="card-number">05 / 07</span>
+  <h2>이렇게 만들었어요</h2>
+  <div class="feat-list">
+    <div class="feat-item">
+      <span class="feat-icon">🗂️</span>
+      <div>
+        <span class="feat-num">120문제</span>
+        <span class="feat-desc">넉넉히 담고 매번 섞어서<br>할 때마다 새 문제가 나와요</span>
+      </div>
+    </div>
+    <div class="feat-item">
+      <span class="feat-icon">💡</span>
+      <div>
+        <span class="feat-num">틀리면 이유 설명</span>
+        <span class="feat-desc">왜 그런지 그 자리에서<br>짚어 주니 규칙이 남아요</span>
+      </div>
+    </div>
+    <div class="feat-item">
+      <span class="feat-icon">🎈</span>
+      <div>
+        <span class="feat-num">무료 · 바로 시작</span>
+        <span class="feat-desc">로그인도 설치도 없이<br>클릭 한 번이면 돼요</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ Card 6: 이런 분께 ════════ -->
+<section class="card card-6">
+  <span class="card-number">06 / 07</span>
+  <h2>이런 분께 딱이에요</h2>
+  <div class="who-list">
+    <div class="who-item">
+      <span class="who-icon">🧒</span>
+      <div class="who-text">혼자 틈틈이<span>쉬는 시간, 이동 중에 가볍게</span></div>
+    </div>
+    <div class="who-item">
+      <span class="who-icon">👨‍👩‍👧</span>
+      <div class="who-text">자녀와 나란히<span>"이건 뭐게?" 하며 겨뤄 보기</span></div>
+    </div>
+    <div class="who-item">
+      <span class="who-icon">🏫</span>
+      <div class="who-text">교실 활동으로<span>수업 도입·마무리에 함께</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ Card 7: CTA ════════ -->
+<section class="card card-7">
+  <span class="card-number">07 / 07</span>
+  <h2>지금 바로, 무료로</h2>
+  <div class="sub">헷갈리는 우리말 놀면서 정복하기</div>
+  <div class="url-box"><span class="play">▶</span> wherethoughtsgrow.com/game</div>
+  <div class="hint">사이트 상단 메뉴 '게임'을 눌러도 돼요</div>
+  <img src="assets/brand-sign.png" alt="생각하는 글밭" class="brand-sign">
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080;
+  var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>
