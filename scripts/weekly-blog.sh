@@ -21,7 +21,9 @@ PROMPT='너는 생각하는 글밭 프로젝트의 블로그 자동화 담당이
    - 글감이 아닌 것: 오타/링크/도메인/문서/리팩터링/설정 등 잔손질(chore, docs, fix 중 사소한 것).
    - 이미 그 변화에 대한 블로그 글이 site/src/content/blog/ 에 있으면 중복 작성하지 않는다.
 3. 글감이 있으면 philo-blog 스킬(/philo-blog)을 사용해 초안을 작성한다.
-   - 카테고리는 소재에 맞게(개발일지=devlog, 사용자 기능/게임=insight 등) 고른다.
+   - 새 기능·게임·서비스·큰 개편 같은 개발 성과 글은 반드시 개발일지 series로 붙인다:
+     category: devlog + series: "생각하는 글밭 개발일지" + seriesNumber는 기존 최댓값+1.
+     (series 없이 insight 등 단독 카테고리로 저장하면 홈에서 누락되고 목록 맨 아래로 떨어진다.)
    - 반드시 frontmatter를 status: "draft" 로 저장한다.
    - 파일은 site/src/content/blog/ 에 저장한다.
 4. 글감이 없으면 아무 파일도 만들지 말고 정확히 "이번 주 글감 없음"이라고만 출력하고 끝낸다.

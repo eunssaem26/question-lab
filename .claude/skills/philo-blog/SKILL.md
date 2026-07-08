@@ -62,8 +62,13 @@ description: |
 
 ### 개발일지
 1. `git log --since="7 days ago" --oneline`으로 최근 1주일 커밋 확인
-2. `site/src/content/blog/` 디렉토리에서 `devlog-NN` 최대 번호 확인 (다음 번호 부여)
+2. `site/src/content/blog/`에서 기존 글의 `seriesNumber:` 중 최댓값 확인 → 다음 번호 부여 (예: 최대 12면 13)
 3. 작업 산출물 디렉토리 변경사항 확인
+
+> ⚠️ **분류 규칙 (홈 노출 필수 조건)**: 새 기능·게임·서비스·큰 개편 같은 **개발 성과 글은 반드시 개발일지 series로 붙인다.**
+> `category: devlog` + `series: "생각하는 글밭 개발일지"` + `seriesNumber: <다음 번호>`를 모두 넣어야 한다.
+> 이 사이트는 `series` 필드가 없으면 홈 개발일지 섹션에서 누락되고 목록 맨 아래 "그 외 글"로 떨어진다.
+> `insight` 등 series 없는 단독 카테고리는 홈에 안 뜨므로, 개발 성과 글에는 쓰지 않는다.
 
 ### 설립기
 1. `memory/` 파일들에서 프로젝트 결정사항, 설계 배경 읽기
@@ -123,8 +128,8 @@ pubDate: YYYY-MM-DD
 heroImage: "/assets/characters/..."
 author: "필로"
 category: "devlog | origin | philosophy | character | insight | support"
-series: "시리즈명 (있으면)"
-seriesNumber: N
+series: "시리즈명 (개발 성과 글은 반드시 '생각하는 글밭 개발일지')"
+seriesNumber: N   # series가 있으면 필수. 개발일지는 기존 최댓값+1
 tags: ["관련", "태그"]
 status: "draft"
 ---
