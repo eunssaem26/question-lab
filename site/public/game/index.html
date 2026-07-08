@@ -412,6 +412,23 @@ const KEY="geulbat-game-v1";
 let S = load();
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ===== 익명 통계 (개인정보 없음. 실패해도 게임엔 영향 없음) ===== */
+const SB_URL="https://bbmrnjkqjxmlvzjsvzfp.supabase.co";
+const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJibXJuamtxanhtbHZ6anN2emZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwODY1ODksImV4cCI6MjA5NjY2MjU4OX0.uDuyOx7QyhLPiHBsTo-2YHaezCtK3lRls63ly8_Dmt8";
+function anonId(){try{let x=localStorage.getItem("geulbat-sid");if(!x){x=(self.crypto&&crypto.randomUUID)?crypto.randomUUID():("s"+Date.now()+Math.random().toString(36).slice(2));localStorage.setItem("geulbat-sid",x);}return x;}catch(e){return "anon";}}
+function qhash(s){let h=5381;s=String(s||"");for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36);}
+function track(row){try{
+  row.session_id=anonId();
+  if(row.question_text)row.question_text=String(row.question_text).slice(0,300);
+  fetch(SB_URL+"/rest/v1/game_events",{method:"POST",keepalive:true,
+    headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},
+    body:JSON.stringify(row)}).catch(function(){});
+}catch(e){}}
+function trackAnswer(corner,q,ok){
+  const text = q.q!=null ? q.q : (q.toks?q.toks.map(t=>t.t).join(""):"");
+  track({event_type:"answer",corner:corner,question_id:corner+":"+qhash(text),question_text:text,correct:!!ok});
+}
 function accent(ch){return getComputedStyle(document.documentElement).getPropertyValue(CH[ch].ac)}
 function av(ch){return '<img class="avimg" src="'+(IMG[ch]||"")+'" alt="'+CH[ch].n+'" draggable="false">';}
 function iav(ch){return '<img class="iav" src="'+(IMG[ch]||"")+'" alt="'+CH[ch].n+'">';}
@@ -557,7 +574,7 @@ window.pick=function(idx){
     if(bi===cur.ans){b.classList.add("correct");b.querySelector(".mk").textContent="○";}
     if(bi===idx&&!ok){b.classList.add("wrong");b.querySelector(".mk").textContent="✕";}
   });
-  score(ok); feedback(ok,q.rule);
+  score(ok); trackAnswer(cur.g.ch,q,ok); feedback(ok,q.rule);
 };
 
 window.pickTok=function(idx){
@@ -572,7 +589,7 @@ window.pickTok=function(idx){
   });
   const fix=q.toks[wrongIdx];
   const rule=`틀린 곳은 <b>‘${fix.w?fix.t.trim():""}’ → ‘${fix.fix}’</b> 예요.<br>${q.rule}`;
-  score(ok); feedback(ok,rule,"여기!");
+  score(ok); trackAnswer(cur.g.ch,q,ok); feedback(ok,rule,"여기!");
 };
 
 function score(ok){
@@ -624,6 +641,7 @@ function diagnose(){
   };
   const lv=levels[stars];
   S.diag={done:true,stars,cor,tot}; save();
+  track({event_type:"diag",corner:"byeol",stars:stars,score_correct:cor,score_total:tot});
   const weak=ks.map(k=>({k,r:S[k].correct/S[k].total,n:GAMES[k].title,a:GAMES[k].area}))
     .sort((a,b)=>a.r-b.r)[0];
   setScene('byeol');
@@ -662,6 +680,7 @@ finishGame=function(){
   if(cur.key!=="boss") return _finish();
   const {correct,g}=cur; const total=cur.rounds.length; const pass=correct>=Math.ceil(total*0.66);
   S.boss={done:true,correct,total,pass}; save();
+  track({event_type:"boss",corner:"eun",score_correct:correct,score_total:total,boss_pass:pass});
   if(pass){
     setScene('eun',{img:BG.sign,op:.17});
     shell(`
