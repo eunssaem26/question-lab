@@ -62,7 +62,7 @@ description: |
 
 ### 개발일지
 1. `git log --since="7 days ago" --oneline`으로 최근 1주일 커밋 확인
-2. `blog/published/` 디렉토리에서 마지막 개발일지 번호 확인 (다음 번호 부여)
+2. `site/src/content/blog/` 디렉토리에서 `devlog-NN` 최대 번호 확인 (다음 번호 부여)
 3. 작업 산출물 디렉토리 변경사항 확인
 
 ### 설립기
@@ -88,7 +88,7 @@ description: |
 
 ## Step 4: 초안 작성
 
-`blog/philo-voice.md`의 카테고리별 글 구조를 따라 초안을 작성한다.
+`archive/blog-drafts/philo-voice.md`의 카테고리별 글 구조를 따라 초안을 작성한다.
 
 ### 공통 규칙
 - 제목은 독자의 관심을 끄는 질문이나 핵심 메시지로
