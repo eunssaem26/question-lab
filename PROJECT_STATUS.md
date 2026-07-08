@@ -15,11 +15,11 @@
 - Vercel: https://question-lab.vercel.app/ (자동배포 중)
 
 ## 📱 공개 URL
-- **진단 시작**: https://writing-app-1q5b.vercel.app/diagnosis
-- **읽기 1단계**: https://writing-app-1q5b.vercel.app/diagnosis/reading/level-1
-- **읽기 2단계**: https://writing-app-1q5b.vercel.app/diagnosis/reading/level-2
-- **글쓰기 1단계**: https://writing-app-1q5b.vercel.app/diagnosis/writing/level-1
-- **글쓰기 2단계**: https://writing-app-1q5b.vercel.app/diagnosis/writing/level-2
+- **진단 시작**: https://app.wherethoughtsgrow.com/diagnosis
+- **읽기 1단계**: https://app.wherethoughtsgrow.com/diagnosis/reading/level-1
+- **읽기 2단계**: https://app.wherethoughtsgrow.com/diagnosis/reading/level-2
+- **글쓰기 1단계**: https://app.wherethoughtsgrow.com/diagnosis/writing/level-1
+- **글쓰기 2단계**: https://app.wherethoughtsgrow.com/diagnosis/writing/level-2
 
 ## 🎯 진단 엔진 개발 완료 (2026-04-17)
 - ✅ diagnosis-engine 브랜치 생성
