@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>생각하는 글밭 · 문해력 게임관</title>
+<title>생각하는 글밭 · Game</title>
 <style>
 :root{
   --bg:#f6f3ec; --card:#fffdf8; --ink:#2b2620; --muted:#7a7168; --line:#e7e0d3;
@@ -70,6 +70,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .hero{text-align:center;padding:14px 8px 6px}
 .hero .rabbit{font-size:56px;line-height:1;filter:drop-shadow(0 6px 10px rgba(107,122,153,.35))}
 .hero h1{font-size:26px;margin:10px 0 4px;letter-spacing:-.6px}
+.hero .gametitle{
+  font-family:"Futura","Avenir Next","Trebuchet MS",system-ui,sans-serif;
+  font-weight:900;font-style:italic;text-transform:uppercase;
+  font-size:clamp(58px,17vw,104px);line-height:.86;letter-spacing:-1px;
+  margin:12px 0 4px;
+  background:linear-gradient(120deg,#ff8a3d,#ff5a5f 42%,#f0b429);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 6px 16px rgba(255,120,60,.30))}
 .hero p{color:var(--muted);margin:0 auto;max-width:30em;font-size:15px}
 .bubble{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;
   box-shadow:var(--shadow);margin:16px auto;max-width:34em;text-align:left;font-size:14.5px;position:relative}
@@ -171,7 +180,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <button class="themebtn" id="themebtn">🌗 화면</button>
   </div>
   <div id="app"></div>
-  <div class="foot">문해력 게임관 · <b>필로</b>가 함께해요 · Where Thoughts Grow</div>
+  <div class="foot"><b>필로</b>가 함께해요 · Where Thoughts Grow</div>
 </div>
 
 <script>
@@ -380,19 +389,19 @@ const G_EUN = [
 
 /* ============================ 게임 메타 ============================ */
 const GAMES = {
- geul:{ch:"geul",title:"글쌤의 맞춤법 대결",area:"맞춤법·표기",data:G_GEUL,mode:"pick",n:10,
+ geul:{ch:"geul",title:"맞춤법 대결",area:"맞춤법·표기",data:G_GEUL,mode:"pick",n:10,
    intro:"오, 왔구나! 나는 글쌤이에요. 헷갈리는 맞춤법, 둘 중에 바른 걸 골라볼까? 좋은 점부터 짚어 줄게요.",
    ok:["좋았어! 바로 그거예요.","맞아요, 감 좋은데요?","오, 정확해요!"],
    no:["아쉽다! 이건 이렇게 기억해요.","괜찮아요, 헷갈릴 만해요.","한 번 더 보면 쉬워요."]},
- hogi:{ch:"hogi",title:"호기의 번개 스피드전",area:"뜻 구별 어휘",data:G_HOGI,mode:"pick",n:10,
+ hogi:{ch:"hogi",title:"번개 스피드전",area:"뜻 구별 어휘",data:G_HOGI,mode:"pick",n:10,
    intro:"야! 나 호기야. 뜻이 비슷해서 자꾸 헷갈리는 단어들, 번개처럼 골라보자! 준비됐지? 가자!",
    ok:["대박! 정답!","오 잘한다 너!","와 이걸 맞히네!"],
    no:["앗 아쉽다!","괜찮아 이거 다들 틀려!","자, 이건 이렇게 외워!"]},
- chaek:{ch:"chaek",title:"책쌤의 뜻 이어주기",area:"속담·사자성어·순우리말",data:G_CHAEK,mode:"pick",n:10,
+ chaek:{ch:"chaek",title:"우리말 탐험",area:"속담·사자성어·순우리말",data:G_CHAEK,mode:"pick",n:10,
    intro:"반가워요. 책쌤이에요. 오래된 말 속에는 지혜가 담겨 있지요. 이 말들의 뜻을 함께 살펴볼까요.",
    ok:["그렇지요, 잘 읽었어요.","정확합니다.","좋아요, 뜻을 제대로 짚었어요."],
    no:["아쉽네요. 뜻을 함께 볼까요.","괜찮아요, 이제 알면 되지요.","이 말은 이런 뜻이랍니다."]},
- kkan:{ch:"kkan",title:"깐쌤의 빨간펜",area:"띄어쓰기·사이시옷",data:G_KKAN,mode:"find",n:8,
+ kkan:{ch:"kkan",title:"빨간펜",area:"띄어쓰기·사이시옷",data:G_KKAN,mode:"find",n:8,
    intro:"흠. 이 문장들 어딘가에 틀린 곳이 반드시 숨어 있다. 점선 친 낱말 중에서, 잘못된 하나를 골라내 봐.",
    ok:["봐, 여기였지.","정확해. 눈이 좋군.","그래, 놓치지 않았어."],
    no:["틀렸어. 진짜는 여기다.","다시 봐. 여기가 문제야.","아직 멀었군. 여길 봐."]},
@@ -443,7 +452,7 @@ function hub(){
       onclick="${allDone?"start('diag')":""}">
       ${diagDone?`<span class="done">별 ${S.diag.stars}개</span>`:""}
       <div class="top"><div class="ava">${av('byeol')}</div>
-        <div><h3>별쌤의 문해력 진단 ⭐</h3><div class="role">별쌤 · 네 게임 종합 판정</div></div></div>
+        <div><h3>문해력 진단 ⭐</h3><div class="role">별쌤 · 네 게임 종합 판정</div></div></div>
       <div class="desc">${allDone?"네 게임 결과를 모아 지금 수준을 재고, 다음 단계를 알려줄게요.":"먼저 위 네 게임을 모두 끝내면 열려요."}</div>
       <span class="tag">종합 진단</span>
     </button>`;
@@ -452,7 +461,7 @@ function hub(){
       onclick="${diagDone?"start('boss')":""}">
       ${S.boss&&S.boss.done?`<span class="done">✓ 인증 완료</span>`:""}
       <div class="top"><div class="ava">${av('eun')}</div>
-        <div><h3>은쌤의 최종 보스전 🏆</h3><div class="role">은쌤 · 심화 인증</div></div></div>
+        <div><h3>최종 보스전 🏆</h3><div class="role">은쌤 · 심화 인증</div></div></div>
       <div class="desc">${diagDone?"교육과정 기준으로도 까다로운 심화 문제. 통과하면 은쌤이 인증서를 줘요.":"별쌤 진단을 먼저 통과하면 열려요."}</div>
       <span class="tag">심화 종합</span>
     </button>`;
@@ -460,7 +469,7 @@ function hub(){
   app.innerHTML=`
     <div class="hero">
       <div class="banner" style="background-image:url(${BG.forest})"><div class="cap">🌱 생각하는 글밭 친구들이 기다려요</div></div>
-      <h1>문해력 게임관</h1>
+      <h1 class="gametitle">Game</h1>
       <p>헷갈리는 우리말, 놀면서 정복하기</p>
     </div>
     <div class="bubble">
@@ -623,7 +632,7 @@ function diagnose(){
     <div class="result">
       <div class="hdr" style="justify-content:center">
         <div class="ava">${av('byeol')}</div>
-        <div style="text-align:left"><div class="name">별쌤의 문해력 진단</div><div class="sub">네 게임 종합</div></div>
+        <div style="text-align:left"><div class="name">문해력 진단</div><div class="sub">네 게임 종합</div></div>
       </div>
       <div class="stars">${"⭐".repeat(stars)}${"☆".repeat(5-stars)}</div>
       <h2>${lv.t}</h2>
@@ -640,7 +649,7 @@ function diagnose(){
 
 /* ============================ 은쌤 보스전 ============================ */
 function bossIntro(){
-  cur={key:"boss",g:{ch:"eun",title:"은쌤의 최종 보스전",area:"심화 종합",data:G_EUN,mode:"pick",
+  cur={key:"boss",g:{ch:"eun",title:"최종 보스전",area:"심화 종합",data:G_EUN,mode:"pick",
     intro:"잘 왔어요. 나는 은쌤이에요. 여기 문제들은 교육과정 기준으로도 꽤 까다로워요. 천천히, 정확하게 골라 봐요.",
     ok:["정확해요. 잘 짚었어요.","맞아요, 근거까지 알면 완벽해요.","훌륭해요."],
     no:["아쉽지만 다시 볼까요.","괜찮아요. 이건 어른도 틀려요.","이 부분만 짚고 가면 돼요."]},
