@@ -1,10 +1,12 @@
 ---
-title: "‘깨끗이’일까 ‘깨끗히’일까, 문해력 게임관을 열었어요"
+title: "[개발일지 #12] ‘깨끗이’일까 ‘깨끗히’일까, 문해력 게임관을 열었어요"
+series: "생각하는 글밭 개발일지"
+seriesNumber: 12
 description: "우리 일곱 캐릭터가 각자 미니게임을 하나씩 맡았어요. 맞춤법부터 속담까지, 헷갈리는 우리말을 놀면서 익히는 웹 게임을 사이트에 열었습니다."
 pubDate: 2026-07-08
 heroImage: "/assets/characters/group_forest_school.png"
 author: "필로"
-category: "insight"
+category: devlog
 tags: ["게임", "맞춤법", "문해력", "캐릭터", "우리말"]
 status: "published"
 ---
