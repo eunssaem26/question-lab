@@ -27,6 +27,7 @@ char="${1:-}"; shift || true
 if [ -z "$char" ] || [ "$char" = "list" ] || [ "$char" = "-h" ] || [ "$char" = "--help" ]; then
   cat <<'EOF'
 Thinking Garden 캐릭터:
+  필로   (philo)    정원장·오케스트레이터 — SOUL만
   은쌤   (eun)      검수·발행게이트 — SOUL만
   깐쌤   (kkan)     품질비평(레드팀) — SOUL만
   별쌤   (byeol)    진단      — SOUL + 읽기 준거틀(레이어3)
@@ -45,6 +46,7 @@ fi
 # 캐릭터 → SOUL 파일명 + 준거틀(레이어3) 상대경로
 soul=""; fw=""
 case "$char" in
+  필로|philo|pilo) soul="필로" ;;
   은쌤|eun)        soul="은쌤" ;;
   깐쌤|kkan)       soul="깐쌤" ;;
   책쌤|chaek)      soul="책쌤" ;;
