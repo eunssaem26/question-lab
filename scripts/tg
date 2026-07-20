@@ -27,7 +27,8 @@ char="${1:-}"; shift || true
 if [ -z "$char" ] || [ "$char" = "list" ] || [ "$char" = "-h" ] || [ "$char" = "--help" ]; then
   cat <<'EOF'
 Thinking Garden 캐릭터:
-  은쌤   (eun)      검수      — SOUL만
+  은쌤   (eun)      검수·발행게이트 — SOUL만
+  깐쌤   (kkan)     품질비평(레드팀) — SOUL만
   별쌤   (byeol)    진단      — SOUL + 읽기 준거틀(레이어3)
   글쌤   (geul)     글쓰기    — SOUL + 글쓰기 준거틀(레이어3)
   책쌤   (chaek)    독서      — SOUL만
@@ -45,6 +46,7 @@ fi
 soul=""; fw=""
 case "$char" in
   은쌤|eun)        soul="은쌤" ;;
+  깐쌤|kkan)       soul="깐쌤" ;;
   책쌤|chaek)      soul="책쌤" ;;
   호기|hogi)       soul="호기" ;;
   밭피디|batpd|bat) soul="밭피디" ;;
