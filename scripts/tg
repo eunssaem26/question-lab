@@ -36,7 +36,7 @@ Thinking Garden 캐릭터:
   호기   (hogi)     학생소통  — SOUL만
   밭피디 (batpd)    콘텐츠    — SOUL만
   가드너 (gardener) 지식연결  — SOUL만
-  영쌤   (young)    학습설계  — SOUL + 준거틀(레이어3)
+  영쌤   (young)    학습설계  — SOUL만 (영어 준거틀 마련 전)
 
 사용법: scripts/tg <캐릭터> "<할 일>"   |   cat file | scripts/tg <캐릭터>
 EOF
@@ -55,7 +55,7 @@ case "$char" in
   가드너|gardener|gard) soul="가드너" ;;
   별쌤|byeol)      soul="별쌤"; fw="curriculum/framework.json curriculum/별쌤-평가준거틀.md" ;;
   글쌤|geul)       soul="글쌤"; fw="curriculum/글쓰기-평가준거틀.md" ;;
-  영쌤|young)      soul="영쌤"; fw="curriculum/글쓰기-평가준거틀.md curriculum/별쌤-평가준거틀.md" ;;
+  영쌤|young)      soul="영쌤" ;;
   *) echo "알 수 없는 캐릭터: $char  (scripts/tg list 로 목록 확인)" >&2; exit 1 ;;
 esac
 
