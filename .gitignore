@@ -9,3 +9,9 @@
 삭제준비/
 
 .workspace-links/
+
+# 로컬 전용 운영 보드 (PUBLIC repo — 출판사 연락처·저작권 상태 등 민감 내용 포함, 공개 금지)
+operations/
+
+# Hermes 기계-로컬 상태 (플랜·워크스페이스)
+.hermes/
