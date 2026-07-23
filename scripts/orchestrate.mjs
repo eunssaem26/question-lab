@@ -61,6 +61,36 @@ function buildReviewInput(c, reviewer) {
   return L.join('\n');
 }
 
+// 카드 yaml 자동 전이 (백업 + 라인 단위 안전 편집만 — 블록 삭제 없음)
+function applyCardTransition(cardPath, raw, { reviewer, verdictLine, newStatus, newNext, blockerLine, handoffRel }) {
+  writeFileSync(cardPath + '.bak', raw); // 편집 전 백업 (operations/는 git 밖)
+  let t = raw;
+  t = t.replace(/^status: .*$/m, `status: ${newStatus}`);
+  t = t.replace(/^next_handoff: .*$/m, `next_handoff: "${newNext}"`);
+  if (/^review_verdicts:\s*\{\}\s*$/m.test(t))
+    t = t.replace(/^review_verdicts:\s*\{\}\s*$/m, `review_verdicts:\n  ${reviewer}: "${verdictLine}"`);
+  else if (!new RegExp(`^\\s+${reviewer}:`, 'm').test(t))
+    t = t.replace(/^review_verdicts:\s*$/m, `review_verdicts:\n  ${reviewer}: "${verdictLine}"`);
+  if (blockerLine) t = t.replace(/^blockers:.*$/m, `blockers:\n  - "${blockerLine}"`);
+  t = t.replace(/^evidence:\s*$/m, `evidence:\n  - "${handoffRel}"`);
+  writeFileSync(cardPath, t);
+}
+
+// BOARD.md 해당 행의 상태·다음행동·다음담당·막힘 셀만 갱신
+function updateBoardRow(id, { status, action, next, blocker }) {
+  const bp = join(ROOT, 'operations/play/BOARD.md');
+  const raw = readFileSync(bp, 'utf8');
+  writeFileSync(bp + '.bak', raw);
+  const out = raw.split('\n').map((ln) => {
+    if (!ln.includes(id) || !ln.trim().startsWith('|')) return ln;
+    const cells = ln.split('|'); // ['', ID, 작업, 우선, 상태(4), 책임자, 제작자, 다음행동(7), 다음담당(8), 막힘(9), '']
+    if (cells.length < 10) return ln;
+    cells[4] = ` ${status} `; cells[7] = ` ${action} `; cells[8] = ` ${next} `; cells[9] = ` ${blocker} `;
+    return cells.join('|');
+  });
+  writeFileSync(bp, out.join('\n'));
+}
+
 // 최소 필드 추출 파서 (task.yaml 스키마 한정 — 범용 YAML 아님)
 function parseCard(text) {
   const lines = text.split('\n');
@@ -181,15 +211,32 @@ if (GO && auto.length) {
     writeFileSync(hp, `# ${who} 검수 — ${c.id}\n\n${out}\n`);
     const crit = (out.match(/CRITICAL/g) || []).length;
     const warn = (out.match(/WARNING/g) || []).length;
+    const handoffRel = hp.replace(ROOT + '/', '');
+    const short = handoffRel.replace('operations/play/', '');
     const pendingDomain = c.required_reviewers.filter((r) => DOMAIN_REVIEWERS.includes(r) && !c.review_verdicts[r] && r !== who);
-    // 불변식(§7-2): CRITICAL 잔존 시 다음 단계로 못 감 → 제작자에게 반송
-    const proposedNext = crit > 0
-      ? 'RETURNED → 제작자(Claude Code)'
-      : (pendingDomain.length ? pendingDomain[0] : '필로(MERGE)');
     console.log('\n' + out.trim() + '\n');
-    console.log(`  💾 핸드오프 저장: ${hp.replace(ROOT + '/', '')}`);
-    console.log(`  🧭 제안 전이: 다음 담당 → ${proposedNext}  ·  review_verdicts += ${who}  (심각도 감지: CRITICAL ${crit}, WARNING ${warn})`);
-    console.log(`  ↳ 카드 yaml은 검토 후 사람이 반영. 자동 전이는 다음 반복에서.`);
+    console.log(`  💾 핸드오프 저장: ${handoffRel}  (심각도 감지: CRITICAL ${crit}, WARNING ${warn})`);
+
+    // 전이 결정 (§4 상태기계 + 불변식 §7-2: CRITICAL 잔존 → 제작자 반송)
+    let tr;
+    if (crit > 0) {
+      tr = { newStatus: 'RETURNED', newNext: 'Claude Code', boardNext: 'Claude Code',
+        verdictLine: `RETURNED (${crit} CRITICAL, ${warn} WARNING) — ${short}`,
+        blockerLine: `${who} RETURN: ${crit} CRITICAL — ${short}`,
+        boardAction: '검수 결함 수정 후 재검수', boardBlocker: `${who} RETURN: ${crit} CRITICAL` };
+    } else if (pendingDomain.length) {
+      tr = { newStatus: c.status, newNext: pendingDomain[0], boardNext: pendingDomain[0],
+        verdictLine: `PASS (${warn} WARNING) — ${short}`, blockerLine: null,
+        boardAction: `${pendingDomain[0]} 도메인 검수`, boardBlocker: '없음' };
+    } else {
+      tr = { newStatus: 'MERGE', newNext: '필로', boardNext: '필로',
+        verdictLine: `PASS (${warn} WARNING) — ${short}`, blockerLine: null,
+        boardAction: '필로 병합 → 깐쌤', boardBlocker: '없음' };
+    }
+    const cardPath = join(TASKS_DIR, c.id + '.yaml');
+    applyCardTransition(cardPath, readFileSync(cardPath, 'utf8'), { reviewer: who, ...tr, handoffRel });
+    updateBoardRow(c.id, { status: tr.newStatus, action: tr.boardAction, next: tr.boardNext, blocker: tr.boardBlocker });
+    console.log(`  ✅ 자동 전이: ${c.status} → ${tr.newStatus} · 다음 담당 → ${tr.newNext}  (카드+BOARD 갱신, .bak 백업)`);
   }
   console.log('');
 } else {
