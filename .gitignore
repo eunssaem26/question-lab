@@ -19,3 +19,6 @@ operations/
 # 인스타 업로드용 JPG 산출물 (HTML 에서 언제든 다시 뽑는다)
 exports/
 /diary/
+
+# 사례글 일러스트 (codex-image 생성물, 게시글에 업로드됨)
+case-post/**/images/
