@@ -85,7 +85,9 @@ fi
 # 2) 텔레그램으로 보여주기 (인스타는 은쌤 확인 후 수동)
 TITLE=$(python3 -c "import json;print(json.load(open('$DIR/diary.json'))['title'])" 2>/dev/null)
 ACADEMY=$(grep -oE 'https://[^ ]+/diary/\?h=[^ ]+' "$DIR/claude-output.txt" | tail -1)
-openclaw message send --channel telegram --target "$TG" --media "$DIR/diary.jpg" \
+# 오픈클로는 ~/.openclaw 아래 파일만 첨부할 수 있다
+mkdir -p "$HOME/.openclaw/media/diary"; cp "$DIR/diary.jpg" "$HOME/.openclaw/media/diary/$DATE.jpg"
+openclaw message send --channel telegram --target "$TG" --media "$HOME/.openclaw/media/diary/$DATE.jpg" \
   --message "🐰 오늘 그림일기 — 「$TITLE」
 사관학교: ${ACADEMY:-업로드 확인 필요}
 인스타에 올리려면 Claude Code 에게 「오늘 그림일기 인스타 올려줘」" >/dev/null 2>&1 || notify "🐰 오늘 그림일기 「$TITLE」 만들었어요 (사진 전송 실패). $DIR/diary.jpg"
