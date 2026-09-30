@@ -3,7 +3,7 @@
 #
 #  1) Claude Code 헤드리스(claude -p, Max 구독)가 picture-diary 스킬 절차대로
 #     오늘 기록에서 배운 것 하나를 골라 → codex-image 로 그림 → diary.jpg 렌더 → 사관학교 업로드
-#  2) 텔레그램(필로 봇)으로 그림·글을 보낸다 — 인스타는 은쌤이 보고 결정한다.
+#  2) 공개 저장소 geulbat-diary 에 아카이브(archive.sh) 3) 텔레그램(필로 봇)으로 그림·글을 보낸다 — 인스타는 은쌤이 보고 결정한다.
 #     올리려면 Claude Code 에게 "오늘 그림일기 인스타 올려줘" (크롬 조작, 4:5 크롭 필수)
 #
 #  사용:  daily.sh            전체 실행
@@ -82,7 +82,10 @@ if [ ! -f "$DIR/diary.jpg" ]; then
 fi
 [ $NO_POST = 1 ] && { log "--no-post: 여기서 끝"; exit 0; }
 
-# 2) 텔레그램으로 보여주기 (인스타는 은쌤 확인 후 수동)
+# 2) 아카이브 — 공개 저장소 eunssaem26/geulbat-diary 에 jpg + json + README 한 줄
+"$ROOT/scripts/diary/archive.sh" "$DATE" 2>&1 | tail -1
+
+# 3) 텔레그램으로 보여주기 (인스타는 은쌤 확인 후 수동)
 TITLE=$(python3 -c "import json;print(json.load(open('$DIR/diary.json'))['title'])" 2>/dev/null)
 ACADEMY=$(grep -oE 'https://[^ ]+/diary/\?h=[^ ]+' "$DIR/claude-output.txt" | tail -1)
 # 오픈클로는 ~/.openclaw 아래 파일만 첨부할 수 있다
