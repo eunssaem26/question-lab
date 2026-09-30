@@ -2,8 +2,13 @@
 # 생각하는 글밭 농부 10명을 OpenClaw 에이전트로 설치한다.
 # - SOUL.md 원본은 저장소 souls/*.SOUL.md. OpenClaw는 심볼릭 링크를 거부하므로 sync-souls.sh로 복사·동기화한다
 # - 메모리는 AKM 포인터만 둔다 (본체 복제 금지)
-# - 재실행해도 안전하다 (있으면 건너뜀)
+# - 재실행해도 안전하다 (워크스페이스 파일·에이전트 등록은 있으면 건너뜀)
 set -euo pipefail
+
+# 워크스페이스 파일은 에이전트가 운영 중에 고친다 (Slack ID, 규칙 등) — 없을 때만 만든다
+write_if_absent() {
+  if [ -e "$1" ]; then cat >/dev/null; else cat > "$1"; fi
+}
 
 GB="/Users/eunssaem/Desktop/open claw 준비"
 WS_ROOT="$HOME/.openclaw/workspaces"
@@ -35,7 +40,7 @@ for row in "${CAST[@]}"; do
   # 아바타
   [ -f "$GB/office/assets/avatars/$id.png" ] && cp -n "$GB/office/assets/avatars/$id.png" "$ws/avatars/$id.png" || true
 
-  cat > "$ws/IDENTITY.md" <<ID
+  write_if_absent "$ws/IDENTITY.md" <<ID
 # IDENTITY.md
 
 - **Name:** $ko
@@ -45,10 +50,10 @@ for row in "${CAST[@]}"; do
 - **Avatar:** avatars/$id.png
 ID
 
-  cat > "$ws/AGENTS.md" <<AG
+  write_if_absent "$ws/AGENTS.md" <<AG
 # AGENTS.md — $ko 작업공간 규칙
 
-성격·역할·경계는 \`SOUL.md\`에 있다 (저장소 \`souls/$soul.SOUL.md\`의 링크). 여기엔 공간 규칙만 둔다.
+성격·역할·경계는 \`SOUL.md\`에 있다 (원본은 저장소 \`souls/$soul.SOUL.md\`, 여기 파일은 \`scripts/openclaw/sync-souls.sh\`가 만든 복사본 — 직접 고치지 말고 원본을 고친다). 여기엔 공간 규칙만 둔다.
 
 ## 지식은 AKM 하나
 - 지식·규칙·절차의 본체는 \`/Users/eunssaem/akm\` (AKM) 하나다. 여기 파일엔 포인터만 둔다.
@@ -67,7 +72,7 @@ ID
 - 한 명이 끝낼 수 없는 일은 필로(\`philo\`)에게 넘긴다. 발행 전엔 깐쌤 → 은쌤 순서를 지킨다. 아이에게 전달은 호기를 거친다.
 AG
 
-  cat > "$ws/USER.md" <<US
+  write_if_absent "$ws/USER.md" <<US
 # USER.md
 
 <!-- observed: 2026-07-26 | status: active -->
@@ -77,7 +82,7 @@ AG
 - 한국어로 답한다.
 US
 
-  cat > "$ws/MEMORY.md" <<MEM
+  write_if_absent "$ws/MEMORY.md" <<MEM
 # MEMORY.md — $ko
 
 지식·규칙·절차의 본체는 AKM \`/Users/eunssaem/akm\` 하나다. 여기엔 포인터만 둔다 — 같은 내용을 두 곳에 두면 캐릭터마다 사실이 갈라진다.
@@ -94,6 +99,15 @@ MEM
   openclaw agents set-identity --agent "$id" --name "$ko" --emoji "$emoji" --avatar "avatars/$id.png" >/dev/null 2>&1 || true
   echo "✓ $id ($ko)"
 done
+
+# 필로 전용 규칙: 게이트웨이 설정을 고친 턴에서 오래 걸리는 점검 금지 (없을 때만 덧붙임)
+if ! grep -q '^## 게이트웨이 설정을 고칠 때' "$WS_ROOT/philo/AGENTS.md"; then
+  cat >> "$WS_ROOT/philo/AGENTS.md" <<'AG'
+
+## 게이트웨이 설정을 고칠 때
+- `openclaw.json`을 고친 턴에서는 `openclaw doctor`나 게이트웨이 재시작처럼 오래 걸리는 점검을 돌리지 않는다. 바꾼 내용과 백업 위치를 보고하고 턴을 끝낸다. 점검이 필요하면 은쌤에게 부탁한다. (2026-09-30: 같은 턴에서 doctor를 돌렸다가 CLI 무출력 워치독 600초 오류가 났다.)
+AG
+fi
 
 # 필로 전용 스킬: philo-blog (저장소 원본 링크)
 mkdir -p "$WS_ROOT/philo/skills"
