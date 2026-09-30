@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>생각하는 글밭 교무실</title>
+<style>
+  :root{
+    --ink:#3d2a1d; --ink-soft:#6d5442; --panel:#fffaf2;
+    --accent:#c2703d; --ok:#4f8a5b; --bad:#b4503f;
+    --panel-w:min(500px, 38vw);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Pretendard","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;
+    color:var(--ink); background:#241812; overflow:hidden;
+  }
+
+  /* ---------- 교무실 ---------- */
+  #stage{
+    position:fixed; inset:0; display:grid; place-items:center;
+    padding:112px 26px 26px;
+    transition:right .45s cubic-bezier(.3,.8,.3,1), filter .45s ease;
+  }
+  body.chatting #stage{right:var(--panel-w); filter:brightness(.9)}
+
+  #room{
+    position:relative; aspect-ratio:1536/1024;
+    width:100%; max-width:calc((100vh - 140px) * 1.5);
+    max-height:100%;
+    border-radius:14px; overflow:hidden;
+    box-shadow:0 26px 70px rgba(0,0,0,.55);
+  }
+  #room img.floor{width:100%; height:100%; display:block; object-fit:cover}
+
+  /* 자리에 앉은 농부 */
+  .who{
+    position:absolute; transform:translate(-50%,-50%);
+    background:none; border:0; padding:0; color:inherit; cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    transition:transform .18s ease, filter .18s ease;
+    width:13%;
+  }
+  .who:hover{transform:translate(-50%,-56%)}
+  .who:focus-visible{outline:3px solid #ffd9a8; outline-offset:4px; border-radius:14px}
+  .face{
+    width:62%; aspect-ratio:1; border-radius:50%;
+    background:#e8d3b6 center/cover no-repeat;
+    border:2px solid rgba(255,250,242,.8);
+    box-shadow:0 8px 18px rgba(30,15,5,.5);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .who:hover .face{box-shadow:0 12px 24px rgba(30,15,5,.6)}
+  .who.active .face{border-color:#ffcf94; box-shadow:0 0 0 3px rgba(255,207,148,.5),0 10px 22px rgba(30,15,5,.5)}
+  .who.busy .face{animation:pulse 1.3s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,207,148,.6),0 8px 18px rgba(30,15,5,.5)}
+                   50%{box-shadow:0 0 0 10px rgba(255,207,148,0),0 8px 18px rgba(30,15,5,.5)}}
+
+  .plate{
+    background:linear-gradient(#e0b184,#c48f61);
+    color:#3a2109; border-radius:6px; padding:3px 11px 4px; white-space:nowrap;
+    box-shadow:0 3px 7px rgba(30,15,5,.45), inset 0 1px 0 rgba(255,255,255,.45);
+    text-align:center; line-height:1.15;
+  }
+  .plate b{display:block; font-size:clamp(11px,1.0vw,15px); font-weight:800}
+
+  /* ---------- 머리말 ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:5;
+    padding:18px 26px; display:flex; align-items:center; gap:16px;
+    color:#fff5e6; text-shadow:0 2px 10px rgba(0,0,0,.6);
+    background:linear-gradient(rgba(20,10,4,.6),rgba(20,10,4,0));
+    pointer-events:none;
+  }
+  header h1{font-size:24px; font-weight:800; letter-spacing:-.02em}
+  header .sub{font-size:13px; opacity:.78; font-weight:500}
+  #status{
+    margin-left:auto; display:flex; align-items:center; gap:9px;
+    font-size:13.5px; font-weight:600; background:rgba(28,15,7,.55);
+    padding:7px 14px; border-radius:999px; pointer-events:auto;
+  }
+  #dot{width:9px;height:9px;border-radius:50%;background:#c9a227;
+       box-shadow:0 0 10px currentColor; color:#c9a227}
+  #status.on #dot{background:var(--ok); color:var(--ok)}
+  #status.off #dot{background:var(--bad); color:var(--bad)}
+
+  /* ---------- 방 탭 ---------- */
+  #rooms{
+    position:fixed; z-index:5; left:0; right:0; top:62px;
+    display:flex; gap:8px; justify-content:center; padding:0 26px;
+    transition:right .45s cubic-bezier(.3,.8,.3,1);
+  }
+  body.chatting #rooms{right:var(--panel-w)}
+  #rooms button{
+    font:inherit; font-weight:700; font-size:14px; cursor:pointer;
+    color:#ffeeda; background:rgba(28,15,7,.5); border:1.5px solid rgba(255,238,218,.22);
+    padding:7px 16px; border-radius:999px; backdrop-filter:blur(6px);
+    transition:background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  #rooms button:hover{background:rgba(48,28,14,.7)}
+  #rooms button.on{background:#e9d3b2; color:#4a2f14; border-color:#e9d3b2}
+  #rooms button small{opacity:.65; font-weight:600; margin-left:6px}
+
+  /* ---------- 대화 패널 ---------- */
+  #panel{
+    position:fixed; z-index:6; top:0; right:0; bottom:0; width:var(--panel-w);
+    background:var(--panel); display:flex; flex-direction:column;
+    box-shadow:-18px 0 50px rgba(20,10,4,.45);
+    transform:translateX(100%); transition:transform .45s cubic-bezier(.3,.8,.3,1);
+  }
+  body.chatting #panel{transform:none}
+  #phead{display:flex; align-items:center; gap:14px; padding:18px 20px;
+         border-bottom:2px solid #efe0cc; background:#fff6e9}
+  #pface{width:54px;height:54px;border-radius:50%;background:#e8d3b6 center/cover no-repeat;
+         border:2px solid #fff; box-shadow:0 4px 12px rgba(60,35,15,.22)}
+  #pname{font-size:18px;font-weight:800}
+  #prole{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-top:2px}
+  #close{margin-left:auto;background:#f0e2ce;border:0;border-radius:10px;
+         width:36px;height:36px;font-size:18px;cursor:pointer;color:var(--ink-soft)}
+  #close:hover{background:#e6d4ba}
+
+  #log{flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:14px;
+       scroll-behavior:smooth}
+  .msg{max-width:88%; padding:12px 15px; border-radius:15px; font-size:15px; line-height:1.62;
+       white-space:pre-wrap; word-break:break-word}
+  .msg.me{align-self:flex-end; background:var(--accent); color:#fff8ef; border-bottom-right-radius:5px}
+  .msg.them{align-self:flex-start; background:#f4e8d7; border-bottom-left-radius:5px}
+  .msg strong{font-weight:800}
+  .msg code{background:#e9dac4;padding:1px 6px;border-radius:5px;font-size:.92em}
+  .msg.sys{align-self:center; background:none; color:var(--ink-soft); font-size:12.5px; font-weight:600}
+  .think{align-self:flex-start; color:var(--ink-soft); font-size:13px; font-weight:600;
+         display:flex; gap:8px; align-items:center}
+  .think i{width:7px;height:7px;border-radius:50%;background:var(--accent);
+           animation:blink 1s infinite; font-style:normal}
+  .think i:nth-child(2){animation-delay:.2s} .think i:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+  .usage{align-self:flex-start;font-size:11px;color:#a08a72;font-weight:600}
+
+  #compose{display:flex; gap:10px; padding:14px 16px; border-top:2px solid #efe0cc; background:#fff6e9}
+  #say{flex:1; border:2px solid #e6d4ba; border-radius:12px; padding:11px 13px;
+       font:inherit; font-size:15px; resize:none; height:50px; background:#fff}
+  #say:focus{outline:none;border-color:var(--accent)}
+  #send{border:0;border-radius:12px;background:var(--accent);color:#fff8ef;
+        font:inherit;font-weight:800;font-size:15px;padding:0 20px;cursor:pointer}
+  #send:disabled{opacity:.45;cursor:default}
+
+  #hint{position:fixed;z-index:4;left:0;right:0;bottom:0;padding:0 26px 10px;
+        text-align:center;color:#ffeeda;opacity:.55;font-size:12.5px;font-weight:600;
+        text-shadow:0 2px 8px rgba(0,0,0,.7);pointer-events:none;transition:opacity .3s}
+  body.chatting #hint{opacity:0}
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="room">
+    <img class="floor" id="floor" src="assets/office_iso.png" alt="교무실">
+  </div>
+</div>
+<nav id="rooms"></nav>
+
+<header>
+  <div>
+    <h1>생각하는 글밭 교무실</h1>
+    <div class="sub">Where Thoughts Grow · 농부 10명이 각자의 자리에 있습니다</div>
+  </div>
+  <div id="status"><span id="dot"></span><span id="stext">연결 중…</span></div>
+</header>
+<div id="hint">캐릭터를 클릭하면 대화가 열립니다</div>
+
+<aside id="panel" aria-live="polite">
+  <div id="phead">
+    <div id="pface"></div>
+    <div><div id="pname"></div><div id="prole"></div></div>
+    <button id="close" title="닫기 (Esc)">✕</button>
+  </div>
+  <div id="log"></div>
+  <div id="compose">
+    <textarea id="say" placeholder="메시지를 입력하고 Enter" rows="1"></textarea>
+    <button id="send">보내기</button>
+  </div>
+</aside>
+
+<script src="config.local.js"></script>
+<script>
+/* ===================== 공간과 자리 =====================
+   x,y 는 각 방 이미지(1536x1024 계열) 안에서의 백분율 = 아바타 중심.
+   자리를 옮기려면 이 숫자만 바꾼다.                                    */
+const ROOMS = [
+  {id:"office", name:"교무실", bg:"assets/office_iso.png", cast:[
+    {id:"byeolsaem", name:"별쌤", role:"진단평가",    x:38.0, y:40.0},
+    {id:"kkansaem",  name:"깐쌤", role:"레드팀",      x:63.0, y:38.0},
+    {id:"eunsaem",   name:"은쌤", role:"발행 게이트", x:57.0, y:54.0},
+    {id:"philo",     name:"필로", role:"코디네이터",  x:45.0, y:73.0},
+  ]},
+  {id:"library", name:"도서관", bg:"assets/room_library.png", cast:[
+    {id:"chaeksaem", name:"책쌤", role:"독서수업",     x:33.0, y:41.0},
+    {id:"geulsaem",  name:"글쌤", role:"글쓰기수업",   x:70.0, y:44.0},
+    {id:"gardener",  name:"가드너", role:"지식 구조",   x:45.0, y:69.0},
+  ]},
+  {id:"media", name:"미디어실", bg:"assets/room_media.png", cast:[
+    {id:"batpd",     name:"밭피디", role:"콘텐츠",     x:42.0, y:56.0},
+  ]},
+  {id:"classroom", name:"교실", bg:"assets/room_classroom.png", cast:[
+    {id:"hogi",      name:"호기",   role:"학생 소통",   x:62.0, y:52.0},
+    {id:"yeongsaem", name:"영쌤",   role:"영어 학습설계", x:34.0, y:54.0},
+  ]},
+];
+const BY_ID = Object.fromEntries(ROOMS.flatMap(r=>r.cast).map(c=>[c.id,c]));
+const ROOM_OF = Object.fromEntries(ROOMS.flatMap(r=>r.cast.map(c=>[c.id,r.id])));
+
+const ROOM = document.getElementById("room");
+const FLOOR = document.getElementById("floor");
+const TABS = document.getElementById("rooms");
+let currentRoom = null;
+
+ROOMS.forEach(r=>{
+  const b=document.createElement("button");
+  b.id="tab-"+r.id;
+  b.innerHTML=`${r.name}<small>${r.cast.length}</small>`;
+  b.onclick=()=>showRoom(r.id);
+  TABS.appendChild(b);
+});
+
+function showRoom(rid){
+  const r = ROOMS.find(x=>x.id===rid); if(!r) return;
+  currentRoom = rid;
+  FLOOR.src = r.bg; FLOOR.alt = r.name;
+  ROOM.querySelectorAll(".who").forEach(n=>n.remove());
+  r.cast.forEach(c=>{
+    const b=document.createElement("button");
+    b.className="who"+(c.id===current?" active":"");
+    b.id="who-"+c.id; b.title=`${c.name} — ${c.role}`;
+    b.style.left=c.x+"%"; b.style.top=c.y+"%";
+    b.innerHTML=`<div class="face" style="background-image:url('assets/avatars/${c.id}.png')"></div>
+                 <div class="plate"><b>${c.name}</b></div>`;
+    b.onclick=()=>openChat(c.id);
+    ROOM.appendChild(b);
+  });
+  TABS.querySelectorAll("button").forEach(n=>n.classList.remove("on"));
+  document.getElementById("tab-"+rid)?.classList.add("on");
+}
+
+/* ===================== OpenClaw 게이트웨이 연결 =====================
+   프로토콜(v4): 서버가 connect.challenge{nonce}를 먼저 보낸다 → connect(토큰 + Ed25519 디바이스 서명)
+   → hello-ok. 브라우저 클라이언트는 디바이스 신원이 필수라 키쌍을 localStorage에 보관하고,
+   첫 접속 한 번만 `openclaw devices approve`로 페어링한다(start.sh가 자동 승인).
+   대화: chat.send{sessionKey:"agent:<id>:<key>"} → chat 이벤트 state=delta/final.        */
+const CFG = window.OFFICE_CONFIG || {};
+const WS_URL = `ws://127.0.0.1:${CFG.port||18789}`;
+const TOKEN = CFG.token || "";
+const CLIENT = {id:"gateway-client", version:"office-1", platform:"web", mode:"ui"};
+const ROLE="operator", SCOPES=["operator.read","operator.write"];
+const RUN_TAG = "office-"+new Date().toISOString().slice(0,16).replace(/[-:T]/g,"");  // 페이지 로드마다 새 세션
+
+let ws=null, rpcId=0, ready=false;
+const pending=new Map(), sessionOf=new Map(), charOf=new Map(), history=new Map();
+let current=null;
+
+const S={box:document.getElementById("status"), txt:document.getElementById("stext")};
+function setStatus(state,label){S.box.className=state; S.txt.textContent=label}
+
+/* --- 디바이스 신원 (Ed25519, WebCrypto) --- */
+const b64u = b => btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const hex  = b => [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+let DEV=null;
+async function loadDevice(){
+  if(DEV) return DEV;
+  const KEY="office.device.v1";
+  let priv, pubRaw;
+  const saved=localStorage.getItem(KEY);
+  if(saved){
+    const j=JSON.parse(saved);
+    priv=await crypto.subtle.importKey("jwk",j.priv,{name:"Ed25519"},true,["sign"]);
+    pubRaw=Uint8Array.from(atob(j.pub),c=>c.charCodeAt(0)).buffer;
+  }else{
+    const kp=await crypto.subtle.generateKey({name:"Ed25519"},true,["sign","verify"]);
+    priv=kp.privateKey;
+    pubRaw=await crypto.subtle.exportKey("raw",kp.publicKey);
+    localStorage.setItem(KEY,JSON.stringify({priv:await crypto.subtle.exportKey("jwk",priv), pub:btoa(String.fromCharCode(...new Uint8Array(pubRaw)))}));
+  }
+  const id=hex(await crypto.subtle.digest("SHA-256",pubRaw));
+  return DEV={priv, publicKey:b64u(pubRaw), id};
+}
+async function connectFrame(nonce){
+  const d=await loadDevice(), signedAt=Date.now();
+  const payload=["v3",d.id,CLIENT.id,CLIENT.mode,ROLE,SCOPES.join(","),String(signedAt),TOKEN,nonce,CLIENT.platform,""].join("|");
+  const sig=await crypto.subtle.sign({name:"Ed25519"},d.priv,new TextEncoder().encode(payload));
+  return {minProtocol:4,maxProtocol:4,client:CLIENT,role:ROLE,scopes:SCOPES,auth:{token:TOKEN},
+          device:{id:d.id,publicKey:d.publicKey,signature:b64u(sig),signedAt,nonce}};
+}
+
+let retryMs=5000, pairingWait=false;
+function connect(){
+  setStatus("",pairingWait?"페어링 승인 대기 중…":"연결 중…");
+  ws=new WebSocket(WS_URL);
+  ws.onopen =()=>{};
+  ws.onclose=()=>{ready=false;
+                  if(!pairingWait) setStatus("off",`끊김 · ${retryMs/1000}초 후 재연결`);
+                  setTimeout(connect,retryMs)};
+  ws.onerror=()=>setStatus("off","연결 실패");
+  ws.onmessage=async e=>{
+    let m; try{m=JSON.parse(e.data)}catch{return}
+    if(m.type==="res" && pending.has(m.id)){pending.get(m.id)(m); pending.delete(m.id); return}
+    if(m.type!=="event") return;
+    if(m.event==="connect.challenge"){
+      const id=String(++rpcId);
+      pending.set(id, r=>{
+        if(r.ok){ready=true; retryMs=5000; pairingWait=false; setStatus("on","오픈클로 연결됨"); return}
+        const code=r.error?.details?.code;
+        if(code==="PAIRING_REQUIRED"){
+          retryMs=3000; pairingWait=true;
+          setStatus("off","페어링 승인 대기 — start.sh가 자동 승인 (수동: openclaw devices approve --latest)");
+        }else{
+          retryMs=10000; setStatus("off","연결 거부: "+(r.error?.message||code||"?"));
+        }
+      });
+      ws.send(JSON.stringify({type:"req",id,method:"connect",params:await connectFrame(m.payload.nonce)}));
+      return;
+    }
+    if(m.event==="chat") onChat(m.payload||{});
+    else if(m.event==="agent") onAgent(m.payload||{});
+  };
+}
+function rpc(method,params){
+  return new Promise((res,rej)=>{
+    if(!ready||ws.readyState!==1) return rej(new Error("not connected"));
+    const id=String(++rpcId); pending.set(id,res);
+    ws.send(JSON.stringify({type:"req",id,method,params}));
+    setTimeout(()=>{if(pending.has(id)){pending.delete(id); rej(new Error("timeout"))}},60000);
+  });
+}
+
+/* ===================== 이벤트 ===================== */
+const streaming=new Map();
+const textOf = msg => (msg?.content||[]).filter(c=>c.type==="text").map(c=>c.text).join("");
+function onAgent(p){
+  const cid=charOf.get(p.sessionKey); if(!cid||cid!==current) return;
+  if(p.stream==="tool" && p.data?.name) setThinkingLabel(`${p.data.name} 사용 중`);
+  else if(p.stream==="lifecycle" && p.data?.phase==="start") showThinking(true);
+}
+function onChat(p){
+  const cid=charOf.get(p.sessionKey); if(!cid) return;
+  const live=(cid===current);
+  const who=document.getElementById("who-"+cid);  // 다른 방이면 null
+  switch(p.state){
+    case "status":
+      who?.classList.add("busy");
+      if(live){showThinking(true); if(p.phase) setThinkingLabel(({starting_model:"생각하는 중",thinking:"생각하는 중"})[p.phase]||p.phase)}
+      if(!streaming.has(cid)) streaming.set(cid,{node:null,text:""});
+      break;
+    case "delta": {
+      if(!streaming.has(cid)) streaming.set(cid,{node:null,text:""});
+      const st=streaming.get(cid);
+      st.text = textOf(p.message) || (st.text+(p.deltaText||""));
+      if(live){
+        showThinking(false);
+        if(!st.node) st.node=addMsg("them","");
+        st.node.innerHTML=md(st.text); scroll();
+      }
+      break;
+    }
+    case "final": {
+      const st=streaming.get(cid);
+      const finalText = textOf(p.message) || (st?st.text:"");
+      who?.classList.remove("busy");
+      remember(cid,"them",finalText);
+      if(live){
+        showThinking(false);
+        if(st&&st.node) st.node.innerHTML=md(finalText); else addMsg("them",finalText);
+        scroll();
+      }
+      streaming.delete(cid); setBusy(false);
+      break;
+    }
+    case "error": case "aborted": {
+      who?.classList.remove("busy");
+      if(live){showThinking(false); addMsg("sys","오류: "+(p.errorMessage||p.error||p.state))}
+      streaming.delete(cid); setBusy(false);
+      break;
+    }
+  }
+}
+
+/* ===================== 대화창 ===================== */
+const LOG=document.getElementById("log"), SAY=document.getElementById("say"),
+      SEND=document.getElementById("send");
+
+function md(src){
+  let s=(src||"").replace(/[&<>]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[ch]));
+  s=s.replace(/`([^`\n]+)`/g,'<code>$1</code>');
+  s=s.replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
+  s=s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g,'$1<em>$2</em>');
+  s=s.replace(/^\s*[-–•]\s+/gm,'· ');
+  return s;
+}
+function addMsg(kind,text){
+  const d=document.createElement("div"); d.className="msg "+kind;
+  if(kind==="them") d.innerHTML=md(text); else d.textContent=text;
+  LOG.appendChild(d); scroll(); return d;
+}
+function addUsage(t){
+  const d=document.createElement("div"); d.className="usage"; d.textContent=t; LOG.appendChild(d);
+}
+let thinkNode=null;
+function showThinking(on){
+  if(on){
+    if(thinkNode) return;
+    thinkNode=document.createElement("div"); thinkNode.className="think";
+    thinkNode.innerHTML=`<span class="lbl">생각하는 중</span><i></i><i></i><i></i>`;
+    LOG.appendChild(thinkNode); scroll();
+  }else if(thinkNode){thinkNode.remove(); thinkNode=null}
+}
+function setThinkingLabel(t){
+  const s=thinkNode?.querySelector(".lbl");
+  if(s&&t&&t.trim()) s.textContent=t.trim().slice(0,60);
+}
+function scroll(){LOG.scrollTop=LOG.scrollHeight}
+function remember(cid,who,text){
+  if(!history.has(cid)) history.set(cid,[]);
+  history.get(cid).push({who,text});
+}
+function setBusy(b){SEND.disabled=b; SAY.disabled=b; if(!b) SAY.focus()}
+
+async function openChat(cid){
+  current=cid;
+  const c=BY_ID[cid];
+  if(ROOM_OF[cid] && ROOM_OF[cid]!==currentRoom) showRoom(ROOM_OF[cid]);
+  document.body.classList.add("chatting");
+  document.querySelectorAll(".who").forEach(n=>n.classList.remove("active"));
+  document.getElementById("who-"+cid)?.classList.add("active");
+  document.getElementById("pface").style.backgroundImage=`url('assets/avatars/${cid}.png')`;
+  document.getElementById("pname").textContent=c.name;
+  document.getElementById("prole").textContent=c.role;
+
+  LOG.innerHTML=""; thinkNode=null;
+  (history.get(cid)||[]).forEach(m=>addMsg(m.who,m.text));
+
+  if(!sessionOf.has(cid)){
+    if(!ready){ addMsg("sys","아직 오픈클로에 연결되지 않았습니다"); return; }
+    const key=`agent:${cid}:${RUN_TAG}`;      // 캐릭터 = OpenClaw 에이전트, 세션은 페이지 로드마다 새로
+    sessionOf.set(cid,key); charOf.set(key,cid);
+    addMsg("sys",`${c.name}이(가) 자리에 앉았습니다`);
+  }
+  setBusy(false); SAY.focus();
+}
+
+async function send(){
+  const text=SAY.value.trim(); if(!text||!current) return;
+  const sid=sessionOf.get(current); if(!sid) return;
+  SAY.value=""; addMsg("me",text); remember(current,"me",text); setBusy(true);
+  try{
+    const r=await rpc("chat.send",{sessionKey:sid,message:text,idempotencyKey:crypto.randomUUID()});
+    if(!r.ok) throw new Error(r.error?.message||"거부됨");
+  }catch(err){ addMsg("sys","전송 실패: "+err.message); setBusy(false); }
+}
+
+SEND.onclick=send;
+SAY.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault(); send()}
+});
+document.getElementById("close").onclick=closeChat;
+document.addEventListener("keydown",e=>{if(e.key==="Escape") closeChat()});
+function closeChat(){
+  document.body.classList.remove("chatting"); current=null;
+  document.querySelectorAll(".who").forEach(n=>n.classList.remove("active"));
+}
+
+showRoom("office");
+connect();
+</script>
+</body>
+</html>
