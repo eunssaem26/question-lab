@@ -3,11 +3,11 @@
 #
 #  1) Claude Code 헤드리스(claude -p, Max 구독)가 picture-diary 스킬 절차대로
 #     오늘 기록에서 배운 것 하나를 골라 → codex-image 로 그림 → diary.jpg 렌더 → 사관학교 업로드
-#  2) scripts/ig/publish-diary.mjs 가 인스타 @eunssaem26 에 발행
-#  3) 텔레그램(필로 봇)으로 결과 알림
+#  2) 텔레그램(필로 봇)으로 그림·글을 보낸다 — 인스타는 은쌤이 보고 결정한다.
+#     올리려면 Claude Code 에게 "오늘 그림일기 인스타 올려줘" (크롬 조작, 4:5 크롭 필수)
 #
 #  사용:  daily.sh            전체 실행
-#         daily.sh --no-post  1)만, 사관학교·인스타에 안 올림 (시험용)
+#         daily.sh --no-post  1)만, 사관학교에 안 올림 (시험용)
 #  로그:  /tmp/geulbat-diary.log
 set -uo pipefail
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
@@ -25,9 +25,9 @@ log() { echo "[$(date '+%F %T')] $*"; }
 log "=== 그림일기 시작 ($DATE, no_post=$NO_POST)"
 mkdir -p "$DIR"
 
-# 이미 인스타까지 올린 날이면 끝
-if [ $NO_POST = 0 ] && grep -q "\"date\": \"$DATE\"" "$ROOT/operations/instagram/diary-state.json" 2>/dev/null; then
-  log "오늘 것은 이미 발행됨 — 종료"; exit 0
+# 오늘 것이 이미 있으면 끝 (사관학교도 하루 1편)
+if [ $NO_POST = 0 ] && [ -f "$DIR/diary.jpg" ]; then
+  log "오늘 것은 이미 있음 — 종료"; exit 0
 fi
 
 # 오늘 기록 모으기 (배운 것의 재료)
@@ -82,21 +82,13 @@ if [ ! -f "$DIR/diary.jpg" ]; then
 fi
 [ $NO_POST = 1 ] && { log "--no-post: 여기서 끝"; exit 0; }
 
-# 2) 인스타 발행 (토큰 갱신 먼저)
-node "$ROOT/scripts/ig/refresh-token.mjs" 2>&1 | tail -1
-OUT=$(node "$ROOT/scripts/ig/publish-diary.mjs" "$DATE" 2>&1); RC=$?
-echo "$OUT" | tail -3
+# 2) 텔레그램으로 보여주기 (인스타는 은쌤 확인 후 수동)
 TITLE=$(python3 -c "import json;print(json.load(open('$DIR/diary.json'))['title'])" 2>/dev/null)
 ACADEMY=$(grep -oE 'https://[^ ]+/diary/\?h=[^ ]+' "$DIR/claude-output.txt" | tail -1)
-if [ $RC = 0 ]; then
-  IG=$(echo "$OUT" | grep -oE 'https://www.instagram.com/[^ ]+' | tail -1)
-  notify "🐰 오늘 그림일기 올렸어요 — 「$TITLE」
-사관학교: ${ACADEMY:-?}
-인스타: ${IG:-발행됨}"
-else
-  notify "🐰 그림일기는 만들었는데 인스타 발행이 실패했어요 — 「$TITLE」
-$(echo "$OUT" | tail -1)
-수동: node scripts/ig/publish-diary.mjs $DATE"
-fi
+openclaw message send --channel telegram --target "$TG" --media "$DIR/diary.jpg" \
+  --message "🐰 오늘 그림일기 — 「$TITLE」
+사관학교: ${ACADEMY:-업로드 확인 필요}
+인스타에 올리려면 Claude Code 에게 「오늘 그림일기 인스타 올려줘」" >/dev/null 2>&1 || notify "🐰 오늘 그림일기 「$TITLE」 만들었어요 (사진 전송 실패). $DIR/diary.jpg"
+RC=0
 log "=== 끝 (rc=$RC)"
 exit $RC
