@@ -65,6 +65,13 @@
   }
   .plate b{display:block; font-size:clamp(11px,1.0vw,15px); font-weight:800}
 
+  /* 명부 상태 (ROSTER.md 와 같게): 활성 🟢 / 대기 🟡 / 휴면 ⚪ — 휴면은 자리를 흐리게 */
+  .plate b::before{content:""; display:inline-block; width:.55em; height:.55em; border-radius:50%; margin-right:.35em; vertical-align:middle; background:#9a9a9a}
+  .who.st-active .plate b::before{background:#3fbf5a; box-shadow:0 0 0 2px rgba(63,191,90,.3)}
+  .who.st-standby .plate b::before{background:#e8c23a}
+  .who.st-dormant{opacity:.55; filter:saturate(.5)}
+  .who.st-dormant:hover{opacity:1; filter:none}
+
   /* ---------- 머리말 ---------- */
   header{
     position:fixed; top:0; left:0; right:0; z-index:5;
@@ -186,27 +193,29 @@
 <script>
 /* ===================== 공간과 자리 =====================
    x,y 는 각 방 이미지(1536x1024 계열) 안에서의 백분율 = 아바타 중심.
-   자리를 옮기려면 이 숫자만 바꾼다.                                    */
+   자리를 옮기려면 이 숫자만 바꾼다.
+   st(상태)·job(반복 일)은 저장소 ROSTER.md 와 맞춘다 — active / standby / dormant.   */
 const ROOMS = [
   {id:"office", name:"교무실", bg:"assets/office_iso.png", cast:[
-    {id:"byeolsaem", name:"별쌤", role:"진단평가",    x:38.0, y:40.0},
-    {id:"kkansaem",  name:"깐쌤", role:"레드팀",      x:63.0, y:38.0},
-    {id:"eunsaem",   name:"은쌤", role:"발행 게이트", x:57.0, y:54.0},
-    {id:"philo",     name:"필로", role:"코디네이터",  x:45.0, y:73.0},
+    {id:"byeolsaem", name:"별쌤", role:"진단평가",    x:38.0, y:40.0, st:"dormant", job:"진단 서버채점 완성까지 휴면"},
+    {id:"kkansaem",  name:"깐쌤", role:"레드팀",      x:63.0, y:38.0, st:"active",  job:"주간 블로그 초안 검수 (월 09:30)"},
+    {id:"eunsaem",   name:"은쌤", role:"발행 게이트", x:57.0, y:54.0, st:"active",  job:"깐쌤 뒤 통과/수정후통과/반려 → 사람 승인"},
+    {id:"philo",     name:"필로", role:"코디네이터",  x:45.0, y:73.0, st:"active",  job:"그림일기 21:30 · 노닥빌리지 · 주간 보고 (월 09:00)"},
   ]},
   {id:"library", name:"도서관", bg:"assets/room_library.png", cast:[
-    {id:"chaeksaem", name:"책쌤", role:"독서수업",     x:33.0, y:41.0},
-    {id:"geulsaem",  name:"글쌤", role:"글쓰기수업",   x:70.0, y:44.0},
-    {id:"gardener",  name:"가드너", role:"지식 구조",   x:45.0, y:69.0},
+    {id:"chaeksaem", name:"책쌤", role:"독서수업",     x:33.0, y:41.0, st:"dormant", job:"독서 트랙 재개까지 휴면"},
+    {id:"geulsaem",  name:"글쌤", role:"글쓰기수업",   x:70.0, y:44.0, st:"standby", job:"#글쌤채널 응대만"},
+    {id:"gardener",  name:"가드너", role:"지식 구조",   x:45.0, y:69.0, st:"standby", job:"11월 — AKM 링크 점검 후보"},
   ]},
   {id:"media", name:"미디어실", bg:"assets/room_media.png", cast:[
-    {id:"batpd",     name:"밭피디", role:"콘텐츠",     x:42.0, y:56.0},
+    {id:"batpd",     name:"밭피디", role:"콘텐츠",     x:42.0, y:56.0, st:"active",  job:"인스타 다음 카드 제안 + 캡션 (수 10:00)"},
   ]},
   {id:"classroom", name:"교실", bg:"assets/room_classroom.png", cast:[
-    {id:"hogi",      name:"호기",   role:"학생 소통",   x:62.0, y:52.0},
-    {id:"yeongsaem", name:"영쌤",   role:"영어 학습설계", x:34.0, y:54.0},
+    {id:"hogi",      name:"호기",   role:"학생 소통",   x:62.0, y:52.0, st:"dormant", job:"학생 대면 채널이 생기면"},
+    {id:"yeongsaem", name:"영쌤",   role:"영어 학습설계", x:34.0, y:54.0, st:"dormant", job:"글로벌 확장 재개 시"},
   ]},
 ];
+const ST_KO = {active:"활성", standby:"대기", dormant:"휴면"};
 const BY_ID = Object.fromEntries(ROOMS.flatMap(r=>r.cast).map(c=>[c.id,c]));
 const ROOM_OF = Object.fromEntries(ROOMS.flatMap(r=>r.cast.map(c=>[c.id,r.id])));
 
@@ -230,8 +239,8 @@ function showRoom(rid){
   ROOM.querySelectorAll(".who").forEach(n=>n.remove());
   r.cast.forEach(c=>{
     const b=document.createElement("button");
-    b.className="who"+(c.id===current?" active":"");
-    b.id="who-"+c.id; b.title=`${c.name} — ${c.role}`;
+    b.className="who st-"+(c.st||"dormant")+(c.id===current?" active":"");
+    b.id="who-"+c.id; b.title=`${c.name} — ${c.role} · ${ST_KO[c.st]||"휴면"}${c.job?" · "+c.job:""}`;
     b.style.left=c.x+"%"; b.style.top=c.y+"%";
     b.innerHTML=`<div class="face" style="background-image:url('assets/avatars/${c.id}.png')"></div>
                  <div class="plate"><b>${c.name}</b></div>`;
