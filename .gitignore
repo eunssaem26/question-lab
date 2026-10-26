@@ -22,3 +22,6 @@ exports/
 
 # 사례글 일러스트 (codex-image 생성물, 게시글에 업로드됨)
 case-post/**/images/
+
+# oh-my-claudecode 도구 상태 (세션마다 새로 생김)
+.omc/
