@@ -1,0 +1,12 @@
+// 별쌤·책쌤·글쌤 도구 정책 (2026-10-26) — 깐쌤 공사(kkansaem-tools.patch.json5)와 동일.
+// 세 에이전트는 「글밭」 워크스페이스(slack default 계정) 자체 채널에만 바인딩, 24기 공유방 노출 없음.
+// 전역 allowlist/on-miss 때문에 10-22 일지 작업이 승인 대기로 한 명씩 재시도됐던 원인 해결.
+{
+  agents: {
+    entries: {
+      byeolsaem: { tools: { exec: { security: "full", ask: "off" } } },
+      chaeksaem: { tools: { exec: { security: "full", ask: "off" } } },
+      geulsaem:  { tools: { exec: { security: "full", ask: "off" } } },
+    },
+  },
+}

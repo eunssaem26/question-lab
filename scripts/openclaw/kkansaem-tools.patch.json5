@@ -1,0 +1,12 @@
+// 깐쌤 에이전트 도구 정책 (2026-10-26) — 필로와 동일. 전역 allowlist/on-miss를 받아
+// 매 세션 Read 승인 요청 → 만료 → cat 우회를 반복하던 문제 해결.
+// 근거: 필로 DM 스레드 p1793007208613859, docs/gateway/cli-backends.md 「ask off + full = 승인 건너뜀」
+{
+  agents: {
+    entries: {
+      kkansaem: {
+        tools: { exec: { security: "full", ask: "off" } },
+      },
+    },
+  },
+}
