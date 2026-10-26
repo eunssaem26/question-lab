@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// orchestrate.mjs — 필로 오케스트레이터 v0.1 (dry-run)
+// orchestrate.mjs — 필로 오케스트레이터 v0.2 (품질 게이트 v2)
 //
 // operations/play 보드(tasks/*.yaml)를 읽어, "필로가 자동으로 돌리면
 // 어떤 농부를 어떤 순서로 부를지 + 예상 전이"를 실제 호출 없이 출력한다.
@@ -8,9 +8,9 @@
 // 설계: operations/ORCHESTRATION-DESIGN.md (§4 상태기계, §5 경계, §7 불변식)
 //
 // 사용: node scripts/orchestrate.mjs            # dry-run
-//       node scripts/orchestrate.mjs --go       # (v0.2 예정) 실제 tg 호출 — 지금은 안내만
+//       node scripts/orchestrate.mjs --go       # 승인·기술 게이트를 제외한 농부 검수 단계 실행
 //
-// v0.1은 절대 tg를 호출하지 않는다. 시뮬레이션만.
+// 기본은 dry-run. --go도 제작·기술검수·사람 승인·배포는 실행하지 않는다.
 
 import { readFileSync, readdirSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -21,6 +21,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const TASKS_DIR = join(ROOT, 'operations/play/tasks');
 const GO = process.argv.includes('--go');
 const CLAUDE_BUILD_MAX = 3;
+const AUTO_STAGES = new Set(['DOMAIN_REVIEW', 'MERGE', 'ADVERSARIAL_QA', 'RELEASE_GATE']);
+const POST_PLAN = new Set(['READY', 'CLAUDE_BUILD', 'AUTO_VERIFIED', 'CODE_REVIEW', 'DOMAIN_REVIEW', 'MERGE', 'ADVERSARIAL_QA', 'RELEASE_GATE', 'HUMAN_APPROVAL', 'RELEASED', 'DONE']);
+const POST_CODE_REVIEW = new Set(['DOMAIN_REVIEW', 'MERGE', 'ADVERSARIAL_QA', 'RELEASE_GATE', 'HUMAN_APPROVAL', 'RELEASED', 'DONE']);
+const POST_ADVERSARIAL_QA = new Set(['RELEASE_GATE', 'HUMAN_APPROVAL', 'RELEASED', 'DONE']);
 
 // 농부(자동 실행) → scripts/tg 캐릭터명.  나머지(사람/개발)는 정지.
 const FARM = {
@@ -30,6 +34,7 @@ const FARM = {
 };
 const isFarm = (who) => Object.prototype.hasOwnProperty.call(FARM, (who || '').trim());
 const isHumanDev = (who) => /사람|claude[- ]?code|개발/i.test(who || '');
+const isTechnicalGate = (who) => /Hermes 기술검수|기술검수/i.test(who || '');
 
 const DOMAIN_REVIEWERS = ['책쌤', '호기', '밭피디', '글쌤', '별쌤', '영쌤', '가드너'];
 
@@ -42,6 +47,22 @@ function predictAfter(agent) {
   if (a === '깐쌤') return 'CRITICAL 없으면 → AI 은쌤(GATE), 있으면 → RETURNED(제작자)';
   if (FARM[a] === '은쌤') return '판정=통과 → AWAIT_HUMAN(사람 은쌤 승인), 반려/수정후통과 → RETURNED';
   return '(예측 규칙 없음)';
+}
+
+function workflowViolations(c) {
+  const v = [];
+  if (c.workflow_version !== '2') v.push('workflow_version=2 누락');
+  if (POST_PLAN.has(c.status) && c.plan_approval?.status !== 'APPROVED')
+    v.push('계획 승인 증거 없이 실행 이후 상태');
+  if (POST_CODE_REVIEW.has(c.status) && !['PASSED', 'NOT_APPLICABLE'].includes(c.code_review?.status))
+    v.push('코드 리뷰 PASS 없이 도메인/QA 단계');
+  if (POST_ADVERSARIAL_QA.has(c.status) && c.adversarial_qa?.status !== 'PASSED')
+    v.push('적대적 QA PASS 없이 발행 단계');
+  if (['CLAUDE_BUILD', 'AUTO_VERIFIED', 'CODE_REVIEW', 'DOMAIN_REVIEW', 'MERGE', 'ADVERSARIAL_QA', 'RELEASE_GATE', 'HUMAN_APPROVAL', 'RELEASED', 'DONE'].includes(c.status) && c.checkpoint_count < 1)
+    v.push('실행 이후 상태인데 durable checkpoint 없음');
+  if (['RELEASED', 'DONE'].includes(c.status) && c.human_approval?.production !== 'true')
+    v.push('사람 프로덕션 승인 없이 RELEASED/DONE');
+  return v;
 }
 
 // 검수용 입력 조립 (카드 → 농부에게 전달할 프롬프트)
@@ -62,7 +83,7 @@ function buildReviewInput(c, reviewer) {
 }
 
 // 카드 yaml 자동 전이 (백업 + 라인 단위 안전 편집만 — 블록 삭제 없음)
-function applyCardTransition(cardPath, raw, { reviewer, verdictLine, newStatus, newNext, blockerLine, handoffRel }) {
+function applyCardTransition(cardPath, raw, { reviewer, verdictLine, newStatus, newNext, blockerLine, handoffRel, gateKey, gateStatus }) {
   writeFileSync(cardPath + '.bak', raw); // 편집 전 백업 (operations/는 git 밖)
   let t = raw;
   t = t.replace(/^status: .*$/m, `status: ${newStatus}`);
@@ -73,6 +94,23 @@ function applyCardTransition(cardPath, raw, { reviewer, verdictLine, newStatus, 
     t = t.replace(/^review_verdicts:\s*$/m, `review_verdicts:\n  ${reviewer}: "${verdictLine}"`);
   if (blockerLine) t = t.replace(/^blockers:.*$/m, `blockers:\n  - "${blockerLine}"`);
   t = t.replace(/^evidence:\s*$/m, `evidence:\n  - "${handoffRel}"`);
+  if (gateKey) {
+    t = t.replace(new RegExp(`(${gateKey}:\\n\\s+status:)\\s*\\S+`), `$1 ${gateStatus}`);
+    t = t.replace(new RegExp(`(${gateKey}:[\\s\\S]*?\\n\\s+evidence:)\\s*\\[\\]`), `$1\n    - "${handoffRel}"`);
+  }
+  const phase = reviewer === '깐쌤' ? 'ADVERSARIAL_QA' : (FARM[reviewer] === '은쌤' ? 'RELEASE_GATE' : 'DOMAIN_REVIEW');
+  const cp = [
+    `  - phase: ${phase}`,
+    `    status: ${newStatus === 'RETURNED' ? 'RETURN' : 'PASS'}`,
+    `    at: "${new Date().toISOString()}"`,
+    `    actor: "${reviewer}"`,
+    `    git_sha: ""`,
+    `    evidence:`,
+    `      - "${handoffRel}"`,
+    `    next_handoff: "${newNext}"`,
+  ].join('\n');
+  if (/^checkpoints:\s*\[\]\s*$/m.test(t)) t = t.replace(/^checkpoints:\s*\[\]\s*$/m, `checkpoints:\n${cp}`);
+  else t = t.replace(/^next_handoff:/m, `${cp}\nnext_handoff:`);
   writeFileSync(cardPath, t);
 }
 
@@ -94,13 +132,13 @@ function updateBoardRow(id, { status, action, next, blocker }) {
 // 최소 필드 추출 파서 (task.yaml 스키마 한정 — 범용 YAML 아님)
 function parseCard(text) {
   const lines = text.split('\n');
-  const c = { required_reviewers: [], conditional_reviewers: [], blockers: [], scope: [], acceptance: [], review_verdicts: {}, human_approval: {}, claude: {} };
+  const c = { required_reviewers: [], conditional_reviewers: [], blockers: [], scope: [], acceptance: [], review_verdicts: {}, human_approval: {}, plan_approval: {}, code_review: {}, adversarial_qa: {}, claude: {}, checkpoint_count: 0 };
   const strip = (v) => (v ?? '').replace(/^["']|["']$/g, '').trim();
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (/^\s*#/.test(line) || !line.trim()) continue;
     let m;
-    if ((m = line.match(/^(id|title|why|status|next_handoff|owner|producer|type|priority|student_facing|data_risk):\s*(.*)$/))) {
+    if ((m = line.match(/^(id|title|why|status|next_handoff|owner|producer|type|priority|workflow_version|student_facing|data_risk):\s*(.*)$/))) {
       c[m[1]] = strip(m[2]);
     } else if (/^claude:\s*$/.test(line)) {
       while (i + 1 < lines.length && /^\s+\w+:/.test(lines[i + 1])) {
@@ -120,8 +158,14 @@ function parseCard(text) {
       while (i + 1 < lines.length && /^\s+\w+:/.test(lines[i + 1])) {
         const hm = lines[++i].match(/^\s+(\w+):\s*(.*)$/); if (hm) c.human_approval[hm[1]] = strip(hm[2]);
       }
+    } else if ((m = line.match(/^(plan_approval|code_review|adversarial_qa):\s*$/))) {
+      const key = m[1];
+      while (i + 1 < lines.length && /^\s+\w+:/.test(lines[i + 1])) {
+        const gm = lines[++i].match(/^\s+(\w+):\s*(.*)$/); if (gm) c[key][gm[1]] = strip(gm[2]);
+      }
     }
   }
+  c.checkpoint_count = (text.match(/^\s+- phase:/gm) || []).length;
   return c;
 }
 
@@ -152,6 +196,8 @@ for (const c of cards) {
     flags.push('⚠ 학생 문구성 카드인데 필수 검수자에 호기 없음');
   if (c.human_approval?.production === 'true')
     flags.push('🔒 배포=사람 승인 필요(production gate)');
+  const violations = workflowViolations(c);
+  if (violations.length) flags.push(...violations.map((x) => `⛔ ${x}`));
   if (flags.length) console.log('  ' + flags.join('  '));
 
   if (c.status === 'BLOCKED') {
@@ -159,7 +205,7 @@ for (const c of cards) {
     console.log(`  🚫 BLOCKED — ${c.blockers[0] || '막힘 사유 미기재'}`);
     continue;
   }
-  if (isFarm(next)) {
+  if (AUTO_STAGES.has(c.status) && isFarm(next) && violations.length === 0) {
     auto.push(c);
     // 도메인 검수(병렬·독립) vs 게이트(순차 깐쌤→은쌤) 구분
     const pendingDomain = c.required_reviewers.filter((r) => DOMAIN_REVIEWERS.includes(r) && !c.review_verdicts[r]);
@@ -170,9 +216,10 @@ for (const c of cards) {
     if (gateStages.length)
       console.log(`     이후 게이트(순차): ${gateStages.map((g) => (g === '깐쌤' ? '깐쌤(레드팀)' : 'AI 은쌤(발행)')).join(' → ')} → 사람 은쌤`);
     console.log(`     예상 전이: ${predictAfter(next)}`);
-  } else if (isHumanDev(next)) {
+  } else if (isHumanDev(next) || isTechnicalGate(next) || ['PLAN_DRAFT', 'PLAN_REVIEW', 'PLAN_APPROVAL', 'READY', 'CLAUDE_BUILD', 'AUTO_VERIFIED', 'CODE_REVIEW', 'HUMAN_APPROVAL'].includes(c.status)) {
     waiting.push(c);
-    console.log(`  ⏸ 정지 — 사람/개발 대기(${next}): ${c.blockers[0] || '다음 행동 대기'}`);
+    const reason = violations[0] || c.blockers[0] || '별도 게이트/다음 행동 대기';
+    console.log(`  ⏸ 정지 — 사람/개발/기술게이트 대기(${next}): ${reason}`);
   } else {
     console.log(`  ? 다음 담당 분류 불가: "${next}"`);
   }
@@ -190,7 +237,7 @@ if (buildCount > CLAUDE_BUILD_MAX) console.log(`  ⚠ CLAUDE_BUILD ${buildCount}
 if (GO && auto.length) {
   console.log('\n' + '━'.repeat(64));
   console.log(`\n🚜 --go 실제 실행 — 농부 검수 ${auto.length}건 (scripts/tg 호출)`);
-  console.log('   (제작·배포·승인은 실행하지 않음. 카드 yaml 자동 변경 없음 — 전이는 제안만.)\n');
+  console.log('   (제작·기술검수·사람 승인·배포는 실행하지 않음. 농부 결과만 카드+BOARD+체크포인트에 기록.)\n');
   const TG = join(ROOT, 'scripts/tg');
   for (const c of auto) {
     const who = (c.next_handoff || '').trim();
@@ -219,19 +266,34 @@ if (GO && auto.length) {
 
     // 전이 결정 (§4 상태기계 + 불변식 §7-2: CRITICAL 잔존 → 제작자 반송)
     let tr;
-    if (crit > 0) {
+    const rejectedGate = /판정\s*[:：]\s*(반려|수정후통과)/.test(out);
+    if (crit > 0 || rejectedGate) {
       tr = { newStatus: 'RETURNED', newNext: 'Claude Code', boardNext: 'Claude Code',
         verdictLine: `RETURNED (${crit} CRITICAL, ${warn} WARNING) — ${short}`,
         blockerLine: `${who} RETURN: ${crit} CRITICAL — ${short}`,
-        boardAction: '검수 결함 수정 후 재검수', boardBlocker: `${who} RETURN: ${crit} CRITICAL` };
-    } else if (pendingDomain.length) {
+        boardAction: '검수 결함 수정 후 재검수', boardBlocker: `${who} RETURN: ${crit} CRITICAL`,
+        gateKey: who === '깐쌤' ? 'adversarial_qa' : null, gateStatus: 'RETURNED' };
+    } else if (DOMAIN_REVIEWERS.includes(who) && pendingDomain.length) {
       tr = { newStatus: c.status, newNext: pendingDomain[0], boardNext: pendingDomain[0],
         verdictLine: `PASS (${warn} WARNING) — ${short}`, blockerLine: null,
         boardAction: `${pendingDomain[0]} 도메인 검수`, boardBlocker: '없음' };
-    } else {
+    } else if (DOMAIN_REVIEWERS.includes(who)) {
       tr = { newStatus: 'MERGE', newNext: '필로', boardNext: '필로',
         verdictLine: `PASS (${warn} WARNING) — ${short}`, blockerLine: null,
         boardAction: '필로 병합 → 깐쌤', boardBlocker: '없음' };
+    } else if (who === '필로') {
+      tr = { newStatus: 'ADVERSARIAL_QA', newNext: '깐쌤', boardNext: '깐쌤',
+        verdictLine: `PASS (${warn} WARNING) — ${short}`, blockerLine: null,
+        boardAction: '깐쌤 적대적 QA', boardBlocker: '없음' };
+    } else if (who === '깐쌤') {
+      tr = { newStatus: 'RELEASE_GATE', newNext: 'AI 은쌤', boardNext: 'AI 은쌤',
+        verdictLine: `PASS (${warn} WARNING) — ${short}`, blockerLine: null,
+        boardAction: 'AI 은쌤 발행 게이트', boardBlocker: '없음',
+        gateKey: 'adversarial_qa', gateStatus: 'PASSED' };
+    } else {
+      tr = { newStatus: 'HUMAN_APPROVAL', newNext: '사람 은쌤', boardNext: '사람 은쌤',
+        verdictLine: `PASS (${warn} WARNING) — ${short}`, blockerLine: null,
+        boardAction: '사람 은쌤 최종 승인', boardBlocker: '프로덕션 승인 필요' };
     }
     const cardPath = join(TASKS_DIR, c.id + '.yaml');
     applyCardTransition(cardPath, readFileSync(cardPath, 'utf8'), { reviewer: who, ...tr, handoffRel });

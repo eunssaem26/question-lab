@@ -6,28 +6,70 @@
 # status:draft 초안을 site/src/content/blog/에 생성한다.
 # 발행은 사람이 검토 후 status를 published로 바꾼다. 절대 자동 발행/푸시 금지.
 
-PROJECT="/Users/eunssaem/Desktop/open claw 준비"
-PAR_APP="/Users/eunssaem/Desktop/독서후플레이/par-app"
-CLAUDE="/Users/eunssaem/.local/bin/claude"
-LOG="/Users/eunssaem/Library/Logs/weekly-blog.log"
-STATUS="/Users/eunssaem/Library/Logs/weekly-blog.status"
+PROJECT="${WEEKLY_BLOG_PROJECT:-/Users/eunssaem/Desktop/open claw 준비}"
+PAR_APP="${WEEKLY_BLOG_PAR_APP:-/Users/eunssaem/Desktop/독서후플레이/par-app}"
+CLAUDE="${WEEKLY_BLOG_CLAUDE:-/Users/eunssaem/.local/bin/claude}"
+LOG="${WEEKLY_BLOG_LOG:-/Users/eunssaem/Library/Logs/weekly-blog.log}"
+STATUS="${WEEKLY_BLOG_STATUS:-/Users/eunssaem/Library/Logs/weekly-blog.status}"
+NOTIFY="${WEEKLY_BLOG_NOTIFY:-1}"
+NODE="${WEEKLY_BLOG_NODE:-/opt/homebrew/opt/node@22/bin/node}"
+VALIDATOR="${WEEKLY_BLOG_VALIDATOR:-$PROJECT/scripts/validate-weekly-blog-draft.mjs}"
+TIMEOUT_SECONDS="${WEEKLY_BLOG_TIMEOUT_SECONDS:-1200}"
+LOCK_DIR="${WEEKLY_BLOG_LOCK_DIR:-${STATUS}.lock}"
 BLOGDIR="site/src/content/blog"
 
 cd "$PROJECT" || exit 1
 
 # 실패를 조용히 넘기지 않는다. 알림 + 상태파일 양쪽에 남긴다.
 notify() {  # notify <제목> <본문>
+  [ "$NOTIFY" = "1" ] || return 0
   /usr/bin/osascript -e "display notification \"$2\" with title \"$1\"" 2>/dev/null
 }
 record() {  # record <결과> <메시지>
   echo "$(date '+%Y-%m-%d %H:%M') | $1 | $2" > "$STATUS"
   echo "[$1] $2" >> "$LOG"
 }
+snapshot_hashes() {
+  local file
+  for file in "$BLOGDIR"/*.md(N); do
+    printf '%s\t' "${file:t}"
+    /usr/bin/shasum -a 256 "$file" | awk '{ print $1 }'
+  done | LC_ALL=C sort
+}
+
+# ── 활성 스위치 (2026-09-28 추가) ───────────────────────────────────
+# 블로그를 당분간 쓰지 않아 자동 초안을 꺼 둔다. launchd 등록은 그대로 두고,
+# 아래 파일이 있을 때만 claude를 호출한다(없으면 토큰 0, 종료코드 0).
+#   다시 켜기:  touch "/Users/eunssaem/Desktop/open claw 준비/.weekly-blog-enabled"
+#   다시 끄기:  rm    "/Users/eunssaem/Desktop/open claw 준비/.weekly-blog-enabled"
+SWITCH="${WEEKLY_BLOG_SWITCH:-$PROJECT/.weekly-blog-enabled}"
+if [ ! -f "$SWITCH" ]; then
+  record "비활성" "스위치 파일 없음 → 건너뜀 (켜려면 touch $SWITCH)"
+  exit 0
+fi
+
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+  LOCK_PID=$(cat "$LOCK_DIR/pid" 2>/dev/null)
+  if [ -n "$LOCK_PID" ] && kill -0 "$LOCK_PID" 2>/dev/null; then
+    record "실패" "중복 실행 차단 (pid $LOCK_PID)"
+    notify "주간 블로그 중복 실행" "이미 실행 중인 작업이 있어 새 실행을 막았어요."
+    exit 3
+  fi
+  rm -f "$LOCK_DIR/pid" 2>/dev/null
+  rmdir "$LOCK_DIR" 2>/dev/null
+  if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+    record "실패" "잠금 획득 실패"
+    exit 3
+  fi
+fi
+echo $$ > "$LOCK_DIR/pid"
+trap 'rm -f "$LOCK_DIR/pid" 2>/dev/null; rmdir "$LOCK_DIR" 2>/dev/null' EXIT INT TERM HUP
 
 echo "===== $(date '+%Y-%m-%d %H:%M') 주간 블로그 체크 시작 =====" >> "$LOG"
 
 # 초안이 새로 생겼는지 판정하기 위한 실행 전 스냅샷
-BEFORE=$(ls "$BLOGDIR" 2>/dev/null)
+BEFORE=$(printf '%s\n' "$BLOGDIR"/*.md(N:t) | LC_ALL=C sort)
+BEFORE_HASHES=$(snapshot_hashes)
 
 # 독서후플레이는 별도 저장소다. #13·#15가 이 저장소 소재였으므로 함께 훑는다.
 if [ -d "$PAR_APP/.git" ]; then
@@ -63,30 +105,83 @@ $PAR_LINE
 - 마지막에 무엇을 했는지(생성한 파일 경로와 제목, 또는 스킵 사유) 한 줄로 요약해라."
 
 OUT=$(mktemp -t weekly-blog-out)
-"$CLAUDE" -p "$PROMPT" --permission-mode bypassPermissions >"$OUT" 2>&1
+TIMEOUT_FLAG="${OUT}.timeout"
+"$CLAUDE" -p "$PROMPT" --permission-mode bypassPermissions >"$OUT" 2>&1 &
+CLAUDE_PID=$!
+(
+  sleep "$TIMEOUT_SECONDS"
+  if kill -0 "$CLAUDE_PID" 2>/dev/null; then
+    : > "$TIMEOUT_FLAG"
+    kill -TERM "$CLAUDE_PID" 2>/dev/null
+    sleep 2
+    kill -KILL "$CLAUDE_PID" 2>/dev/null
+  fi
+) >/dev/null 2>&1 &
+WATCHDOG_PID=$!
+wait "$CLAUDE_PID"
 CODE=$?
+kill "$WATCHDOG_PID" 2>/dev/null
+wait "$WATCHDOG_PID" 2>/dev/null
 cat "$OUT" >> "$LOG"
 
-AFTER=$(ls "$BLOGDIR" 2>/dev/null)
-NEW=$(comm -13 <(echo "$BEFORE") <(echo "$AFTER") | head -3)
+AFTER=$(printf '%s\n' "$BLOGDIR"/*.md(N:t) | LC_ALL=C sort)
+NEW=$(comm -13 <(echo "$BEFORE") <(echo "$AFTER"))
+NEW_COUNT=$(printf '%s\n' "$NEW" | awk 'NF { count++ } END { print count + 0 }')
+CHANGED_EXISTING=$(while IFS=$'\t' read -r name before_hash; do
+  [ -n "$name" ] || continue
+  file="$BLOGDIR/$name"
+  if [ ! -f "$file" ]; then
+    print -r -- "$name"
+    continue
+  fi
+  after_hash=$(/usr/bin/shasum -a 256 "$file" | awk '{ print $1 }')
+  [ "$before_hash" = "$after_hash" ] || print -r -- "$name"
+done <<< "$BEFORE_HASHES")
+LAST_LINE=$(awk 'NF { line=$0 } END { print line }' "$OUT")
+RESULT_CODE=0
 
-if [ $CODE -ne 0 ]; then
+if [ -f "$TIMEOUT_FLAG" ]; then
+  record "실패" "claude 실행 시간 초과 (${TIMEOUT_SECONDS}초)"
+  notify "주간 블로그 시간 초과" "Claude 실행이 ${TIMEOUT_SECONDS}초를 넘어 중단됐어요."
+  RESULT_CODE=1
+elif [ -n "$CHANGED_EXISTING" ]; then
+  record "실패" "기존 블로그 파일 변경 감지: $CHANGED_EXISTING"
+  notify "주간 블로그 기존 글 변경" "자동화가 기존 글을 건드려 검토가 필요해요."
+  RESULT_CODE=1
+elif [ $CODE -ne 0 ]; then
   record "실패" "claude 종료코드 $CODE"
   notify "주간 블로그 실패" "claude가 종료코드 ${CODE}, 실행이 중단됐어요. 로그를 확인하세요."
+  RESULT_CODE=1
 elif grep -q "API Error" "$OUT"; then
   record "실패" "API Error (응답 중단)"
   notify "주간 블로그 실패" "API 오류로 초안을 못 만들었어요. 수동 실행이 필요해요."
+  RESULT_CODE=1
+elif [ "$NEW_COUNT" -gt 1 ]; then
+  record "실패" "새 초안은 정확히 1개여야 함 (${NEW_COUNT}개 생성)"
+  notify "주간 블로그 초안 과다 생성" "초안 ${NEW_COUNT}개가 생겨 자동 검증을 중단했어요."
+  RESULT_CODE=1
 elif [ -n "$NEW" ]; then
-  record "성공" "초안 생성: $NEW"
-  notify "주간 블로그 초안 나왔어요" "$NEW"
-elif grep -q "글감 없음" "$OUT"; then
+  VALIDATION=$("$NODE" "$VALIDATOR" "$BLOGDIR/$NEW" "$BLOGDIR" 2>&1)
+  VALIDATION_CODE=$?
+  echo "$VALIDATION" >> "$LOG"
+  if [ $VALIDATION_CODE -ne 0 ]; then
+    record "실패" "초안 검증 실패: $NEW"
+    notify "주간 블로그 초안 검증 실패" "$NEW 파일을 검토하세요."
+    RESULT_CODE=1
+  else
+    record "성공" "초안 생성·검증: $NEW"
+    notify "주간 블로그 초안 나왔어요" "$NEW"
+  fi
+elif grep -qxF "이번 주 글감 없음" "$OUT"; then  # claude가 뒤에 요약을 덧붙여도 인정
   record "정상" "이번 주 글감 없음"
 else
   record "확인필요" "초안도 없고 '글감 없음'도 아님"
   notify "주간 블로그 확인 필요" "초안이 안 생겼는데 사유도 불분명해요. 로그를 확인하세요."
+  RESULT_CODE=2
 fi
 
-rm -f "$OUT"
+rm -f "$OUT" "$TIMEOUT_FLAG"
 
 echo "===== $(date '+%Y-%m-%d %H:%M') 완료 =====" >> "$LOG"
 echo "" >> "$LOG"
+exit $RESULT_CODE

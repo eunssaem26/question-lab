@@ -12,7 +12,9 @@
 set -uo pipefail
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
 ROOT="/Users/eunssaem/Desktop/open claw 준비"
-SKILL="$HOME/.openclaw/workspaces/philo/skills/picture-diary"
+# 스킬은 2026-10-01 picture-diary → nodak-village 로 이름이 바뀌었다 (diary-api.mjs 는 그대로 있음). 새 이름 우선, 없으면 옛 이름
+SKILL="$HOME/.openclaw/workspaces/philo/skills/nodak-village"
+[ -d "$SKILL" ] || SKILL="$HOME/.openclaw/workspaces/philo/skills/picture-diary"
 VAULT="/Users/eunssaem/Documents/Obsidian Vault"
 DATE=$(date +%F)
 DIR="$ROOT/diary/$DATE"

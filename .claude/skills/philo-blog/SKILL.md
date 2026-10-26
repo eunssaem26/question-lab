@@ -4,6 +4,10 @@ description: |
   필로의 블로그 글 작성. 생각하는 글밭의 설립 과정, 개발 일지, 캐릭터 이야기,
   교육 인사이트를 필로의 톤으로 블로그 글 초안을 생성한다.
   Trigger: "블로그 써줘", "필로 블로그", "개발일지", "/philo-blog"
+metadata:
+  hermes:
+    tags: [blog, 블로그, 개발일지, devlog, 필로, philo, 생각하는글밭, writing]
+    related_skills: []
 ---
 
 # 필로 블로그 작성 스킬
@@ -11,7 +15,22 @@ description: |
 ## 개요
 
 생각하는 글밭의 코디네이터 필로가 블로그 글을 작성한다.
-`blog/philo-voice.md` 톤 가이드를 따르며, 다양한 소재원에서 자료를 수집하여 초안을 생성한다.
+`$GB/archive/blog-drafts/philo-voice.md` 톤 가이드를 따르며, 다양한 소재원에서 자료를 수집하여 초안을 생성한다.
+
+---
+
+## 경로 기준 (Claude Code · 헤르메스 공통)
+
+이 스킬은 두 런타임에서 함께 쓰인다. Claude Code는 프로젝트 폴더에서 실행되지만
+헤르메스는 프로필 워크스페이스에서 실행되므로, **상대경로를 쓰지 않는다.**
+아래 `$GB`를 프로젝트 루트로 두고 모든 경로를 절대경로로 해석한다.
+
+```
+$GB  = /Users/eunssaem/Desktop/open claw 준비
+$MEM = /Users/eunssaem/.claude/projects/-Users-eunssaem-Desktop-open-claw---/memory
+```
+
+git 명령도 cwd에 의존하지 않도록 `git -C "$GB" ...` 형태로 실행한다.
 
 ---
 
@@ -32,13 +51,13 @@ description: |
 
 ## Step 0: AI 티 체크리스트 로드 (필수)
 
-`agents/필로_AI티_체크리스트.md`를 먼저 읽는다. 여기 정의된 보존 규칙(친근체 어미 등)과 S1 금지 패턴을 초안 작성 내내 적용한다. 이 단계를 건너뛰면 Step 6 자체검증에서 거의 확실히 실패한다.
+`$GB/agents/필로_AI티_체크리스트.md`를 먼저 읽는다. 여기 정의된 보존 규칙(친근체 어미 등)과 S1 금지 패턴을 초안 작성 내내 적용한다. 이 단계를 건너뛰면 Step 6 자체검증에서 거의 확실히 실패한다.
 
 ---
 
 ## Step 1: 톤 가이드 로드
 
-`archive/blog-drafts/philo-voice.md`를 읽어 필로의 글쓰기 톤, 구조, 명명 규칙을 파악한다.
+`$GB/archive/blog-drafts/philo-voice.md`를 읽어 필로의 글쓰기 톤, 구조, 명명 규칙을 파악한다.
 
 ---
 
@@ -61,8 +80,8 @@ description: |
 카테고리에 따라 다른 소재를 수집한다:
 
 ### 개발일지
-1. `git log --since="7 days ago" --oneline`으로 최근 1주일 커밋 확인
-2. `site/src/content/blog/`에서 기존 글의 `seriesNumber:` 중 최댓값 확인 → 다음 번호 부여 (예: 최대 12면 13)
+1. `git -C "$GB" log --since="7 days ago" --oneline`으로 최근 1주일 커밋 확인
+2. `$GB/site/src/content/blog/`에서 기존 글의 `seriesNumber:` 중 최댓값 확인 → 다음 번호 부여 (예: 최대 12면 13)
 3. 작업 산출물 디렉토리 변경사항 확인
 
 > ⚠️ **분류 규칙 (홈 노출 필수 조건)**: 새 기능·게임·서비스·큰 개편 같은 **개발 성과 글은 반드시 개발일지 series로 붙인다.**
@@ -71,29 +90,29 @@ description: |
 > `insight` 등 series 없는 단독 카테고리는 홈에 안 뜨므로, 개발 성과 글에는 쓰지 않는다.
 
 ### 설립기
-1. `memory/` 파일들에서 프로젝트 결정사항, 설계 배경 읽기
-2. `AGENT_ARCHITECTURE.md`에서 시스템 설계 맥락 파악
-3. git 초기 커밋 히스토리 참조
+1. `$MEM/` 파일들에서 프로젝트 결정사항, 설계 배경 읽기
+2. `$GB/agents/ARCHITECTURE.md`에서 시스템 설계 맥락 파악
+3. git 초기 커밋 히스토리 참조 (`git -C "$GB" log --reverse`)
 
 ### 설계 철학
-1. `AGENT_ARCHITECTURE.md` 관련 섹션 읽기
-2. `memory/` 파일에서 해당 결정의 배경 수집
+1. `$GB/agents/ARCHITECTURE.md` 관련 섹션 읽기
+2. `$MEM/` 파일에서 해당 결정의 배경 수집
 3. 관련 산출물 확인
 
 ### 캐릭터 이야기
-1. `memory/project_characters.md`에서 캐릭터 설정 읽기
-2. 프로필 이미지 경로 확인 (`프로필이미지/` 디렉토리)
-3. `agents/{캐릭터}.md`에서 시스템 프롬프트 참조
+1. `$GB/agents/생각하는글밭_캐릭터_가이드.md`와 `$GB/WORLD-BIBLE.md`에서 캐릭터 설정 읽기
+2. 프로필 이미지 경로 확인 (`$GB/site/src/assets/characters/`)
+3. `$GB/souls/{캐릭터}.SOUL.md`에서 해당 캐릭터의 운영 규칙 참조 (구버전 `$GB/agents/{영문명}.md`는 참고용)
 
 ### 교육 인사이트
-1. `별쌤작업/별쌤-평가준거틀.md` 등 교육 관련 산출물 읽기
-2. `knowledge/` 디렉토리의 교육과정 데이터 참조
+1. `$GB/curriculum/별쌤-평가준거틀.md`, `$GB/curriculum/글쓰기-평가준거틀.md` 등 교육 관련 산출물 읽기
+2. `$GB/curriculum/`의 교육과정 데이터(`framework.json` 등) 참조
 
 ---
 
 ## Step 4: 초안 작성
 
-`archive/blog-drafts/philo-voice.md`의 카테고리별 글 구조를 따라 초안을 작성한다.
+`$GB/archive/blog-drafts/philo-voice.md`의 카테고리별 글 구조를 따라 초안을 작성한다.
 
 ### 공통 규칙
 - 제목은 독자의 관심을 끄는 질문이나 핵심 메시지로
@@ -141,7 +160,7 @@ status: "draft"
 
 ## Step 5: 파일 저장
 
-초안을 `site/src/content/blog/`에 직접 저장한다 (Astro content collection 위치).
+초안을 `$GB/site/src/content/blog/`에 직접 저장한다 (Astro content collection 위치).
 
 파일명: `YYYY-MM-DD-{카테고리}-{슬러그}.md` (devlog/일반) 또는 `{시리즈번호}-{한글슬러그}.md` (시리즈물).
 - 슬러그는 영문 소문자·하이픈 구분 또는 한글
@@ -172,7 +191,7 @@ status: "draft"
 
 작성 완료 후 다음을 보고한다:
 
-1. 저장 경로 (`site/src/content/blog/...`)
+1. 저장 경로 (`$GB/site/src/content/blog/...`)
 2. 글 제목
 3. 카테고리·시리즈 정보
 4. 분량 (글자 수)
