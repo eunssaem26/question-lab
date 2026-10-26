@@ -1,0 +1,36 @@
+{
+  "name": "video",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "capture": "node scripts/capture.mjs",
+    "ig": "node scripts/export-ig.mjs",
+    "grid": "node scripts/preview-grid.mjs",
+    "config": "node scripts/make-config.mjs",
+    "reel": "node scripts/reel.mjs",
+    "studio": "remotion studio",
+    "render": "remotion render",
+    "chars": "node scripts/gen-characters.mjs",
+    "pano": "node scripts/gen-panorama.mjs",
+    "ig:all": "node scripts/export-all.mjs",
+    "pano:check": "node scripts/check-seams.mjs",
+    "books": "node scripts/gen-book-games.mjs"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.468",
+    "@remotion/google-fonts": "^4.0.468",
+    "@remotion/transitions": "^4.0.468",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "remotion": "^4.0.468"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.15",
+    "playwright": "^1.60.0",
+    "typescript": "^6.0.3"
+  }
+}

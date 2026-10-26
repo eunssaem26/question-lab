@@ -1,0 +1,105 @@
+{
+  "_comment": [
+    "@eunssaem26 계정 오픈 시퀀스 — 전체 게시물의 단일 출처.",
+    "배열 순서 = 발행 순서. 위에서부터 차례로 올린다.",
+    "인스타 그리드는 최신이 왼쪽 위이므로, 이 순서를 뒤집어 3개씩 끊으면 프로필 화면이 된다.",
+    "dir = exports/instagram/<dir>/ (npm run ig · npm run pano 가 만드는 폴더).",
+    "중간에 다른 게시물이 끼면 얼굴 띠와 파노라마가 어긋난다. 순서를 지킬 것.",
+    "fullBleed: 사진이 가장자리까지 꽉 찬 게시물. 반드시 4:5 로 올려야 한다 — 1:1 로 올리면 정사각이 되고, 그리드가 4:5 로 되돌리며 좌우를 잘라내 가장자리 인물이 사라진다."
+  ],
+  "posts": [
+    {
+      "dir": "brand-01-sign",
+      "label": "간판",
+      "group": "브랜드"
+    },
+    {
+      "dir": "brand-02-tagline",
+      "label": "태그라인",
+      "group": "브랜드"
+    },
+    {
+      "dir": "brand-03-intro",
+      "label": "글밭 소개",
+      "group": "브랜드"
+    },
+    {
+      "dir": "pano-1-right",
+      "label": "파노라마 우",
+      "group": "파노라마",
+      "fullBleed": true
+    },
+    {
+      "dir": "pano-2-center",
+      "label": "파노라마 중",
+      "group": "파노라마",
+      "fullBleed": true
+    },
+    {
+      "dir": "pano-3-left",
+      "label": "파노라마 좌",
+      "group": "파노라마",
+      "fullBleed": true
+    },
+    {
+      "dir": "char-philo",
+      "label": "필로",
+      "group": "농부"
+    },
+    {
+      "dir": "char-batpd",
+      "label": "밭피디",
+      "group": "농부"
+    },
+    {
+      "dir": "char-gardener",
+      "label": "가드너",
+      "group": "농부"
+    },
+    {
+      "dir": "char-yeongsaem",
+      "label": "영쌤",
+      "group": "농부"
+    },
+    {
+      "dir": "char-byeolsaem",
+      "label": "별쌤",
+      "group": "농부"
+    },
+    {
+      "dir": "char-chaeksaem",
+      "label": "책쌤",
+      "group": "농부"
+    },
+    {
+      "dir": "char-geulsaem",
+      "label": "글쌤",
+      "group": "농부"
+    },
+    {
+      "dir": "char-hogi",
+      "label": "호기",
+      "group": "농부"
+    },
+    {
+      "dir": "char-eunsaem",
+      "label": "은쌤",
+      "group": "농부"
+    },
+    {
+      "dir": "char-kkansaem",
+      "label": "깐쌤",
+      "group": "농부"
+    },
+    {
+      "dir": "roster",
+      "label": "열 명이 하는 일",
+      "group": "마무리"
+    },
+    {
+      "dir": "cta-diagnosis",
+      "label": "진단 받기",
+      "group": "마무리"
+    }
+  ]
+}

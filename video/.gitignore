@@ -1,0 +1,6 @@
+node_modules/
+out/
+public/cards/
+public/config/
+public/audio/*.mp3
+.DS_Store
