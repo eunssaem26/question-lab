@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 게임 소개 : 깐쌤의 빨간 펜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  /* ─── 그리드 안전영역 ───────────────────────────
+     인스타 업로드 기본값이 1:1 이라 1080×1350 중 y=135~1215 만 남는다.
+     글자·핵심 그림은 반드시 .safe(1080×1080) 안에 둔다.
+     ───────────────────────────────────────────── */
+  .safe {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .above-fold, .below-fold {
+    position: absolute; left: 0; width: 100%;
+    text-align: center;
+  }
+  .above-fold { top: 165px; }
+  .below-fold { bottom: 165px; }
+  .card-number {
+    position: absolute; top: 160px; right: 50px;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: 2px; z-index: 5; opacity: 0.55;
+  }
+  .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.7; }
+  .swipe { font-size: 30px; font-weight: 700; letter-spacing: 8px; opacity: 0.6; }
+
+  /* 게임 고유색 — 빨간 펜 */
+  :root { --ink: #FFF3E6; --red: #C4362F; --deep: #7A2420; }
+
+  /* ─── 01 커버 : 게임 커버 아트 통째로 ─── */
+  .card-1 { background: #E0743C; }
+  .card-1 .cover-art {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    object-fit: cover;
+  }
+  .card-1 .band {
+    position: absolute; left: 0; width: 100%; height: 135px;
+    display: flex; align-items: center; justify-content: center;
+    color: #FFF3E6;
+  }
+  .card-1 .band.top { top: 0; background: #E0955C; }
+  .card-1 .band.bottom { bottom: 0; background: #4A3428; }
+  .card-1 .card-number { color: #FFF3E6; top: 160px; }
+
+  /* ─── 공통 : 텍스트 카드 ─── */
+  .txt { color: var(--ink); }
+  .txt .card-number, .txt .brand-tag, .txt .swipe { color: var(--ink); }
+  .eyebrow {
+    font-size: 34px; font-weight: 700;
+    letter-spacing: 8px; opacity: 0.75; margin-bottom: 40px;
+  }
+  .head {
+    font-size: 88px; font-weight: 900; line-height: 1.35;
+    text-align: center; word-break: keep-all; padding: 0 80px;
+  }
+  .head em { font-style: normal; color: #FFD166; }
+  .sub {
+    margin-top: 48px; font-size: 40px; font-weight: 500; line-height: 1.7;
+    text-align: center; word-break: keep-all; padding: 0 110px; opacity: 0.9;
+  }
+
+  /* ─── 02 규칙 ─── */
+  .card-2 { background: var(--red); }
+  .card-2 .moles { display: flex; gap: 40px; margin-bottom: 56px; }
+  .card-2 .mole {
+    width: 210px; height: 210px; border-radius: 32px;
+    overflow: hidden; border: 8px solid #FFF3E6;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.28);
+    position: relative;
+  }
+  .card-2 .mole img { width: 100%; height: 100%; object-fit: cover; }
+  .card-2 .mole .tag {
+    position: absolute; left: 0; bottom: 0; width: 100%;
+    background: rgba(74,52,40,0.9); color: #FFF3E6;
+    font-size: 30px; font-weight: 900; padding: 10px 0; text-align: center;
+  }
+
+  /* ─── 03 함정 (톤 반전) ─── */
+  .card-3 { background: #FFF3E6; }
+  .card-3 .eyebrow, .card-3 .card-number, .card-3 .swipe { color: var(--deep); }
+  .card-3 .head { color: var(--deep); }
+  .card-3 .head em { color: var(--red); }
+  .card-3 .sub { color: #6B5344; }
+  .card-3 .kkan {
+    width: 340px; height: 340px; border-radius: 50%;
+    overflow: hidden; border: 12px solid var(--red);
+    box-shadow: 0 18px 44px rgba(122,36,32,0.25);
+    margin-bottom: 52px;
+  }
+  .card-3 .kkan img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+
+  /* ─── 04 등급 ─── */
+  .card-4 { background: var(--deep); }
+  .card-4 .ranks { display: flex; flex-direction: column; gap: 22px; margin-top: 12px; }
+  .card-4 .rank {
+    display: flex; align-items: center; gap: 28px;
+    background: rgba(255,243,230,0.1); border-radius: 999px;
+    padding: 22px 52px; width: 780px;
+  }
+  .card-4 .rank .n {
+    font-size: 34px; font-weight: 900; color: #FFD166;
+    width: 54px; flex-shrink: 0;
+  }
+  .card-4 .rank .t { font-size: 46px; font-weight: 700; color: var(--ink); }
+  .card-4 .rank.top { background: #FFD166; }
+  .card-4 .rank.top .n { color: var(--deep); }
+  .card-4 .rank.top .t { color: var(--deep); font-weight: 900; }
+
+  /* ─── 05 CTA ─── */
+  .card-5 { background: var(--red); }
+  .card-5 .badge {
+    margin-top: 20px; background: #FFD166; color: var(--deep);
+    font-size: 38px; font-weight: 900;
+    padding: 20px 52px; border-radius: 999px; letter-spacing: 1px;
+  }
+  .card-5 .url {
+    margin-top: 56px; background: #FFF3E6; color: var(--deep);
+    font-size: 44px; font-weight: 900;
+    padding: 26px 62px; border-radius: 999px; letter-spacing: 0.5px;
+  }
+  .card-5 .where { margin-top: 34px; font-size: 34px; font-weight: 500; opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<!-- 01 커버 -->
+<section class="card card-1">
+  <img class="cover-art" src="assets/games/redpen-cover.png" alt="깐쌤의 빨간 펜">
+  <div class="band top"><div class="brand-tag">생 각 하 는  글 밭</div></div>
+  <div class="card-number">01 / 05</div>
+  <div class="band bottom"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 02 규칙 -->
+<section class="card card-2 txt">
+  <div class="card-number">02 / 05</div>
+  <div class="safe">
+    <div class="moles">
+      <div class="mole"><img src="assets/games/redpen-mole.jpg" alt=""><div class="tag">틀린 말</div></div>
+      <div class="mole"><img src="assets/games/redpen-mole-hit.jpg" alt=""><div class="tag">콕!</div></div>
+    </div>
+    <div class="eyebrow">게 임 방 법</div>
+    <div class="head">밭에서 튀어나오는 단어,<br><em>틀린 말만</em> 콕</div>
+    <div class="sub">두더지가 든 팻말에 단어가 적혀 있어요.<br>틀린 표기만 빨간 펜으로 찍으면 점수.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 03 함정 -->
+<section class="card card-3">
+  <div class="card-number">03 / 05</div>
+  <div class="safe">
+    <div class="kkan"><img src="assets/games/redpen-kkan.jpg" alt="깐쌤"></div>
+    <div class="head">맞는 말을 치면<br><em>시간 −3초</em></div>
+    <div class="sub">깐쌤이 째려봅니다.<br>급하다고 아무거나 찍으면 손해예요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe" style="color:#7A2420">SWIPE →</div></div>
+</section>
+
+<!-- 04 등급 -->
+<section class="card card-4 txt">
+  <div class="card-number">04 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">어 디 까 지  가 나 요</div>
+    <div class="ranks">
+      <div class="rank"><div class="n">1</div><div class="t">견습 검수생</div></div>
+      <div class="rank"><div class="n">2</div><div class="t">빨간 펜 조교</div></div>
+      <div class="rank"><div class="n">3</div><div class="t">교정의 달인</div></div>
+      <div class="rank top"><div class="n">4</div><div class="t">깐쌤의 후계자</div></div>
+    </div>
+    <div class="sub" style="margin-top:56px">1단계 몸풀기를 넘기면<br>깐쌤의 진짜 검수가 시작돼요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 05 CTA -->
+<section class="card card-5 txt">
+  <div class="card-number">05 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">지 금  바 로</div>
+    <div class="head">전체 랭킹<br><em>TOP 5</em>가 있어요</div>
+    <div class="badge">설치 없이 브라우저에서 바로</div>
+    <div class="url">play.wherethoughtsgrow.com</div>
+    <div class="where">프로필 링크에서 바로 열려요</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080;
+  var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

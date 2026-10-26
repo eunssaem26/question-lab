@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 농부 소개 06. 책쌤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* 이 파일은 gen-characters.mjs 가 생성한다. 직접 고치지 말고 data/characters.json 을 고칠 것. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  /* ─── 그리드 안전영역 ───────────────────────────
+     인스타 프로필 그리드는 4:5 를 1:1 로 중앙 크롭한다.
+     1080×1350 중 그리드에 보이는 건 y=135~1215 뿐이므로
+     얼굴·이름은 반드시 .safe 안에 둔다. 인스타 업로드 기본값이 1:1 이라
+     위아래 135px 은 실제로 잘려 나간다 — 글자를 두면 안 된다.
+     ───────────────────────────────────────────── */
+  .safe {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .above-fold, .below-fold {
+    position: absolute; left: 0; width: 100%;
+    text-align: center; color: #A67B5B;
+  }
+  .above-fold { top: 165px; }
+  .below-fold { bottom: 165px; }
+  .card-number {
+    position: absolute; top: 160px; right: 50px;
+    font-size: 28px; font-weight: 700;
+    color: #A67B5B; opacity: 0.5; letter-spacing: 2px; z-index: 5;
+  }
+  .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.65; }
+  .swipe { font-size: 30px; font-weight: 700; letter-spacing: 8px; opacity: 0.55; }
+
+  /* 얼굴 초점: --fx/--fy 지점을 기준으로 --zoom 만큼 당긴다 */
+  .portrait-wrap {
+    width: 620px; height: 620px;
+    border-radius: 50%; overflow: hidden;
+    border: 14px solid #FBF3EA;
+    box-shadow: 0 18px 50px rgba(92,61,46,0.18);
+    flex-shrink: 0;
+  }
+  .portrait-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: var(--fx) var(--fy);
+    transform: scale(var(--zoom));
+    transform-origin: var(--fx) var(--fy);
+  }
+
+  /* ─── 01 커버 ─── */
+  .card-1 { background: #F5E6D0; color: #5C3D2E; }
+  .card-1 .name {
+    font-size: 130px; font-weight: 900; line-height: 1;
+    margin-top: 52px; letter-spacing: -2px;
+  }
+  .card-1 .role {
+    margin-top: 26px; background: #6B7F4A; color: #FBF3EA;
+    font-size: 36px; font-weight: 700;
+    padding: 16px 44px; border-radius: 999px; letter-spacing: 1px;
+  }
+
+  /* ─── 02 하는 일 ─── */
+  .card-2 { background: #FBF3EA; color: #5C3D2E; }
+  .card-2 .label {
+    font-size: 34px; font-weight: 700; color: #A67B5B;
+    letter-spacing: 8px; margin-bottom: 44px;
+  }
+  .card-2 .quote {
+    font-size: 76px; font-weight: 900; line-height: 1.45;
+    text-align: center; word-break: keep-all; padding: 0 90px;
+  }
+  .card-2 .quote em { font-style: normal; color: #C4956A; }
+  .card-2 .desc {
+    margin-top: 60px; font-size: 38px; font-weight: 500; line-height: 1.75;
+    color: #6B5344; text-align: center; word-break: keep-all; padding: 0 110px;
+  }
+
+  /* ─── 03 원칙 (톤 반전) ─── */
+  .card-3 { background: #6B7F4A; color: #FBF3EA; }
+  .card-3 .mark { font-size: 110px; font-weight: 900; opacity: 0.35; line-height: 1; margin-bottom: 24px; }
+  .card-3 .principle {
+    font-size: 82px; font-weight: 900; line-height: 1.5;
+    text-align: center; word-break: keep-all; padding: 0 100px;
+  }
+  .card-3 .who { margin-top: 56px; font-size: 34px; font-weight: 700; letter-spacing: 4px; opacity: 0.8; }
+  .card-3 .above-fold, .card-3 .below-fold { color: #FBF3EA; opacity: 0.7; }
+
+  /* ─── 04 다음 예고 / 마무리 ─── */
+  .card-4 { background: #F5E6D0; color: #5C3D2E; }
+  .card-4 .next-label {
+    font-size: 40px; font-weight: 700; color: #A67B5B;
+    letter-spacing: 6px; margin-bottom: 50px; text-align: center; word-break: keep-all;
+  }
+  .card-4 .next-wrap { width: 400px; height: 400px; border-width: 12px; }
+  .card-4 .next-name { font-size: 92px; font-weight: 900; margin-top: 44px; line-height: 1; }
+  .card-4 .next-one-liner { margin-top: 26px; font-size: 38px; font-weight: 500; color: #6B5344; }
+  .card-4 .finale {
+    font-size: 86px; font-weight: 900; line-height: 1.45;
+    text-align: center; word-break: keep-all;
+  }
+  .card-4 .finale-sub { margin-top: 34px; font-size: 40px; font-weight: 500; color: #6B5344; }
+  .card-4 .follow {
+    margin-top: 60px; background: #5C3D2E; color: #F5E6D0;
+    font-size: 36px; font-weight: 700;
+    padding: 22px 56px; border-radius: 999px; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<section class="card card-1">
+  <div class="card-number">01 / 04</div>
+  <div class="above-fold"><div class="brand-tag">생각하는 글밭</div></div>
+  <div class="safe">
+    <div class="portrait-wrap" style="--fx:50%; --fy:36%; --zoom:1.75;">
+      <img src="../assets/characters/chaeksaem_clay.png" alt="책쌤">
+    </div>
+    <div class="name">책쌤</div>
+    <div class="role">독서</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-2">
+  <div class="card-number">02 / 04</div>
+  <div class="safe">
+    <div class="label">하는 일</div>
+    <div class="quote">깊이<br><em>읽게 한다</em></div>
+    <div class="desc">줄거리를 요약해 주지 않아요.<br>스스로 의미를 짓도록 질문으로 밀어요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-3">
+  <div class="card-number">03 / 04</div>
+  <div class="safe">
+    <div class="mark">&ldquo;</div>
+    <div class="principle">대신 읽어주지 않는다</div>
+    <div class="who">책쌤이 잊지 않는 것</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-4">
+  <div class="card-number">04 / 04</div>
+  <div class="safe">
+    <div class="next-label">다음 농부는</div>
+    <div class="portrait-wrap next-wrap" style="--fx:50%; --fy:36%; --zoom:1.75;">
+      <img src="../assets/characters/geulsaem_clay.png" alt="글쌤">
+    </div>
+    <div class="next-name">글쌤</div>
+    <div class="next-one-liner">글쓰기</div>
+    <div class="follow">팔로우하고 10명 다 만나기</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080;
+  var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

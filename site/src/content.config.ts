@@ -17,6 +17,8 @@ const blog = defineCollection({
       seriesNumber: z.number().optional(),
       tags: z.array(z.string()).default([]),
       status: z.enum(['draft', 'published']).default('published'),
+      // 네이버 블로그로 옮긴 글은 원문 대신 이 주소로 가는 안내만 보여 준다 (2026-10-25)
+      naverUrl: z.string().url().optional(),
     }),
 });
 

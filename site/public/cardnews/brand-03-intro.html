@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 브랜드 03. 소개</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  .safe {
+    position: absolute; top: 135px; left: 0; width: 1080px; height: 1080px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .above-fold, .below-fold {
+    position: absolute; left: 0; width: 100%; text-align: center; color: #A67B5B;
+  }
+  .above-fold { top: 165px; }
+  .below-fold { bottom: 165px; }
+  .card-number {
+    position: absolute; top: 160px; right: 50px;
+    font-size: 28px; font-weight: 700; color: #A67B5B; opacity: 0.5;
+    letter-spacing: 2px; z-index: 5;
+  }
+  .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.65; }
+  .swipe { font-size: 30px; font-weight: 700; letter-spacing: 8px; opacity: 0.55; }
+  .label {
+    font-size: 34px; font-weight: 700; color: #A67B5B;
+    letter-spacing: 8px; margin-bottom: 44px;
+  }
+  .big {
+    font-size: 82px; font-weight: 900; line-height: 1.45;
+    text-align: center; word-break: keep-all; padding: 0 95px;
+  }
+  .big em { font-style: normal; color: #C4956A; }
+  .sub {
+    margin-top: 56px; font-size: 38px; font-weight: 500; line-height: 1.75;
+    color: #6B5344; text-align: center; word-break: keep-all; padding: 0 110px;
+  }
+
+  /* 01 커버 — 그리드 왼쪽 아래 칸이 된다 */
+  .card-1 { background: #F5E6D0; color: #5C3D2E; }
+  /* 원본 PNG 는 정사각 + 옅은 크림 여백이라 배경 위에 사각 경계가 드러난다.
+     엠블럼 자체가 원형이므로 원으로 잘라내면 경계가 사라진다. */
+  .card-1 .logo {
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: drop-shadow(0 14px 36px rgba(92,61,46,0.18));
+  }
+  .card-1 .title { font-size: 104px; font-weight: 900; margin-top: 52px; line-height: 1; }
+  .card-1 .what {
+    margin-top: 30px; background: #6B7F4A; color: #FBF3EA;
+    font-size: 36px; font-weight: 700; padding: 16px 44px;
+    border-radius: 999px; letter-spacing: 1px;
+  }
+
+  .card-2 { background: #FBF3EA; color: #5C3D2E; }
+  .card-3 { background: #6B7F4A; color: #FBF3EA; }
+  .card-3 .label { color: #D5E2C8; }
+  .card-3 .sub { color: #E8EFDC; }
+  .card-3 .above-fold, .card-3 .below-fold { color: #FBF3EA; opacity: 0.7; }
+  .card-4 { background: #F5E6D0; color: #5C3D2E; }
+  .card-5 { background: #FBF3EA; color: #5C3D2E; }
+
+  /* 두 정원 */
+  .gardens { display: flex; gap: 40px; margin-top: 20px; }
+  .garden {
+    width: 410px; padding: 60px 34px 54px;
+    background: #F5E6D0; border-radius: 40px; text-align: center;
+  }
+  .garden .g-name { font-size: 48px; font-weight: 900; color: #5C3D2E; }
+  .garden .g-en { margin-top: 10px; font-size: 26px; font-weight: 700; color: #A67B5B; letter-spacing: 2px; }
+  .garden .g-desc { margin-top: 30px; font-size: 33px; font-weight: 500; color: #6B5344; line-height: 1.6; word-break: keep-all; }
+  .garden .g-items {
+    margin-top: 30px; padding-top: 26px;
+    border-top: 3px solid #E0CBB2;
+    font-size: 27px; font-weight: 700; color: #A67B5B; line-height: 1.7;
+  }
+  .both {
+    margin-top: 54px; font-size: 34px; font-weight: 500;
+    color: #6B5344; text-align: center; word-break: keep-all;
+  }
+  .both em { font-style: normal; font-weight: 700; color: #6B7F4A; }
+
+  .card-6 { background: #5C3D2E; color: #F5E6D0; }
+  .card-6 .above-fold { color: #F5E6D0; opacity: 0.5; }
+  .card-6 .cta-big { font-size: 88px; font-weight: 900; line-height: 1.4; text-align: center; word-break: keep-all; }
+  .card-6 .cta-sub { margin-top: 34px; font-size: 38px; font-weight: 500; color: #D4BFA8; }
+  .card-6 .pill {
+    margin-top: 64px; background: #F5E6D0; color: #5C3D2E;
+    font-size: 38px; font-weight: 700; padding: 24px 60px; border-radius: 999px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 01 커버 -->
+<section class="card card-1">
+  <div class="card-number">01 / 06</div>
+  <div class="above-fold"><div class="brand-tag">WHERE THOUGHTS GROW</div></div>
+  <div class="safe">
+    <img class="logo" src="assets/brand-circle.png" alt="생각하는 글밭">
+    <div class="title">생각하는 글밭</div>
+    <div class="what">어떤 곳인가요</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 02 문제 -->
+<section class="card card-2">
+  <div class="card-number">02 / 06</div>
+  <div class="safe">
+    <div class="label">세상은 이렇게 말합니다</div>
+    <div class="big">더 빨리 읽어라<br>더 많이 써라</div>
+    <div class="sub">속도와 분량이 실력의 증거라고<br>믿게 만드는 말들이에요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 03 우리의 질문 -->
+<section class="card card-3">
+  <div class="card-number">03 / 06</div>
+  <div class="safe">
+    <div class="label">우리는 반대로 묻습니다</div>
+    <div class="big">너는 지금<br>무슨 생각을<br>하고 있니?</div>
+    <div class="sub">얼마나 읽었는지가 아니라<br>무엇을 생각했는지를 먼저 봅니다.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 04 관점 -->
+<section class="card card-4">
+  <div class="card-number">04 / 06</div>
+  <div class="safe">
+    <div class="label">우리가 보는 문해력</div>
+    <div class="big">기능이 아니라<br><em>자라나는 것</em></div>
+    <div class="sub">아이는 이미 자랄 힘을 품은 씨앗이에요.<br>질문과 책과 글이 물과 햇빛이 되고요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 05 두 정원 -->
+<section class="card card-5">
+  <div class="card-number">05 / 06</div>
+  <div class="safe">
+    <div class="label">글밭에는 두 정원이 있어요</div>
+    <div class="gardens">
+      <div class="garden">
+        <div class="g-name">스튜디오</div>
+        <div class="g-en">STUDIO</div>
+        <div class="g-desc">생각을<br>세상에 전합니다</div>
+        <div class="g-items">카드뉴스 · 영상<br>블로그 · 소식지</div>
+      </div>
+      <div class="garden">
+        <div class="g-name">아카데미</div>
+        <div class="g-en">ACADEMY</div>
+        <div class="g-desc">사람이<br>실제로 자랍니다</div>
+        <div class="g-items">문해력 진단 · 독서<br>글쓰기 커리큘럼</div>
+      </div>
+    </div>
+    <div class="both">두 정원을 모두 보는 건 <em>필로</em>예요</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 06 CTA -->
+<section class="card card-6">
+  <div class="card-number">06 / 06</div>
+  <div class="above-fold"><div class="brand-tag">생각하는 글밭</div></div>
+  <div class="safe">
+    <div class="cta-big">이 밭을 가꾸는<br>농부 열 명을<br>소개할게요</div>
+    <div class="cta-sub">한 명씩, 차례로 만나요</div>
+    <div class="pill">팔로우하고 지켜보기</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080; var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

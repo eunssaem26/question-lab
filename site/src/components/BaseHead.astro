@@ -9,11 +9,12 @@ interface Props {
   title: string;
   description: string;
   image?: ImageMetadata | string;
+  canonical?: string;
+  noindex?: boolean;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage, canonical, noindex = false } = Astro.props;
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site);
 // heroImage는 문자열 경로(예: /assets/...)로, BaseHead 기본값은 ImageMetadata다. 둘 다 지원.
 const imageUrl = typeof image === 'string' ? image : image.src;
 ---
@@ -36,6 +37,7 @@ const imageUrl = typeof image === 'string' ? image : image.src;
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex" />}
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

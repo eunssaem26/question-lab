@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 게임 소개 : 글밭 리듬 수확</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  /* 그리드 안전영역 — 인스타 업로드 기본값 1:1 이라 y=135~1215 만 남는다 */
+  .safe {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .below-fold { position: absolute; left: 0; bottom: 165px; width: 100%; text-align: center; }
+  .card-number {
+    position: absolute; top: 160px; right: 50px;
+    font-size: 28px; font-weight: 700; letter-spacing: 2px; z-index: 5;
+    opacity: 0.55; color: var(--ink);
+  }
+  .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.7; }
+  .swipe { font-size: 30px; font-weight: 700; letter-spacing: 8px; opacity: 0.6; color: var(--ink); }
+
+  /* 글밭 리듬 수확 — 밤의 숲 + 금빛 */
+  :root {
+    --deep: #12332E;
+    --theme: #D99A2B;
+    --ink: #FFF6E3;
+    --accent: #FFD166;
+    --danger: #E8635A;
+  }
+
+  .eyebrow {
+    font-size: 34px; font-weight: 700; letter-spacing: 6px;
+    opacity: 0.75; margin-bottom: 40px; color: var(--ink);
+  }
+  .head {
+    font-size: 86px; font-weight: 900; line-height: 1.35;
+    text-align: center; word-break: keep-all; padding: 0 80px; color: var(--ink);
+  }
+  .head em { font-style: normal; color: var(--accent); }
+  .sub {
+    margin-top: 44px; font-size: 39px; font-weight: 500; line-height: 1.7;
+    text-align: center; word-break: keep-all; padding: 0 105px;
+    color: var(--ink); opacity: 0.9;
+  }
+
+  /* ─── 01 커버 ─── */
+  .card-1 { background: var(--deep); }
+  .card-1 .cover-art {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px; object-fit: cover;
+  }
+  .card-1 .band {
+    position: absolute; left: 0; width: 100%; height: 135px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--deep); color: var(--ink);
+  }
+  .card-1 .band.top { top: 0; }
+  .card-1 .band.bottom { bottom: 0; }
+
+  /* ─── 02 게임 방법 ─── */
+  .card-2 { background: var(--deep); }
+  .ring-demo {
+    width: 300px; height: 300px; border-radius: 50%;
+    border: 16px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 50px; position: relative;
+    box-shadow: 0 0 0 22px rgba(255,209,102,0.14), 0 18px 44px rgba(0,0,0,0.35);
+  }
+  .ring-demo img { width: 130px; }
+  .ring-demo .tap {
+    position: absolute; bottom: -18px; right: -26px;
+    background: var(--ink); color: var(--deep);
+    font-size: 32px; font-weight: 900;
+    padding: 12px 30px; border-radius: 999px;
+  }
+
+  /* ─── 03 피해야 할 것 ─── */
+  .card-3 { background: #1A1A1A; }
+  .items { display: flex; gap: 34px; margin-bottom: 52px; align-items: flex-end; }
+  .item { text-align: center; }
+  .item .box {
+    width: 210px; height: 210px; border-radius: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border: 7px solid; background: rgba(255,255,255,0.06);
+  }
+  .item .box img { width: 118px; }
+  .item.good .box { border-color: var(--accent); }
+  .item.bad .box { border-color: var(--danger); }
+  .item .cap {
+    margin-top: 18px; font-size: 33px; font-weight: 900; color: var(--ink);
+  }
+  .item.good .cap { color: var(--accent); }
+  .item.bad .cap { color: var(--danger); }
+
+  /* ─── 04 단계 ─── */
+  .card-4 { background: var(--theme); }
+  .card-4 .head, .card-4 .sub, .card-4 .eyebrow, .card-4 .card-number, .card-4 .swipe { color: #3A2408; }
+  .card-4 .head em { color: #FFF6E3; }
+  .bpm {
+    display: flex; align-items: center; gap: 34px;
+    margin-top: 20px; margin-bottom: 8px;
+  }
+  .bpm .b {
+    background: rgba(58,36,8,0.14); color: #3A2408;
+    border-radius: 28px; padding: 26px 44px; text-align: center;
+  }
+  .bpm .b .n { font-size: 74px; font-weight: 900; line-height: 1; }
+  .bpm .b .l { margin-top: 10px; font-size: 28px; font-weight: 700; opacity: 0.75; }
+  .bpm .arrow { font-size: 56px; font-weight: 900; color: #3A2408; opacity: 0.5; }
+  .note {
+    margin-top: 44px; background: #3A2408; color: #FFF6E3;
+    font-size: 34px; font-weight: 700; line-height: 1.55;
+    padding: 24px 46px; border-radius: 28px;
+    text-align: center; word-break: keep-all;
+  }
+
+  /* ─── 05 등급 + CTA ─── */
+  .card-5 { background: var(--deep); }
+  .ranks { display: flex; flex-direction: column; gap: 20px; }
+  .rank {
+    display: flex; align-items: center; gap: 26px;
+    background: rgba(255,246,227,0.1); border-radius: 999px;
+    padding: 20px 48px; width: 760px;
+  }
+  .rank .n {
+    font-size: 30px; font-weight: 900; color: var(--accent);
+    width: 200px; flex-shrink: 0; white-space: nowrap;
+  }
+  .rank .t { font-size: 44px; font-weight: 700; color: var(--ink); }
+  .rank.top { background: var(--accent); }
+  .rank.top .n, .rank.top .t { color: var(--deep); font-weight: 900; }
+  .url {
+    margin-top: 52px; background: var(--ink); color: var(--deep);
+    font-size: 43px; font-weight: 900;
+    padding: 25px 60px; border-radius: 999px;
+  }
+  .where { margin-top: 28px; font-size: 33px; font-weight: 500; color: var(--ink); opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<!-- 01 커버 -->
+<section class="card card-1">
+  <img class="cover-art" src="assets/games/rhythm-cover.png" alt="글밭 리듬 수확">
+  <div class="band top"><div class="brand-tag">생 각 하 는  글 밭</div></div>
+  <div class="card-number">01 / 05</div>
+  <div class="band bottom"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 02 게임 방법 -->
+<section class="card card-2">
+  <div class="card-number">02 / 05</div>
+  <div class="safe">
+    <div class="ring-demo">
+      <img src="assets/games/rhythm-seed.png" alt="씨앗">
+      <div class="tap">TAP!</div>
+    </div>
+    <div class="eyebrow">게 임  방 법</div>
+    <div class="head">깐쌤이 박자에 맞춰<br>씨앗을 <em>떨어뜨려요</em></div>
+    <div class="sub">링에 닿는 바로 그 순간 탭!<br>박자를 놓치면 씨앗이 그냥 지나가요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 03 받을 것 / 피할 것 -->
+<section class="card card-3">
+  <div class="card-number">03 / 05</div>
+  <div class="safe">
+    <div class="items">
+      <div class="item good">
+        <div class="box"><img src="assets/games/rhythm-gold.png" alt="황금씨앗"></div>
+        <div class="cap">황금씨앗 +5</div>
+      </div>
+      <div class="item bad">
+        <div class="box"><img src="assets/games/rhythm-rock.png" alt="돌"></div>
+        <div class="cap">돌</div>
+      </div>
+      <div class="item bad">
+        <div class="box"><img src="assets/games/rhythm-mushroom.png" alt="독버섯"></div>
+        <div class="cap">독버섯</div>
+      </div>
+    </div>
+    <div class="head">받을 것과<br><em>절대 받으면 안 될 것</em></div>
+    <div class="sub">손이 빠른 것만으로는 안 돼요.<br>보고 가려내는 눈이 같이 필요합니다.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 04 단계 -->
+<section class="card card-4">
+  <div class="card-number">04 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">10 점 마 다  한  단 계</div>
+    <div class="head">6단계까지<br><em>점점 빨라져요</em></div>
+    <div class="bpm">
+      <div class="b"><div class="n">96</div><div class="l">1단계 BPM</div></div>
+      <div class="arrow">→</div>
+      <div class="b"><div class="n">131</div><div class="l">6단계 BPM</div></div>
+    </div>
+    <div class="note">빨라져도 판정 창은 그대로예요<br>아이들이 따라올 수 있도록</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 05 등급 + CTA -->
+<section class="card card-5">
+  <div class="card-number">05 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">최 고  콤 보 로  칭 호 가</div>
+    <div class="ranks">
+      <div class="rank"><div class="n">콤보 5 미만</div><div class="t">새싹 박자꾼</div></div>
+      <div class="rank"><div class="n">콤보 5+</div><div class="t">리듬 농부</div></div>
+      <div class="rank"><div class="n">콤보 10+</div><div class="t">박자 달인</div></div>
+      <div class="rank top"><div class="n">콤보 15+</div><div class="t">글밭 마에스트로</div></div>
+    </div>
+    <div class="url">play.wherethoughtsgrow.com</div>
+    <div class="where">설치 없이 브라우저에서 바로 열려요</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080;
+  var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

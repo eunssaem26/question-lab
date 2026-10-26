@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 게임 소개 : 글밭 수확대작전</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  /* 그리드 안전영역 — 1080×1350 중 y=135~1215 만 남는다 */
+  .safe {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .above-fold, .below-fold {
+    position: absolute; left: 0; width: 100%;
+    text-align: center;
+  }
+  .above-fold { top: 165px; }
+  .below-fold { bottom: 165px; }
+  .card-number {
+    position: absolute; top: 160px; right: 50px;
+    font-size: 28px; font-weight: 700;
+    letter-spacing: 2px; z-index: 5; opacity: 0.55;
+  }
+  .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.7; }
+  .swipe { font-size: 30px; font-weight: 700; letter-spacing: 8px; opacity: 0.6; }
+
+  /* 게임 고유색 — 수확대작전 */
+  :root { --ink: #F3F7EC; --green: #2F7D4F; --deep: #1C4A30; --gold: #F2C14E; }
+
+  /* ─── 01 커버 ─── */
+  .card-1 { background: #7FB4D9; }
+  .card-1 .cover-art {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    object-fit: cover;
+  }
+  .card-1 .band {
+    position: absolute; left: 0; width: 100%; height: 135px;
+    display: flex; align-items: center; justify-content: center;
+    color: #F3F7EC;
+  }
+  .card-1 .band.top { top: 0; background: #7FB4D9; }
+  .card-1 .band.bottom { bottom: 0; background: #3E6B33; }
+  .card-1 .card-number { color: #F3F7EC; top: 160px; }
+
+  /* 공통 텍스트 카드 */
+  .txt { color: var(--ink); }
+  .txt .card-number, .txt .brand-tag, .txt .swipe { color: var(--ink); }
+  .eyebrow {
+    font-size: 34px; font-weight: 700;
+    letter-spacing: 8px; opacity: 0.75; margin-bottom: 40px;
+  }
+  .head {
+    font-size: 88px; font-weight: 900; line-height: 1.35;
+    text-align: center; word-break: keep-all; padding: 0 80px;
+  }
+  .head em { font-style: normal; color: var(--gold); }
+  .sub {
+    margin-top: 48px; font-size: 40px; font-weight: 500; line-height: 1.7;
+    text-align: center; word-break: keep-all; padding: 0 110px; opacity: 0.92;
+  }
+
+  /* ─── 02 선택 ─── */
+  .card-2 { background: var(--green); }
+  .card-2 .choice { display: flex; gap: 36px; margin-top: 56px; }
+  .card-2 .opt {
+    width: 400px; border-radius: 40px; padding: 44px 30px;
+    text-align: center; word-break: keep-all;
+  }
+  .card-2 .opt .big { font-size: 62px; font-weight: 900; line-height: 1.2; }
+  .card-2 .opt .small { margin-top: 20px; font-size: 32px; font-weight: 500; line-height: 1.5; }
+  .card-2 .opt.go { background: var(--gold); color: var(--deep); }
+  .card-2 .opt.out { background: #F3F7EC; color: var(--deep); }
+
+  /* ─── 03 습격 ─── */
+  .card-3 { background: #1A1A1A; }
+  .card-3 .attack {
+    width: 420px; height: 420px; border-radius: 36px;
+    overflow: hidden; border: 10px solid #F3F7EC;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    margin-bottom: 44px;
+  }
+  .card-3 .sub { margin-top: 36px; }
+  .card-3 .attack img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+  .card-3 .head em { color: #FF6B5A; }
+
+  /* ─── 04 등급 ─── */
+  .card-4 { background: #F3F7EC; }
+  .card-4 .eyebrow, .card-4 .card-number, .card-4 .swipe { color: var(--deep); }
+  .card-4 .head { color: var(--deep); }
+  .card-4 .sub { color: #4A5D42; }
+  .card-4 .ranks { display: flex; flex-direction: column; gap: 22px; margin-top: 12px; }
+  .card-4 .rank {
+    display: flex; align-items: center; gap: 28px;
+    background: rgba(47,125,79,0.12); border-radius: 999px;
+    padding: 22px 52px; width: 780px;
+  }
+  .card-4 .rank .n { font-size: 34px; font-weight: 900; color: var(--green); width: 54px; flex-shrink: 0; }
+  .card-4 .rank .t { font-size: 46px; font-weight: 700; color: var(--deep); }
+  .card-4 .rank.top { background: var(--gold); }
+  .card-4 .rank.top .n, .card-4 .rank.top .t { color: var(--deep); font-weight: 900; }
+
+  /* ─── 05 CTA ─── */
+  .card-5 { background: var(--deep); }
+  .card-5 .badge {
+    margin-top: 20px; background: var(--gold); color: var(--deep);
+    font-size: 38px; font-weight: 900;
+    padding: 20px 52px; border-radius: 999px; letter-spacing: 1px;
+  }
+  .card-5 .url {
+    margin-top: 56px; background: #F3F7EC; color: var(--deep);
+    font-size: 44px; font-weight: 900;
+    padding: 26px 62px; border-radius: 999px; letter-spacing: 0.5px;
+  }
+  .card-5 .where { margin-top: 34px; font-size: 34px; font-weight: 500; opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<!-- 01 커버 -->
+<section class="card card-1">
+  <img class="cover-art" src="assets/games/geulbat-cover.png" alt="글밭 수확대작전">
+  <div class="band top"><div class="brand-tag">생 각 하 는  글 밭</div></div>
+  <div class="card-number">01 / 05</div>
+  <div class="band bottom"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 02 더 간다 / 나간다 -->
+<section class="card card-2 txt">
+  <div class="card-number">02 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">매  턴  선  택</div>
+    <div class="head">더 갈래,<br>여기서 <em>멈출래?</em></div>
+    <div class="choice">
+      <div class="opt go">
+        <div class="big">🌱 더 간다</div>
+        <div class="small">씨앗은 늘지만<br>습격 위험도 커져요</div>
+      </div>
+      <div class="opt out">
+        <div class="big">🚪 나간다</div>
+        <div class="small">지금까지 모은 건<br>곳간에 확정돼요</div>
+      </div>
+    </div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 03 습격 -->
+<section class="card card-3 txt">
+  <div class="card-number">03 / 05</div>
+  <div class="safe">
+    <div class="attack"><img src="assets/games/geulbat-attack.jpg" alt="까마귀의 습격"></div>
+    <div class="head">같은 결함이 두 번이면<br><em>까마귀의 습격</em></div>
+    <div class="sub">밭에 남겨둔 오늘 수확을 몽땅 잃어요.<br>욕심과 겁 사이, 어디서 멈출 건가요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<!-- 04 등급 -->
+<section class="card card-4">
+  <div class="card-number">04 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">닷 새  뒤  당 신 의  칭 호</div>
+    <div class="ranks">
+      <div class="rank"><div class="n">1</div><div class="t">새싹 농부</div></div>
+      <div class="rank"><div class="n">2</div><div class="t">튼튼 농부</div></div>
+      <div class="rank"><div class="n">3</div><div class="t">수확왕</div></div>
+      <div class="rank top"><div class="n">4</div><div class="t">올해의 농부</div></div>
+    </div>
+    <div class="sub" style="margin-top:56px">함께 갈 농부도 직접 고릅니다.<br>호기를 데려가면 결함 하나를 무효로!</div>
+  </div>
+  <div class="below-fold"><div class="swipe" style="color:#1C4A30">SWIPE →</div></div>
+</section>
+
+<!-- 05 CTA -->
+<section class="card card-5 txt">
+  <div class="card-number">05 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">지 금  바 로</div>
+    <div class="head">닷새 농사,<br><em>지금 시작</em></div>
+    <div class="badge">설치 없이 브라우저에서 바로</div>
+    <div class="url">play.wherethoughtsgrow.com</div>
+    <div class="where">프로필 링크에서 바로 열려요</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080;
+  var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

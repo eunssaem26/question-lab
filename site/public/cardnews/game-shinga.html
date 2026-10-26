@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 게임 소개 : 그 많던 싱아는 누가 다 먹었을까</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* 이 파일은 gen-book-games.mjs 가 생성한다. 직접 고치지 말고 data/book-games.json 을 고칠 것. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  /* 그리드 안전영역 — 인스타 업로드 기본값 1:1 이라 1080×1350 중 y=135~1215 만 남는다 */
+  .safe {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .below-fold { position: absolute; left: 0; bottom: 165px; width: 100%; text-align: center; }
+  .card-number {
+    position: absolute; top: 160px; right: 50px;
+    font-size: 28px; font-weight: 700; letter-spacing: 2px; z-index: 5; opacity: 0.55;
+    color: var(--ink);
+  }
+  .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.7; }
+  .swipe { font-size: 30px; font-weight: 700; letter-spacing: 8px; opacity: 0.6; color: var(--ink); }
+
+  :root {
+    --theme: #7D9C4F;
+    --deep: #3E4A28;
+    --ink: #F7F4E8;
+    --accent: #D98F3E;
+    /* theme(밝은/중간) 배경 위에서는 accent 가 배경과 붙는 게임이 있어 따로 쓴다 */
+    --em-theme: #33401E;
+  }
+
+  /* ─── 커버 ─── */
+  .card-cover { background: var(--deep); }
+  .card-cover .cover-art {
+    position: absolute; top: 135px; left: 0;
+    width: 1080px; height: 1080px;
+    object-fit: cover; object-position: 50% 50%;
+  }
+  .card-cover .band {
+    position: absolute; left: 0; width: 100%; height: 135px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--deep); color: var(--ink);
+  }
+  .card-cover .band.top { top: 0; }
+  .card-cover .band.bottom { bottom: 0; }
+  .card-cover .scrim {
+    position: absolute; left: 0; bottom: 135px; width: 100%;
+    padding: 200px 80px 56px;
+    background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 45%, rgba(0,0,0,0) 100%);
+    text-align: center; color: #fff;
+  }
+  .card-cover .t-main { font-size: 96px; font-weight: 900; line-height: 1.15; word-break: keep-all; }
+  .card-cover .t-sub {
+    margin-top: 12px; font-size: 62px; font-weight: 900;
+    color: var(--accent); line-height: 1.2; word-break: keep-all;
+  }
+  .card-cover .t-book {
+    margin-top: 28px; font-size: 29px; font-weight: 500;
+    opacity: 0.82; word-break: keep-all;
+  }
+
+  /* ─── 공통 텍스트 카드 ─── */
+  .eyebrow {
+    font-size: 34px; font-weight: 700; letter-spacing: 4px;
+    opacity: 0.75; margin-bottom: 42px; color: var(--ink);
+  }
+  .head {
+    font-size: 86px; font-weight: 900; line-height: 1.35;
+    text-align: center; word-break: keep-all; padding: 0 80px; color: var(--ink);
+  }
+  .head em { font-style: normal; color: var(--accent); }
+  .sub {
+    margin-top: 46px; font-size: 39px; font-weight: 500; line-height: 1.7;
+    text-align: center; word-break: keep-all; padding: 0 105px;
+    color: var(--ink); opacity: 0.9;
+  }
+
+  /* deep 배경엔 accent, theme 배경엔 --em-theme 를 쓴다 (대비 확보) */
+  .card-premise { background: var(--theme); }
+  .card-premise .head em { color: var(--em-theme); }
+  .card-device { background: var(--deep); }
+
+  /* ─── 등급 ─── */
+  .card-rank { background: var(--ink); }
+  .card-rank .eyebrow, .card-rank .card-number, .card-rank .swipe { color: var(--deep); }
+  .card-rank .ranks { display: flex; flex-direction: column; gap: 22px; }
+  .card-rank .rank {
+    display: flex; align-items: center; gap: 28px;
+    background: rgba(0,0,0,0.07); border-radius: 999px;
+    padding: 22px 52px; width: 780px;
+  }
+  .card-rank .rank .n { font-size: 34px; font-weight: 900; color: var(--theme); width: 54px; flex-shrink: 0; }
+  .card-rank .rank .t { font-size: 46px; font-weight: 700; color: var(--deep); }
+  .card-rank .rank.top { background: var(--accent); }
+  .card-rank .rank.top .n, .card-rank .rank.top .t { color: var(--deep); font-weight: 900; }
+
+  /* ─── CTA ─── */
+  .card-cta { background: var(--theme); }
+  .card-cta .head em { color: var(--em-theme); }
+  .card-cta .closer { font-size: 74px; }
+  .card-cta .badge {
+    margin-top: 52px; background: var(--accent); color: var(--deep);
+    font-size: 37px; font-weight: 900;
+    padding: 20px 52px; border-radius: 999px;
+  }
+  .card-cta .url {
+    margin-top: 44px; background: var(--ink); color: var(--deep);
+    font-size: 44px; font-weight: 900;
+    padding: 26px 62px; border-radius: 999px;
+  }
+  .card-cta .where { margin-top: 32px; font-size: 33px; font-weight: 500; color: var(--ink); opacity: 0.88; }
+</style>
+</head>
+<body>
+
+<section class="card card-cover">
+  <img class="cover-art" src="assets/games/book-shinga.png" alt="그 많던 싱아는">
+  <div class="band top"><div class="brand-tag">생 각 하 는  글 밭</div></div>
+  <div class="card-number">01 / 05</div>
+  <div class="scrim">
+    <div class="t-main">그 많던 싱아는</div>
+    <div class="t-sub">누가 다 먹었을까</div>
+    <div class="t-book">박완서 · 기억 복원 프로젝트 Ⅰ</div>
+  </div>
+  <div class="band bottom"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-premise">
+  <div class="card-number">02 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">무 슨  게 임 인 가 요</div>
+    <div class="head">기록보관원이 되어<br><em>바래 가는 기억</em>을 복원</div>
+    <div class="sub">1930년대 박적골, 1938년 서울 현저동,<br>1945년 해방의 날.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-device">
+  <div class="card-number">03 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">핵 심  장 치</div>
+    <div class="head">그 시절에 없던<br><em>물건 3개</em>를 찾아라</div>
+    <div class="sub">장면마다 숨어든 시대 오류를 짚어내면<br>세피아빛 사진이 제 색을 되찾아요.</div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-rank">
+  <div class="card-number">04 / 05</div>
+  <div class="safe">
+    <div class="eyebrow">복 원  등 급</div>
+    <div class="ranks">
+      <div class="rank"><div class="n">1</div><div class="t">견습 기록보관원</div></div>
+      <div class="rank"><div class="n">2</div><div class="t">정식 기록보관원</div></div>
+      <div class="rank top"><div class="n">3</div><div class="t">수석 기록보관원</div></div>
+    </div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-cta">
+  <div class="card-number">05 / 05</div>
+  <div class="safe">
+    <div class="head closer">마지막엔 이렇게 물어요<br><em>너의 '싱아'는</em> 무엇이니?</div>
+    <div class="badge">설치 없이 브라우저에서 바로</div>
+    <div class="url">play.wherethoughtsgrow.com</div>
+    <div class="where">프로필 링크에서 바로 열려요</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080;
+  var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 농부 열 명이 하는 일</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* 이 파일은 gen-characters.mjs 가 생성한다. 직접 고치지 말 것. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  /* 그리드 안전영역 — 1:1 중앙 크롭에서 살아남는 1080×1080 */
+  .safe {
+    position: absolute; top: 135px; left: 0; width: 1080px; height: 1080px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .above-fold, .below-fold {
+    position: absolute; left: 0; width: 100%; text-align: center; color: #A67B5B;
+  }
+  .above-fold { top: 165px; }
+  .below-fold { bottom: 165px; }
+  .card-number {
+    position: absolute; top: 160px; right: 50px; font-size: 28px; font-weight: 700;
+    color: #A67B5B; opacity: 0.5; letter-spacing: 2px; z-index: 5;
+  }
+  .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.65; }
+  .swipe { font-size: 30px; font-weight: 700; letter-spacing: 8px; opacity: 0.55; }
+
+  .portrait-wrap {
+    border-radius: 50%; overflow: hidden;
+    border: 8px solid #FBF3EA;
+    box-shadow: 0 10px 26px rgba(92,61,46,0.20);
+    flex-shrink: 0;
+  }
+  .portrait-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: var(--fx) var(--fy);
+    transform: scale(var(--zoom));
+    transform-origin: var(--fx) var(--fy);
+  }
+
+  /* ─── 커버: 열 명 얼굴을 5×2 로 ─── */
+  .card-cover { background: #6B7F4A; color: #FBF3EA; }
+  .card-cover .above-fold, .card-cover .below-fold { color: #FBF3EA; opacity: 0.7; }
+  .card-cover .card-number { color: #FBF3EA; }
+  .cover-title {
+    font-size: 96px; font-weight: 900; line-height: 1.35;
+    text-align: center; margin-bottom: 70px;
+  }
+  .mini-grid {
+    display: grid; grid-template-columns: repeat(5, 150px);
+    gap: 34px 30px; justify-content: center;
+  }
+  .mini { width: 150px; height: 150px; border-width: 6px; }
+
+  /* ─── 팀 카드 ─── */
+  .card-team { background: #FBF3EA; color: #5C3D2E; }
+  .card-team.alt { background: #F5E6D0; }
+  .label {
+    font-size: 40px; font-weight: 700; color: #A67B5B;
+    letter-spacing: 4px; margin-bottom: 60px; text-align: center; word-break: keep-all;
+  }
+  .team {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 56px 48px; width: 940px;
+  }
+  .member { width: 200px; text-align: center; }
+  .member-ring { width: 200px; height: 200px; }
+  .m-name { margin-top: 22px; font-size: 46px; font-weight: 900; line-height: 1; }
+  .m-role { margin-top: 12px; font-size: 28px; font-weight: 500; color: #A67B5B; }
+  /* 네 명이면 한 줄에 안 들어가 3+1 로 갈라진다 → 폭을 좁혀 2×2 로 */
+  .team.four { width: 460px; }
+  /* 혼자인 카드(필로)는 크게 */
+  .team.solo .member { width: 340px; }
+  .team.solo .member-ring { width: 340px; height: 340px; border-width: 12px; }
+  .team.solo .m-name { font-size: 72px; margin-top: 34px; }
+  .team.solo .m-role { font-size: 36px; }
+
+  /* ─── 마무리 ─── */
+  .card-closing { background: #5C3D2E; color: #F5E6D0; }
+  .card-closing .above-fold { color: #F5E6D0; opacity: 0.5; }
+  .card-closing .card-number { color: #F5E6D0; }
+  .closing-big {
+    font-size: 84px; font-weight: 900; line-height: 1.45;
+    text-align: center; word-break: keep-all;
+  }
+  .closing-sub {
+    margin-top: 40px; font-size: 40px; font-weight: 500; line-height: 1.7;
+    color: #D4BFA8; text-align: center; word-break: keep-all;
+  }
+  .pill {
+    margin-top: 66px; background: #F5E6D0; color: #5C3D2E;
+    font-size: 36px; font-weight: 700; padding: 24px 58px; border-radius: 999px;
+  }
+</style>
+</head>
+<body>
+
+<section class="card card-cover">
+  <div class="card-number">01 / 06</div>
+  <div class="above-fold"><div class="brand-tag">생각하는 글밭</div></div>
+  <div class="safe">
+    <div class="cover-title">농부 열 명이<br>하는 일</div>
+    <div class="mini-grid">
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:38%; --zoom:1.65;">
+        <img src="../assets/characters/philo_clay.png" alt="필로"></div>
+      <div class="portrait-wrap mini" style="--fx:52%; --fy:32%; --zoom:1.30;">
+        <img src="../assets/characters/batpd_clay_16x9.png" alt="밭피디"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:34%; --zoom:1.30;">
+        <img src="../assets/characters/gardener_clay_16x9.png" alt="가드너"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:34%; --zoom:1.30;">
+        <img src="../assets/characters/yeongsaem_clay_16x9.png" alt="영쌤"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:40%; --zoom:1.45;">
+        <img src="../assets/characters/byeolsaem_clay.png" alt="별쌤"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:36%; --zoom:1.75;">
+        <img src="../assets/characters/chaeksaem_clay.png" alt="책쌤"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:36%; --zoom:1.75;">
+        <img src="../assets/characters/geulsaem_clay.png" alt="글쌤"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:36%; --zoom:1.75;">
+        <img src="../assets/characters/hogi_clay.png" alt="호기"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:27%; --zoom:2.35;">
+        <img src="../assets/characters/eunsaem_clay.png" alt="은쌤"></div>
+      <div class="portrait-wrap mini" style="--fx:50%; --fy:33%; --zoom:1.85;">
+        <img src="../assets/characters/kkansaem_clay.png" alt="깐쌤"></div>
+    </div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-team ">
+  <div class="card-number">02 / 06</div>
+  <div class="safe">
+    <div class="label">전체를 조율한다</div>
+    <div class="team solo">
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:38%; --zoom:1.65;">
+        <img src="../assets/characters/philo_clay.png" alt="필로"></div>
+        <div class="m-name">필로</div>
+        <div class="m-role">코디네이터</div>
+      </div>
+    </div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-team alt">
+  <div class="card-number">03 / 06</div>
+  <div class="safe">
+    <div class="label">창조 · 연결 · 성장</div>
+    <div class="team ">
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:52%; --fy:32%; --zoom:1.30;">
+        <img src="../assets/characters/batpd_clay_16x9.png" alt="밭피디"></div>
+        <div class="m-name">밭피디</div>
+        <div class="m-role">콘텐츠 디렉터</div>
+      </div>
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:34%; --zoom:1.30;">
+        <img src="../assets/characters/gardener_clay_16x9.png" alt="가드너"></div>
+        <div class="m-name">가드너</div>
+        <div class="m-role">지식 아키텍트</div>
+      </div>
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:34%; --zoom:1.30;">
+        <img src="../assets/characters/yeongsaem_clay_16x9.png" alt="영쌤"></div>
+        <div class="m-name">영쌤</div>
+        <div class="m-role">러닝 디자이너</div>
+      </div>
+    </div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-team ">
+  <div class="card-number">04 / 06</div>
+  <div class="safe">
+    <div class="label">아이 곁에서 가르친다</div>
+    <div class="team four">
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:40%; --zoom:1.45;">
+        <img src="../assets/characters/byeolsaem_clay.png" alt="별쌤"></div>
+        <div class="m-name">별쌤</div>
+        <div class="m-role">진단</div>
+      </div>
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:36%; --zoom:1.75;">
+        <img src="../assets/characters/chaeksaem_clay.png" alt="책쌤"></div>
+        <div class="m-name">책쌤</div>
+        <div class="m-role">독서</div>
+      </div>
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:36%; --zoom:1.75;">
+        <img src="../assets/characters/geulsaem_clay.png" alt="글쌤"></div>
+        <div class="m-name">글쌤</div>
+        <div class="m-role">글쓰기</div>
+      </div>
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:36%; --zoom:1.75;">
+        <img src="../assets/characters/hogi_clay.png" alt="호기"></div>
+        <div class="m-name">호기</div>
+        <div class="m-role">학생 소통</div>
+      </div>
+    </div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-team alt">
+  <div class="card-number">05 / 06</div>
+  <div class="safe">
+    <div class="label">나가기 전에 검증한다</div>
+    <div class="team ">
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:33%; --zoom:1.85;">
+        <img src="../assets/characters/kkansaem_clay.png" alt="깐쌤"></div>
+        <div class="m-name">깐쌤</div>
+        <div class="m-role">품질 비평</div>
+      </div>
+      <div class="member">
+        <div class="portrait-wrap member-ring" style="--fx:50%; --fy:27%; --zoom:2.35;">
+        <img src="../assets/characters/eunsaem_clay.png" alt="은쌤"></div>
+        <div class="m-name">은쌤</div>
+        <div class="m-role">발행 게이트</div>
+      </div>
+    </div>
+  </div>
+  <div class="below-fold"><div class="swipe">SWIPE →</div></div>
+</section>
+
+<section class="card card-closing">
+  <div class="card-number">06 / 06</div>
+  <div class="above-fold"><div class="brand-tag">생각하는 글밭</div></div>
+  <div class="safe">
+    <div class="closing-big">열 명이 하는 일은<br>결국 하나예요</div>
+    <div class="closing-sub">아이가 스스로 생각하도록<br>자랄 자리를 만드는 것</div>
+    <div class="pill">wherethoughtsgrow.com</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080; var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

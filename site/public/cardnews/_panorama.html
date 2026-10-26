@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>생각하는 글밭 — 그리드 파노라마 (단체샷 3분할)</title>
+<style>
+  /* ─────────────────────────────────────────────
+     인스타 그리드 한 줄(3칸)을 가로지르는 단체샷 파노라마.
+
+     3240×1350 = 1080×1350 짜리 게시물 3개를 이어붙인 크기.
+     gen-panorama.mjs 가 이 페이지를 세로로 3등분해 각각 JPG 로 뽑는다.
+
+     원본은 codex-image(gpt-image-2)로 만든 1536×1024 클레이 단체샷.
+     최대 가로가 1536 이라 3240 까지 2.109배 확대해 쓴다.
+     (클레이는 질감이 부드러워 이 정도 확대는 견딘다)
+
+     세로: 3240/1350 = 2.4:1 이므로 원본에서 1536×640 밴드만 쓴다.
+     BAND_Y 는 얼굴이 그리드 가시영역(각 칸의 세로 중앙 1080) 안에 오도록 고른 값.
+     ───────────────────────────────────────────── */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #222; }
+
+  /* ── 칸별 좌우 밀기 ────────────────────────────
+     원본의 세 무리가 1/3 지점에 딱 맞게 서 있지 않다. 특히 가운데 무리가
+     오른쪽으로 치우쳐 글쌤(고양이)이 칸 경계에서 30px 까지 붙었다
+     (실제 발행 후 그리드에서 잘려 보였다).
+
+     그림 전체를 미는 방식은 못 쓴다 — 왼쪽 필로가 프레임 밖으로 잘리고
+     반대쪽 끝에 빈 띠가 생긴다. 대신 칸마다 따로 민다.
+     칸 사이는 그리드에서 간격으로 떨어져 있어 배경이 조금 어긋나도 티가 안 나고,
+     가운데 칸은 안쪽이라 밀어도 빈 곳이 생기지 않는다.
+
+     바깥 두 칸은 밀면 바깥쪽에 빈 띠가 생기므로 0 으로 둔다.
+     값을 바꾼 뒤에는 반드시 `npm run pano:check` 로 눈으로 확인할 것. */
+  :root {
+    --pan-1: 0px;      /* 좌: 필로·밭피디·가드너 — 여백 68 / 230, 손댈 것 없음 */
+    --pan-2: -119px;   /* 중: 영쌤·별쌤·책쌤·글쌤 — 왼쪽으로 밀어 149 / 149 로 맞춤 */
+    --pan-3: 0px;      /* 우: 호기·은쌤·깐쌤 — 밀면 오른쪽 끝이 비므로 그대로 */
+  }
+
+  .pano {
+    position: relative;
+    width: 3240px; height: 1350px;
+    overflow: hidden;
+    background: #E8D5C0;
+  }
+
+  /* 칸 하나 = 게시물 하나. 각자 자기 창으로 원본의 제 구간을 들여다본다 */
+  .tile {
+    position: absolute;
+    top: 0;
+    width: 1080px; height: 1350px;
+    overflow: hidden;
+  }
+  .tile img {
+    position: absolute;
+    /* 1536 → 3240 (×2.109). 원본 y=230 부터가 화면 위쪽이 되도록 끌어올린다 */
+    top: -485px;
+    width: 3240px;
+    height: 2160px;
+    display: block;
+  }
+  .t1 { left: 0; }
+  .t2 { left: 1080px; }
+  .t3 { left: 2160px; }
+  /* 칸이 왼쪽으로 이동한 만큼 그림을 되밀어야 원래 구간이 보인다 */
+  .t1 img { left: calc(0px    + var(--pan-1)); }
+  .t2 img { left: calc(-1080px + var(--pan-2)); }
+  .t3 img { left: calc(-2160px + var(--pan-3)); }
+
+  /* 검수용 눈금 — gen-panorama.mjs 가 렌더 전에 지운다.
+     .seam = 칸 경계, .fold = 그리드에서 잘려나가는 위아래 135px 경계 */
+  .seam {
+    position: absolute; top: 0; width: 3px; height: 100%;
+    background: rgba(255,0,0,0.55); z-index: 50;
+  }
+  .seam.a { left: 1080px; }
+  .seam.b { left: 2160px; }
+  .fold {
+    position: absolute; left: 0; width: 100%; height: 3px;
+    background: rgba(0,120,255,0.5); z-index: 50;
+  }
+  .fold.top { top: 135px; }
+  .fold.bottom { top: 1212px; }
+</style>
+</head>
+<body>
+<div class="pano">
+  <div class="tile t1"><img src="../assets/characters/group_ten_clay_pano4.png" alt="생각하는 글밭 — 필로, 밭피디, 가드너"></div>
+  <div class="tile t2"><img src="../assets/characters/group_ten_clay_pano4.png" alt="생각하는 글밭 — 영쌤, 별쌤, 책쌤, 글쌤"></div>
+  <div class="tile t3"><img src="../assets/characters/group_ten_clay_pano4.png" alt="생각하는 글밭 — 호기, 은쌤, 깐쌤"></div>
+
+  <div class="seam a"></div>
+  <div class="seam b"></div>
+  <div class="fold top"></div>
+  <div class="fold bottom"></div>
+</div>
+</body>
+</html>

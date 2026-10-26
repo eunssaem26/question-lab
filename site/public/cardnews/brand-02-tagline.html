@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>생각하는 글밭 — 브랜드 02. 태그라인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #E8D5C0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 40px; padding: 40px 0;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  }
+  .card {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  body.scaled { display: block; padding: 10px; }
+  body.scaled .card { transform-origin: top left; display: flex; margin-bottom: 10px; }
+
+  .safe {
+    position: absolute; top: 135px; left: 0; width: 1080px; height: 1080px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .above-fold, .below-fold {
+    position: absolute; left: 0; width: 100%; text-align: center;
+  }
+  .above-fold { top: 165px; }
+  .below-fold { bottom: 165px; }
+
+  /* 그리드 가운데 칸. 양옆(소개·간판)이 크림색이라 여기만 진하게 눌러 리듬을 만든다. */
+  .card-1 { background: #5C3D2E; color: #F5E6D0; }
+  .card-1 .brand-tag { font-size: 26px; font-weight: 700; letter-spacing: 6px; opacity: 0.5; }
+
+  .en {
+    font-size: 128px; font-weight: 900; line-height: 1.12;
+    letter-spacing: -3px; text-align: center;
+  }
+  .en .grow { color: #A8C07A; }
+  .rule {
+    width: 120px; height: 5px; background: #A67B5B;
+    border-radius: 999px; margin: 54px 0;
+  }
+  .ko {
+    font-size: 56px; font-weight: 700; line-height: 1.5;
+    text-align: center; word-break: keep-all;
+  }
+  .ko-sub {
+    margin-top: 30px; font-size: 34px; font-weight: 500;
+    color: #D4BFA8; line-height: 1.7; text-align: center; word-break: keep-all;
+  }
+</style>
+</head>
+<body>
+
+<section class="card card-1">
+  <div class="above-fold"><div class="brand-tag">생각하는 글밭</div></div>
+  <div class="safe">
+    <div class="en">Where<br>Thoughts<br><span class="grow">Grow</span></div>
+    <div class="rule"></div>
+    <div class="ko">생각이 자라는 곳</div>
+    <div class="ko-sub">완성이 아니라 성장,<br>정답이 아니라 생각</div>
+  </div>
+</section>
+
+<script>
+function scaleCards() {
+  var vw = window.innerWidth;
+  if (vw >= 1080) {
+    document.body.classList.remove('scaled');
+    document.querySelectorAll('.card').forEach(function(c){ c.style.transform=''; c.style.marginBottom=''; });
+    return;
+  }
+  document.body.classList.add('scaled');
+  var s = vw / 1080; var realH = 1350 * s;
+  document.querySelectorAll('.card').forEach(function(c){
+    c.style.transform = 'scale(' + s + ')';
+    c.style.marginBottom = (realH - 1350) + 'px';
+  });
+}
+scaleCards();
+window.addEventListener('resize', scaleCards);
+</script>
+</body>
+</html>

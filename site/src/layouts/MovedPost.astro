@@ -1,0 +1,50 @@
+---
+// 네이버 블로그로 옮긴 글 — 원문 없이 옮긴 곳으로 가는 링크만 남긴다 (2026-10-25)
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  naverUrl: string;
+}
+
+const { title, description, naverUrl } = Astro.props;
+---
+
+<html lang="ko">
+  <head>
+    <BaseHead title={`${title} — 생각하는 글밭`} description={description} canonical={naverUrl} noindex />
+    <style>
+      main {
+        max-width: 640px;
+        margin: 4em auto;
+        padding: 0 1em;
+        text-align: center;
+      }
+      .moved-note {
+        color: rgb(var(--gray));
+        margin-bottom: 2em;
+      }
+      .moved-link {
+        display: inline-block;
+        padding: 0.8em 1.6em;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>{title}</h1>
+      <p class="moved-note">이 글은 네이버 블로그 「생각하는 글밭」으로 옮겼어요.</p>
+      <a class="moved-link" href={naverUrl}>네이버 블로그에서 읽기</a>
+    </main>
+    <Footer />
+  </body>
+</html>

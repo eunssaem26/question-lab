@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import MovedPost from '../../layouts/MovedPost.astro';
 
 export async function getStaticPaths() {
   // 발행(published)된 글만 공개 페이지로 빌드한다.
@@ -40,6 +41,10 @@ if (post.data.series && post.data.seriesNumber) {
 }
 ---
 
-<BlogPost {...post.data} prevPost={prevPost} nextPost={nextPost}>
-  <Content />
-</BlogPost>
+{post.data.naverUrl ? (
+  <MovedPost title={post.data.title} description={post.data.description} naverUrl={post.data.naverUrl} />
+) : (
+  <BlogPost {...post.data} prevPost={prevPost} nextPost={nextPost}>
+    <Content />
+  </BlogPost>
+)}
